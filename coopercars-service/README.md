@@ -6,4 +6,4 @@
 3. **VehiclesDataBuilder**: user enters a VIN, service grabs info from NHTSA's online source and puts it in our database
    (vehiclesDatabase.csv). Multiple vehicles can be added continuously since the service keeps prompting the user until
    he/she types "stop". Exception detection: if VIN is invalid, notify user.
-4. **VehiclesDataReader**: reads from a database (vehiclesDatabase.csv) and creates a new Vehicles object.
+4. **VehiclesDataReader**: reads from a database (vehiclesDatabase.csv) and creates a new Vehicles object. 
