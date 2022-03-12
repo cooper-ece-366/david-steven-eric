@@ -31,6 +31,20 @@ public class Vehicles
             vehicles.set(possibleIndex, temp);
         }
     }
+    public void sortByHorsepower()
+    {
+        for (int j = 1; j < vehicles.size(); j++)
+        {
+            Vehicle temp = vehicles.get(j);
+            int possibleIndex = j;
+            while (possibleIndex > 0 && temp.getHorsepower() < vehicles.get(possibleIndex - 1).getHorsepower())
+            {
+                vehicles.set(possibleIndex,vehicles.get(possibleIndex - 1));
+                possibleIndex--;
+            }
+            vehicles.set(possibleIndex, temp);
+        }
+    }
 
     public Vehicle getVehicle(String theVIN)
     {
@@ -40,7 +54,7 @@ public class Vehicles
         return null;
     }
 
-    public int getBasePrice(String theVIN)
+    public double getBasePrice(String theVIN)
     {
         for (Vehicle v : vehicles)
             if (v.getVIN().equals(theVIN))
@@ -84,5 +98,12 @@ public class Vehicles
         return byType;
     }
 
+    @Override
+    public String toString() {
+        String output = "";
+        for (Vehicle v : vehicles)
+            output += v.toString() + "\n";
+        return output;
+    }
 }
 

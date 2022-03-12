@@ -15,7 +15,7 @@ public class Vehicle
     private String trim;
     private String vehicleType;
     private String plantCountry;
-    private int basePrice;
+    private double basePrice;
     private String entertainSys;
     private int numOfSeats;
     private int numOfSeatRows;
@@ -88,7 +88,7 @@ public class Vehicle
     private int axles;
     private String transmissionStyle;
 
-    public Vehicle(String VIN, String make, String model, int year, String series, String trim, String vehicleType, String plantCountry, int basePrice, String entertainSys, int numOfSeats, int numOfSeatRows, String antiLockBraking, String electronicStability, String tractionControl, String keylessIgnition, String autoCrashNotif, String backupCam, String parkingAssist, String rearCrossTrafficAlert, String rearAutoEmergBraking, String crashImmBraking, String forwColliWarn, String dynamicBrakeSupp, String pedestrianAutoEmergBrak, String blindSpotWarn, String laneDepartWarn, String laneKeepAssist, String blindSpotIntervention, String laneCenterAssist, String daytimeRunLights, String headlampLightSrc, String headlampBeamSwitch, String adaptDrivingBeam, String adaptiveCruiseControl, int numOfCylinders, double displacementCC, double displacementCI, double displacementL, double enginePowerkW, String fuelTypePrim, String fuelTypeSec, String fuelInjectionType, String engineConfig, int horsepower, String electricificationLevel, String otherEngineInfo, String turbo, int topSpeed, String engineManufact, String bodyClass, int numOfDoors, int numOfWindows, String wheelBaseType, double bedLength, double curbWeight, double wheelBase, double grossCombWeight, String truckBedType, String truckCabType, int numOfWheels, int wheelSizeFrontIn, int wheelsSizeRearIn, String driveType, int axles, String transmissionStyle) {
+    public Vehicle(String VIN, String make, String model, int year, String series, String trim, String vehicleType, String plantCountry, double basePrice, String entertainSys, int numOfSeats, int numOfSeatRows, String antiLockBraking, String electronicStability, String tractionControl, String keylessIgnition, String autoCrashNotif, String backupCam, String parkingAssist, String rearCrossTrafficAlert, String rearAutoEmergBraking, String crashImmBraking, String forwColliWarn, String dynamicBrakeSupp, String pedestrianAutoEmergBrak, String blindSpotWarn, String laneDepartWarn, String laneKeepAssist, String blindSpotIntervention, String laneCenterAssist, String daytimeRunLights, String headlampLightSrc, String headlampBeamSwitch, String adaptDrivingBeam, String adaptiveCruiseControl, int numOfCylinders, double displacementCC, double displacementCI, double displacementL, double enginePowerkW, String fuelTypePrim, String fuelTypeSec, String fuelInjectionType, String engineConfig, int horsepower, String electricificationLevel, String otherEngineInfo, String turbo, int topSpeed, String engineManufact, String bodyClass, int numOfDoors, int numOfWindows, String wheelBaseType, double bedLength, double curbWeight, double wheelBase, double grossCombWeight, String truckBedType, String truckCabType, int numOfWheels, int wheelSizeFrontIn, int wheelsSizeRearIn, String driveType, int axles, String transmissionStyle) {
         this.VIN = VIN;
         this.make = make;
         this.model = model;
@@ -221,11 +221,11 @@ public class Vehicle
         this.plantCountry = plantCountry;
     }
 
-    public int getBasePrice() {
+    public double getBasePrice() {
         return basePrice;
     }
 
-    public void setBasePrice(int basePrice) {
+    public void setBasePrice(double basePrice) {
         this.basePrice = basePrice;
     }
 
@@ -683,6 +683,22 @@ public class Vehicle
 
     public void setTransmissionStyle(String transmissionStyle) {
         this.transmissionStyle = transmissionStyle;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "VIN='" + VIN + '\'' +
+                ", make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", year=" + year +
+                ", series='" + series + '\'' +
+                ", trim='" + trim + '\'' +
+                ", vehicleType='" + vehicleType + '\'' +
+                ", plantCountry='" + plantCountry + '\'' +
+                ", basePrice=" + basePrice +
+                ", horsepower=" + horsepower +
+                '}';
     }
 }
 
