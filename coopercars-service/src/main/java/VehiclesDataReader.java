@@ -18,21 +18,23 @@ public class VehiclesDataReader
             String[] vehicleData;
             Vehicle theVehicle;
 
+            input.nextLine();
+
             String VIN, make, model, series, trim, vehicleType, plantCountry, entertainSys, antiLockBraking, electronicStability,
                     tractionControl, keylessIgnition, autoCrashNotif, backupCam, parkingAssist, rearCrossTrafficAlert, rearAutoEmergBraking,
                     crashImmBraking, forwColliWarn, dynamicBrakeSupp, pedestrianAutoEmergBrak, blindSpotWarn, laneDepartWarn,
                     laneKeepAssist, blindSpotIntervention, laneCenterAssist, daytimeRunLights, headlampLightSrc, headlampBeamSwitch,
                     adaptDrivingBeam, adaptiveCruiseControl, fuelTypePrim, fuelTypeSec, fuelInjectionType, engineConfig, electricificationLevel,
                     otherEngineInfo, turbo, engineManufact, bodyClass, wheelBaseType, truckBedType, truckCabType, driveType, transmissionStyle;
-            int year, basePrice, numOfSeats, numOfSeatRows, numOfCylinders, horsepower, topSpeed, numOfDoors, numOfWindows,
-                    numOfWheels, wheelSizeFrontIn, wheelSizeRearIn, axles;
-            double displacementCC, displacementCI, displacementL, enginePowerkW, bedLength, curbWeight, wheelBase, grossCombWeight;
+            int year= 0,  numOfSeats= 0, numOfSeatRows= 0, numOfCylinders= 0, horsepower= 0, topSpeed= 0, numOfDoors= 0, numOfWindows= 0,
+                    numOfWheels= 0, wheelSizeFrontIn= 0, wheelSizeRearIn= 0, axles = 0;
+            double displacementCC = 0.0, displacementCI = 0.0, displacementL = 0.0, enginePowerkW = 0.0, bedLength = 0.0, curbWeight = 0.0,
+                    wheelBase = 0.0, grossCombWeight = 0.0, basePrice = 0.0;
 
             while(input.hasNextLine())
             {
                 currentLine = input.nextLine();
-                vehicleData = currentLine.split(",");
-
+                vehicleData = currentLine.split(",",66);
                 VIN = vehicleData[0];
                 antiLockBraking = vehicleData[1];
                 electronicStability = vehicleData[2];
@@ -57,47 +59,51 @@ public class VehiclesDataReader
                 headlampBeamSwitch = vehicleData[21];
                 adaptDrivingBeam = vehicleData[22];
                 adaptiveCruiseControl = vehicleData[23];
-                numOfCylinders = Integer.parseInt(vehicleData[24]);
-                displacementCC = Integer.parseInt(vehicleData[25]);
-                displacementCI = Double.parseDouble(vehicleData[26]);
-                displacementL = Double.parseDouble(vehicleData[27]);
-                enginePowerkW = Double.parseDouble(vehicleData[28]);
+                year = Integer.parseInt("0" + vehicleData[54]);
+
+                numOfCylinders = Integer.parseInt("0" + vehicleData[24]);
+                displacementCC = Double.parseDouble("0" + vehicleData[25]);
+                displacementCI = Double.parseDouble("0" + vehicleData[26]);
+                displacementL = Double.parseDouble("0" + vehicleData[27]);
+                enginePowerkW = Double.parseDouble("0" + vehicleData[28]);
+                horsepower = Integer.parseInt("0" + vehicleData[33]);
+                topSpeed = Integer.parseInt("0" + vehicleData[37]);
+                numOfDoors = Integer.parseInt("0" + vehicleData[40]);
+                numOfWindows = Integer.parseInt("0" + vehicleData[41]);
+                bedLength = Double.parseDouble("0" + vehicleData[43]);
+                curbWeight = Double.parseDouble("0" + vehicleData[44]);
+                wheelBase = Double.parseDouble("0" + vehicleData[45]);
+                grossCombWeight = Double.parseDouble("0" + vehicleData[46]);
+                numOfWheels = Integer.parseInt("0" + vehicleData[49]);
+                wheelSizeFrontIn = Integer.parseInt("0" + vehicleData[50]);
+                wheelSizeRearIn = Integer.parseInt("0" + vehicleData[51]);
+
+                basePrice = Double.parseDouble("0"+vehicleData[59]);
+                numOfSeats = Integer.parseInt("0" + vehicleData[61]);
+                numOfSeatRows = Integer.parseInt("0" + vehicleData[62]);
+                axles = Integer.parseInt("0" + vehicleData[64]);
+
+
                 fuelTypePrim = vehicleData[29];
                 engineConfig = vehicleData[30];
                 fuelTypeSec = vehicleData[31];
                 fuelInjectionType = vehicleData[32];
-                horsepower = Integer.parseInt(vehicleData[33]);
                 electricificationLevel = vehicleData[34];
                 otherEngineInfo = vehicleData[35];
                 turbo = vehicleData[36];
-                topSpeed = Integer.parseInt(vehicleData[37]);
                 engineManufact = vehicleData[38];
                 bodyClass = vehicleData[39];
-                numOfDoors = Integer.parseInt(vehicleData[40]);
-                numOfWindows = Integer.parseInt(vehicleData[41]);
                 wheelBaseType = vehicleData[42];
-                bedLength = Double.parseDouble(vehicleData[43]);
-                curbWeight = Double.parseDouble(vehicleData[44]);
-                wheelBase = Double.parseDouble(vehicleData[45]);
-                grossCombWeight = Double.parseDouble(vehicleData[46]);
                 truckBedType = vehicleData[47];
                 truckCabType = vehicleData[48];
-                numOfWheels = Integer.parseInt(vehicleData[49]);
-                wheelSizeFrontIn = Integer.parseInt(vehicleData[50]);
-                wheelSizeRearIn = Integer.parseInt(vehicleData[51]);
                 make = vehicleData[52];
                 model = vehicleData[53];
-                year = Integer.parseInt(vehicleData[54]);
                 series = vehicleData[55];
                 trim = vehicleData[56];
                 vehicleType = vehicleData[57];
                 plantCountry = vehicleData[58];
-                basePrice = Integer.parseInt(vehicleData[59]);
                 entertainSys = vehicleData[60];
-                numOfSeats = Integer.parseInt(vehicleData[61]);
-                numOfSeatRows = Integer.parseInt(vehicleData[62]);
                 driveType = vehicleData[63];
-                axles = Integer.parseInt(vehicleData[64]);
                 transmissionStyle = vehicleData[65];
 
                 theVehicle = new Vehicle(VIN,make,model,year,series,trim,vehicleType,plantCountry,basePrice,entertainSys,numOfSeats,
@@ -113,6 +119,18 @@ public class VehiclesDataReader
 
             }
             input.close();
+
+            System.out.println("PRINT DATABASE SORTED BY BASE PRICE");
+            Vehicles sortedByBasePrice = vehiclesDatabase;
+            sortedByBasePrice.sortByBasePrice();
+            System.out.println(sortedByBasePrice);
+            System.out.println();
+
+            System.out.println("PRINT DATABASE SORTED BY HORSEPOWER");
+            Vehicles sortedByHP = vehiclesDatabase;
+            sortedByHP.sortByHorsepower();
+            System.out.println(sortedByHP);
+            System.out.println();
         }
     }
 }
