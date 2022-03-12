@@ -1,5 +1,5 @@
-#Basic Java-only proof-of-concept application.
-##Key functionalities are working:
+# Basic Java-only proof-of-concept application.
+## Key functionalities are working:
 1. **Vehicle**: class for a single vehicle in inventory with all its attributes, getters/setters.
 2. **Vehicles**: class for all the vehicles in inventory, held in an ArrayList. Working on functions such as sorting by
    price, filtering by certain features, etc.
