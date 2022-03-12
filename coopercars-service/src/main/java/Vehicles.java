@@ -9,7 +9,7 @@ public class Vehicles
     // constructor
     public Vehicles()
     {
-        vehicles = new ArrayList<Vehicle>();
+        vehicles = new ArrayList<>();
     }
 
     public void addVehicle(Vehicle v)
@@ -97,6 +97,17 @@ public class Vehicles
 
         return byType;
     }
+
+    public List<Vehicle> getAllWithACC()
+    {
+        List<Vehicle> byType = new ArrayList<>();
+        for (Vehicle v : vehicles)
+            if (v.getAdaptiveCruiseControl().equals("Standard"))
+                byType.add(v);
+
+        return byType;
+    }
+
 
     @Override
     public String toString() {

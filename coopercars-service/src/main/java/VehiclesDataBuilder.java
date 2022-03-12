@@ -49,15 +49,26 @@ public class VehiclesDataBuilder
         }
         theWriter.write("\n");
 
+        String filename = "sampleVINs.txt";
+        File inputFile = new File(filename);
+        Scanner readInput = new Scanner(inputFile);
         boolean run = true;
         while(run) {
+
+
+
+            /*
             Scanner readInput = new Scanner(System.in);
             System.out.println("Enter a VIN number: ");
 
-            // add a try catch
             String theVIN = readInput.nextLine();
             if (theVIN.equals("stop"))
                 run = false;
+
+            */
+            String theVIN = readInput.nextLine();
+            if (readInput.hasNextLine() == false)
+                    run = false;
             String theURL = "https://vpic.nhtsa.dot.gov/decoder/Decoder/ExportToExcel?VIN=" + theVIN;
 
             BufferedReader in = null;

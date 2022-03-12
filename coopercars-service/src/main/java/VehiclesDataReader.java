@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.List;
 import java.util.Scanner;
 
 public class VehiclesDataReader
@@ -131,6 +132,13 @@ public class VehiclesDataReader
             sortedByHP.sortByHorsepower();
             System.out.println(sortedByHP);
             System.out.println();
+
+            System.out.println("PRINT VEHICLES WITH ACC");
+            List<Vehicle> allWithACC = vehiclesDatabase.getAllWithACC();
+            for (Vehicle hasACC : allWithACC)
+                System.out.println(hasACC);
+            System.out.println();
+
         }
     }
 }
