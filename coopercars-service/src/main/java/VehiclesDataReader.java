@@ -27,10 +27,10 @@ public class VehiclesDataReader
                     laneKeepAssist, blindSpotIntervention, laneCenterAssist, daytimeRunLights, headlampLightSrc, headlampBeamSwitch,
                     adaptDrivingBeam, adaptiveCruiseControl, fuelTypePrim, fuelTypeSec, fuelInjectionType, engineConfig, electricificationLevel,
                     otherEngineInfo, turbo, engineManufact, bodyClass, wheelBaseType, truckBedType, truckCabType, driveType, transmissionStyle;
-            int year= 0,  numOfSeats= 0, numOfSeatRows= 0, numOfCylinders= 0, horsepower= 0, topSpeed= 0, numOfDoors= 0, numOfWindows= 0,
+            int year= 0,  numOfSeats= 0, numOfSeatRows= 0, numOfCylinders= 0, topSpeed= 0, numOfDoors= 0, numOfWindows= 0,
                     numOfWheels= 0, wheelSizeFrontIn= 0, wheelSizeRearIn= 0, axles = 0;
             double displacementCC = 0.0, displacementCI = 0.0, displacementL = 0.0, enginePowerkW = 0.0, bedLength = 0.0, curbWeight = 0.0,
-                    wheelBase = 0.0, grossCombWeight = 0.0, basePrice = 0.0;
+                    wheelBase = 0.0, grossCombWeight = 0.0, basePrice = 0.0, horsepower = 0.0;
 
             while(input.hasNextLine())
             {
@@ -67,7 +67,7 @@ public class VehiclesDataReader
                 displacementCI = Double.parseDouble("0" + vehicleData[26]);
                 displacementL = Double.parseDouble("0" + vehicleData[27]);
                 enginePowerkW = Double.parseDouble("0" + vehicleData[28]);
-                horsepower = Integer.parseInt("0" + vehicleData[33]);
+                horsepower = Double.parseDouble("0" + vehicleData[33]);
                 topSpeed = Integer.parseInt("0" + vehicleData[37]);
                 numOfDoors = Integer.parseInt("0" + vehicleData[40]);
                 numOfWindows = Integer.parseInt("0" + vehicleData[41]);

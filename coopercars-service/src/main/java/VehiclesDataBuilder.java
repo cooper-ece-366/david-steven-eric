@@ -41,15 +41,28 @@ public class VehiclesDataBuilder
                 "Wheel Size Rear (inches)", "Make", "Model", "Model Year", "Series", "Trim", "Vehicle Type", "Plant Country",
                 "Base Price ($)", "Entertainment System", "Number of Seats", "Number of Seat Rows", "Drive Type", "Axles", "Transmission Style"};
         initialRow.add(populateInitialRow);
-
-
-        Writer theWriter = new FileWriter("vehiclesDatabase.csv");
-        for (String[] data : initialRow) {
-            theWriter.write(String.join(",", data));
+        boolean writeInitialLineBool = false;
+        try{
+            File myFile = new File("vehiclesDatabase.csv");
+            if(myFile.createNewFile())
+            {
+               writeInitialLineBool = true;
+            }
         }
-        theWriter.write("\n");
+        catch (IOException e){
 
-        String filename = "sampleVINs.txt";
+        }
+
+        Writer theWriter = new FileWriter("vehiclesDatabase.csv", true);
+
+        if(writeInitialLineBool) {
+            for (String[] data : initialRow) {
+                theWriter.write(String.join(",", data));
+            }
+            theWriter.write("\n");
+        }
+
+        String filename = "sampleVINs2.txt";
         File inputFile = new File(filename);
         Scanner readInput = new Scanner(inputFile);
         boolean run = true;

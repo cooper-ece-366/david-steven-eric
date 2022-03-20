@@ -55,7 +55,7 @@ public class Vehicle
     private String fuelTypeSec;
     private String fuelInjectionType;
     private String engineConfig;
-    private int horsepower;
+    private double horsepower;
     private String electricificationLevel;
     private String otherEngineInfo;
     private String turbo;
@@ -88,7 +88,7 @@ public class Vehicle
     private int axles;
     private String transmissionStyle;
 
-    public Vehicle(String VIN, String make, String model, int year, String series, String trim, String vehicleType, String plantCountry, double basePrice, String entertainSys, int numOfSeats, int numOfSeatRows, String antiLockBraking, String electronicStability, String tractionControl, String keylessIgnition, String autoCrashNotif, String backupCam, String parkingAssist, String rearCrossTrafficAlert, String rearAutoEmergBraking, String crashImmBraking, String forwColliWarn, String dynamicBrakeSupp, String pedestrianAutoEmergBrak, String blindSpotWarn, String laneDepartWarn, String laneKeepAssist, String blindSpotIntervention, String laneCenterAssist, String daytimeRunLights, String headlampLightSrc, String headlampBeamSwitch, String adaptDrivingBeam, String adaptiveCruiseControl, int numOfCylinders, double displacementCC, double displacementCI, double displacementL, double enginePowerkW, String fuelTypePrim, String fuelTypeSec, String fuelInjectionType, String engineConfig, int horsepower, String electricificationLevel, String otherEngineInfo, String turbo, int topSpeed, String engineManufact, String bodyClass, int numOfDoors, int numOfWindows, String wheelBaseType, double bedLength, double curbWeight, double wheelBase, double grossCombWeight, String truckBedType, String truckCabType, int numOfWheels, int wheelSizeFrontIn, int wheelsSizeRearIn, String driveType, int axles, String transmissionStyle) {
+    public Vehicle(String VIN, String make, String model, int year, String series, String trim, String vehicleType, String plantCountry, double basePrice, String entertainSys, int numOfSeats, int numOfSeatRows, String antiLockBraking, String electronicStability, String tractionControl, String keylessIgnition, String autoCrashNotif, String backupCam, String parkingAssist, String rearCrossTrafficAlert, String rearAutoEmergBraking, String crashImmBraking, String forwColliWarn, String dynamicBrakeSupp, String pedestrianAutoEmergBrak, String blindSpotWarn, String laneDepartWarn, String laneKeepAssist, String blindSpotIntervention, String laneCenterAssist, String daytimeRunLights, String headlampLightSrc, String headlampBeamSwitch, String adaptDrivingBeam, String adaptiveCruiseControl, int numOfCylinders, double displacementCC, double displacementCI, double displacementL, double enginePowerkW, String fuelTypePrim, String fuelTypeSec, String fuelInjectionType, String engineConfig, double horsepower, String electricificationLevel, String otherEngineInfo, String turbo, int topSpeed, String engineManufact, String bodyClass, int numOfDoors, int numOfWindows, String wheelBaseType, double bedLength, double curbWeight, double wheelBase, double grossCombWeight, String truckBedType, String truckCabType, int numOfWheels, int wheelSizeFrontIn, int wheelsSizeRearIn, String driveType, int axles, String transmissionStyle) {
         this.VIN = VIN;
         this.make = make;
         this.model = model;
@@ -509,11 +509,11 @@ public class Vehicle
         this.engineConfig = engineConfig;
     }
 
-    public int getHorsepower() {
+    public double getHorsepower() {
         return horsepower;
     }
 
-    public void setHorsepower(int horsepower) {
+    public void setHorsepower(double horsepower) {
         this.horsepower = horsepower;
     }
 
