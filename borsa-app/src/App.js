@@ -12,7 +12,7 @@ function getRandomColor() {
 function App() {
     const apiUrlPrefix = "http://localhost:8080";
   // const tickers = ['AAPL','AMZN','GOOG','NVDA','INTC','FB','ORCL','NFLX'];
-  const vins = ['1FMCU9GD1HUA30879','3FA6P0LU1KR242602','3HGGK5H88KM742051','5YJ3E1EA5JF098290','1FTEX1E51KKC66386','1C4RJFLG1HC603078','3FA6P0LU1KR101755','JTMRWRFV7LJ048851'];
+  const vins = ['1FMCU9GD1HUA30879', '3FA6P0LU1KR242602', '3HGGK5H88KM742051', '5YJ3E1EA5JF098290', '1FTEX1E51KKC66386', '1C4RJFLG1HC603078', '3FA6P0LU1KR101755', 'JTMRWRFV7LJ048851', '1G1RE6E42EU111830', 'SADCJ2BN5HA086947', 'KNMAT2MV3JP608780', '5NPD84LF6KH490922', '5npe34af3jh646547', '2hgfc2f78jh564740', '5YFEPRAE7LP054292', '55SWF4KB5GU142000'];
 
   const [currentVIN, setCurrentVIN] = useState('-');
   const [currentVehicleInfo, setCurrentVehicleInfo] = useState('-');
@@ -64,11 +64,11 @@ function App() {
         <br></br>
         <button className="button" onClick={App.buttonClicked}>Click to Refresh</button>
 
-        <p>The vehicle for VIN ${currentVIN} is</p>
+        <p>The vehicle for VIN {currentVIN} is</p>
         <div style={{background: `${getRandomColor()}`}}>
 
         </div>
-        $ {currentVehicleInfo}
+        {currentVehicleInfo}
         <p></p>
       </header>
     </div>
