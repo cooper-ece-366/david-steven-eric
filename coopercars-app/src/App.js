@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState } from "react";
+import NavBar from './components/NavBar'
 import TextField from "@material-ui/core/TextField";
 
 
@@ -14,6 +15,7 @@ function App() {
     }
   return (
     <div className="App">
+      <NavBar />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
           <p>
@@ -22,11 +24,7 @@ function App() {
           <input type="text" onChange={getData}/>
           <button onClick={()=>setPrint(true)}>Submit</button>
 
-          {
-              print?
-                  <h1>{data}</h1>
-                  :null
-          }
+
 
       </header>
 
