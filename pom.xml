@@ -7,7 +7,6 @@
 	<version>0.0.1</version>
 	<modules>
 		<module>borsa-service</module>
-		<module>yahoofinance-api</module>
 	</modules>
 	<name>project-borsa</name>
 	<packaging>pom</packaging>
@@ -42,7 +41,6 @@
 		<testng.version>7.3.0</testng.version>
 		<jackson.version>2.13.1</jackson.version>
 
-		<yahoo-finance.version>3.16.0-SNAPSHOT</yahoo-finance.version>
 
 		<spring.boot.version>2.6.3</spring.boot.version>
 		<spring.webmvc.version>5.3.15</spring.webmvc.version>
@@ -178,11 +176,7 @@
                             <version>${gson.version}</version>
                         </dependency>
             -->
-			<dependency>
-				<groupId>edu.cooper.ece366.yahoofinance</groupId>
-				<artifactId>api</artifactId>
-				<version>${yahoo-finance.version}</version>
-			</dependency>
+
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
@@ -341,7 +335,6 @@
 			<id>classpath-deps</id>
 			<modules>
 				<module>borsa-service</module>
-				<module>yahoofinance-api</module>
 			</modules>
 			<build>
 				<plugins>
@@ -437,7 +430,6 @@
 			</activation>
 			<modules>
 				<module>borsa-service</module>
-				<module>yahoofinance-api</module>
 			</modules>
 		</profile>
 
@@ -446,7 +438,6 @@
 			<id>uber</id>
 			<modules>
 				<module>borsa-service</module>
-				<module>yahoofinance-api</module>
 			</modules>
 			<build>
 				<plugins>
