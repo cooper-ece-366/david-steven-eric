@@ -1,4 +1,8 @@
-# david-steven-eric
-ECE 366 Spring 2022 -- David Guo, Steven Joongyeon Cho, Eric Xu
+# CooperCars: US-7 
+### Connects a custom-made VehicleAPI to the front-end. This is based on the Borsa project and needs to be renamed and refactored. 
+#### Merged with dguo-us-12 to add title navigation bar and re-implement text box.
+#### WIP!!! Currently, the text box does absolutely nothing (and also doesn't work properly). The vehicle displayed is based on a set of pre-defined VINs.
+#### Todo: present the vehicle based on what's passed in the text box.
+#### Done: re-factor and rename everything from borsa to coopercars.
 
-This application will provide customers and employees of a car dealer with valuable information about the vehicles available in inventory. Customers (the general public) can access the application through a mobile app or a website where they can view vehicles in inventory, sort, and filter based on features and cost, and read additional information such as condition and service required. Employees of the dealer can see all the information available to the general public, but can also login to their version of the application where they can change an inventory database and see detailed information about the vehicles such as dealer cost, currently running promotions, recalls and service to be done, etc. They may also add notes and images of the vehicles. The application will also highlight information important to dealers such as the time the vehicle has spent on the lot, net profit, etc.
+![image1](us-7.png)
