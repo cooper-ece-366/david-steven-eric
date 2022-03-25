@@ -1,5 +1,5 @@
-# for borsa-service
-./borsa-service/src/main/resources/application.properties
+# for coopercars-service
+./coopercars-service/src/main/resources/application.properties
 
 ssh
 opt

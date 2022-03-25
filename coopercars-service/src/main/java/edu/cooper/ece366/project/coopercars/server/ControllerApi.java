@@ -1,4 +1,4 @@
-package edu.cooper.ece366.project.borsa.server;
+package edu.cooper.ece366.project.coopercars.server;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,9 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.ldap.Control;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # TODO: Add in the application you will write below. That will be a folder under this current working directory
-APPS="borsa-service"
+APPS="coopercars-service"
 
 # First ensure dependencies loaded since .m2 may be empty
 mvn dependency:tree -Ddetail=true
@@ -18,7 +18,7 @@ NOW=$(date "+%Y%m%d%H%M%S")
 APP_MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version | grep -e '^[^\[]')
 APP_GIT_VERSION=$(git rev-parse --abbrev-ref HEAD)
 
-RESOURCES_DIR=./borsa-service/src/main/resources
+RESOURCES_DIR=./coopercars-service/src/main/resources
 APP_PROP_FILE=${RESOURCES_DIR}/application.properties
 APP_TEMPLATE_PROP_FILE=${RESOURCES_DIR}/application.properties-template
 APP_VERSION_FILE=./app.version

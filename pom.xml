@@ -2,13 +2,13 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
 	<!-- TODO: Update your team's project name below and refactor using IntelliJ -->
-	<artifactId>project-borsa</artifactId>
+	<artifactId>project-coopercars</artifactId>
 	<groupId>edu.cooper.ece366</groupId>
 	<version>0.0.1</version>
 	<modules>
-		<module>borsa-service</module>
+		<module>coopercars-service</module>
 	</modules>
-	<name>project-borsa</name>
+	<name>project-coopercars</name>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -334,7 +334,7 @@
 		<profile>
 			<id>classpath-deps</id>
 			<modules>
-				<module>borsa-service</module>
+				<module>coopercars-service</module>
 			</modules>
 			<build>
 				<plugins>
@@ -429,7 +429,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<modules>
-				<module>borsa-service</module>
+				<module>coopercars-service</module>
 			</modules>
 		</profile>
 
@@ -437,7 +437,7 @@
 		<profile>
 			<id>uber</id>
 			<modules>
-				<module>borsa-service</module>
+				<module>coopercars-service</module>
 			</modules>
 			<build>
 				<plugins>

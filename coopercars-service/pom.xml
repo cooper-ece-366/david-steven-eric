@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>project-borsa</artifactId>
+        <artifactId>project-coopercars</artifactId>
         <groupId>edu.cooper.ece366</groupId>
         <version>0.0.1</version>
     </parent>
@@ -12,17 +12,17 @@
     <groupId>edu.cooper.ece366.project</groupId>
     <artifactId>server</artifactId>
 
-    <name>borsa-service</name>
+    <name>coopercars-service</name>
     <packaging>jar</packaging>
     <url>https://ee.cooper.edu</url>
 
     <properties>
-        <main.class>edu.cooper.ece366.project.borsa.server.RestApiServer</main.class>
-        <start-class>edu.cooper.ece366.project.borsa.server.RestApiServer</start-class>
+        <main.class>edu.cooper.ece366.project.coopercars.server.RestApiServer</main.class>
+        <start-class>edu.cooper.ece366.project.coopercars.server.RestApiServer</start-class>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <name>borsa-service</name>
+        <name>coopercars-service</name>
         <portNumber>1859</portNumber>
     </properties>
 
@@ -59,7 +59,7 @@
                     <arguments>
                         <argument>-classpath</argument>
                         <classpath/>
-                        <argument>edu.cooper.ece366.project.borsa.server.RestApiServer</argument>
+                        <argument>RestApiServer</argument>
                     </arguments>
                 </configuration>
             </plugin>
