@@ -17,7 +17,7 @@ public class ControllerApi {
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @GetMapping(path = "/vehicle/{vin}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getClosingStockPrice(@PathVariable final String vin) throws JsonProcessingException {
+    public String getVehicleInfo(@PathVariable final String vin) throws JsonProcessingException {
         try {
             VehicleAPI vehicle = new VehicleAPI(vin);
             String theVIN = vehicle.getVIN();

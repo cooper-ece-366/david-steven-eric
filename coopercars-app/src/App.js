@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import useInterval from './useInterval';
+//import useInterval from './useInterval';
 import coopercars1_logo from './CooperCars-logos.jpeg';
 import coopercars2_logo from './CooperCars-logos_black.png';
 import './App.css';
