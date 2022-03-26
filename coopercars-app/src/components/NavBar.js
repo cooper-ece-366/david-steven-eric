@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button';
 import {Container, Tooltip} from "@material-ui/core";
-import logo from "../CooperCars-logos_black.png";
+import logo from "../CooperCars-logos_white.png";
 
 const pages = ['Browse Vehicles', 'Add Vehicles'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -21,7 +21,7 @@ const NavBar = () => {
                         component="div"
                         sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                     >
-                        <img src={logo} className="App-logo" alt="logo" sx={{ p: 0 }} width = "100" height = "200"/>
+                        <img src={logo} className="App-logo" alt="logo" sx={{ p: 0 }} width = "100" height = "100"/>
                     </Typography>
 
                     {/*<div>*/}
