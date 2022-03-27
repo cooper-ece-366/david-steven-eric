@@ -36,10 +36,10 @@ const NavBar = () => {
                     {/*<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>*/}
                     {/*    Vehicles*/}
                     {/*</Typography>*/}
-                    <Button to = "/browse" component= {Link} color="inherit">Browse Vehicles</Button>
-                    <Button to = "/addVehicle" component= {Link} color="inherit">Add Vehicle</Button>
+                    <Button to="/browse" component={Link} color="inherit">Browse Vehicles</Button>
+                    <Button to="/addVehicle" component={Link} color="inherit">Add Vehicle</Button>
                     <Tooltip>
-                        <Button color="inherit" align = "right" sx={{ p: 0 }}>Login</Button>
+                        <Button to="/login" component={Link} color="inherit" align = "right" sx={{ p: 0 }}>Login</Button>
                     </Tooltip>
                 </Toolbar>
                 </Container>
