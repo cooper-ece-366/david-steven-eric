@@ -28,6 +28,8 @@ function HomePage() {
   const [currentVehicleFeatures2, setCurrentVehicleFeatures2] = useState('-');
   const [currentVehicleFeatures3, setCurrentVehicleFeatures3] = useState('-');
   const [currentVehicleFeatures4, setCurrentVehicleFeatures4] = useState('-');
+  const [currentVehicleFeatures5, setCurrentVehicleFeatures5] = useState('-');
+
   //const [data,setData] = useState(null);
   //const [print,setPrint] = useState(false);
   //const vinDelay = 30000; // in milliseconds
@@ -43,6 +45,8 @@ function HomePage() {
     setCurrentVehicleFeatures2(vin);
     setCurrentVehicleFeatures3(vin);
     setCurrentVehicleFeatures4(vin);
+    setCurrentVehicleFeatures5(vin);
+
     var vehicleApiUrl = apiUrlPrefix.concat("/api/vehicle/",vin);
       fetch(vehicleApiUrl)
       .then(response => response.json())
@@ -88,6 +92,8 @@ function HomePage() {
         setCurrentVehicleFeatures2(hasBSW + "with blind spot warning. ");
         setCurrentVehicleFeatures3(hasACC + "with adaptive cruise control. ");
         setCurrentVehicleFeatures4(hasBackup + "with a backup camera. ");
+        setCurrentVehicleFeatures5("Manufactured in: " + data.plantCountry);
+
         console.log(data);
       })
       .catch(err => {
@@ -144,6 +150,7 @@ function HomePage() {
         {currentVehicleFeatures2}<br></br>
         {currentVehicleFeatures3}<br></br>
         {currentVehicleFeatures4}<br></br>
+        {currentVehicleFeatures5}<br></br>
       </header>
     </div>
   );
