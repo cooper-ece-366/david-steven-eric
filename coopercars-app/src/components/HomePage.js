@@ -4,6 +4,7 @@ import coopercars1_logo from '../CooperCars-logos.jpeg';
 import coopercars2_logo from '../CooperCars-logos_black.png';
 import '../App.css';
 import NavBar from './NavBar'
+import logo from "../CooperCars-logos_white.png";
 import TextField from "@material-ui/core/TextField";
 import {
   BrowserRouter as Router,
@@ -120,37 +121,14 @@ function HomePage() {
     <div className="App">
       <NavBar />
       <header className="App-header">
-      <img src={coopercars1_logo} className="App-logo" alt="cooper-logo" />
+      <img src={logo} className="App-logo" alt="cooper-logo" height = "400" width = "200"/>
 
         <p>
-          Enter VIN of vehicle to add to inventory:
+          Welcome to CooperCars
         </p>
 
-        <TextField
-            style={{background: "rgb(232, 241, 250)"}}
-            value={vin}
-            onChange={(e) => {
-              setVin(e.target.value);
-            }}
-
-        />
-
-        <button className="button" onClick={HomePage.buttonClicked}>Submit</button>
 
 
-        {/*<input type="text" onChange={HomePage.getData}/>*/}
-        {/*<button onClick={HomePage.getData}>Submit</button>*/}
-
-        <br></br>
-        {/*<button className="button" onClick={HomePage.buttonClicked}>Click to Refresh</button>*/}
-
-        <p>The vehicle for VIN {vin} is </p>
-        {currentVehicleInfo}<br></br>
-        {currentVehicleFeatures1}<br></br>
-        {currentVehicleFeatures2}<br></br>
-        {currentVehicleFeatures3}<br></br>
-        {currentVehicleFeatures4}<br></br>
-        {currentVehicleFeatures5}<br></br>
       </header>
     </div>
   );

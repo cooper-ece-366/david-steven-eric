@@ -22,7 +22,6 @@ const NavBar = () => {
                         component="div"
                         sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                     >
-                        <img src={logo} className="App-logo" alt="logo" sx={{ p: 0 }} width = "100" height = "100"/>
                     </Typography>
 
                     {/*<div>*/}
@@ -36,6 +35,9 @@ const NavBar = () => {
                     {/*<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>*/}
                     {/*    Vehicles*/}
                     {/*</Typography>*/}
+                    <Button to="/" component={Link} color="inherit">
+                        <img src={logo} className="App-logo" alt="logo" sx={{ p: 0 }} width = "100" height = "100"/>
+                    </Button>
                     <Button to="/browse" component={Link} color="inherit">Browse Vehicles</Button>
                     <Button to="/addVehicle" component={Link} color="inherit">Add Vehicle</Button>
                     <Tooltip>
