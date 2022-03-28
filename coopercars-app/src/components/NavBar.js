@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button';
 import {Container, Tooltip} from "@material-ui/core";
 import logo from "../CooperCars-logos_white.png";
+import {Link} from "react-router-dom";
 
 const pages = ['Browse Vehicles', 'Add Vehicles'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -35,10 +36,10 @@ const NavBar = () => {
                     {/*<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>*/}
                     {/*    Vehicles*/}
                     {/*</Typography>*/}
-                    <Button color="inherit">Browse Vehicles</Button>
-                    <Button color="inherit">Add Vehicle</Button>
+                    <Button to="/browse" component={Link} color="inherit">Browse Vehicles</Button>
+                    <Button to="/addVehicle" component={Link} color="inherit">Add Vehicle</Button>
                     <Tooltip>
-                        <Button color="inherit" align = "right" sx={{ p: 0 }}>Login</Button>
+                        <Button to="/login" component={Link} color="inherit" align = "right" sx={{ p: 0 }}>Login</Button>
                     </Tooltip>
                 </Toolbar>
                 </Container>
