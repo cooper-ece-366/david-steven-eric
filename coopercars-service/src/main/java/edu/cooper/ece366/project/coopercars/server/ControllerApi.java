@@ -17,10 +17,10 @@ public class ControllerApi {
     private static final Logger LOGGER = LoggerFactory.getLogger(ControllerApi.class);
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    @GetMapping(path = "/vehicle/{vin}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getVehicleInfo(@PathVariable final String vin) throws JsonProcessingException {
+    @GetMapping(path = "/vehicle/{vin}/{dealerPrice}/{salePrice}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getVehicleInfo(@PathVariable final String vin, @PathVariable final String dealerPrice, @PathVariable final String salePrice) throws JsonProcessingException {
         try {
-            VehicleAPI vehicle = new VehicleAPI(vin);
+            VehicleAPI vehicle = new VehicleAPI(vin,dealerPrice,salePrice);
             LOGGER.debug(vehicle.getTheVehicle().toString());
             String theVehicleJSON = objectMapper.writeValueAsString(vehicle.getTheVehicle());
             LOGGER.debug(theVehicleJSON);

@@ -36,7 +36,7 @@ public class VehiclesAPI
 
             input.nextLine();
 
-            String VIN, make, model, series, trim, vehicleType, plantCountry, entertainSys, antiLockBraking, electronicStability,
+            String VIN, make, model, imgURL, series, trim, vehicleType, plantCountry, entertainSys, antiLockBraking, electronicStability,
                     tractionControl, keylessIgnition, autoCrashNotif, backupCam, parkingAssist, rearCrossTrafficAlert, rearAutoEmergBraking,
                     crashImmBraking, forwColliWarn, dynamicBrakeSupp, pedestrianAutoEmergBrak, blindSpotWarn, laneDepartWarn,
                     laneKeepAssist, blindSpotIntervention, laneCenterAssist, daytimeRunLights, headlampLightSrc, headlampBeamSwitch,
@@ -45,12 +45,12 @@ public class VehiclesAPI
             int year= 0,  numOfSeats= 0, numOfSeatRows= 0, numOfCylinders= 0, topSpeed= 0, numOfDoors= 0, numOfWindows= 0,
                     numOfWheels= 0, wheelSizeFrontIn= 0, wheelSizeRearIn= 0, axles = 0;
             double displacementCC = 0.0, displacementCI = 0.0, displacementL = 0.0, enginePowerkW = 0.0, bedLength = 0.0, curbWeight = 0.0,
-                    wheelBase = 0.0, grossCombWeight = 0.0, basePrice = 0.0, horsepower = 0.0;
+                    wheelBase = 0.0, grossCombWeight = 0.0, basePrice = 0.0, horsepower = 0.0, dealerPrice = 0.0, salePrice = 0.0;
 
             while(input.hasNextLine())
             {
                 currentLine = input.nextLine();
-                vehicleData = currentLine.split(",",66);
+                vehicleData = currentLine.split(",",69);
                 VIN = vehicleData[0];
                 antiLockBraking = vehicleData[1];
                 electronicStability = vehicleData[2];
@@ -98,6 +98,8 @@ public class VehiclesAPI
                 numOfSeats = Integer.parseInt("0" + vehicleData[61]);
                 numOfSeatRows = Integer.parseInt("0" + vehicleData[62]);
                 axles = Integer.parseInt("0" + vehicleData[64]);
+                dealerPrice = Double.parseDouble("0"+vehicleData[66]);
+                salePrice = Double.parseDouble("0"+vehicleData[67]);
 
 
                 fuelTypePrim = vehicleData[29];
@@ -122,7 +124,10 @@ public class VehiclesAPI
                 driveType = vehicleData[63];
                 transmissionStyle = vehicleData[65];
 
-                theVehicle = new Vehicle(VIN,make,model,year,series,trim,vehicleType,plantCountry,basePrice,entertainSys,numOfSeats,
+                imgURL = vehicleData[68];
+
+
+                theVehicle = new Vehicle(VIN,dealerPrice,salePrice,imgURL,make,model,year,series,trim,vehicleType,plantCountry,basePrice,entertainSys,numOfSeats,
                         numOfSeatRows,antiLockBraking,electronicStability,tractionControl,keylessIgnition,autoCrashNotif,backupCam,parkingAssist,rearCrossTrafficAlert,
                         rearAutoEmergBraking,crashImmBraking,forwColliWarn,dynamicBrakeSupp,pedestrianAutoEmergBrak,blindSpotWarn,
                         laneDepartWarn,laneKeepAssist,blindSpotIntervention,laneCenterAssist,daytimeRunLights,headlampLightSrc,headlampBeamSwitch,
