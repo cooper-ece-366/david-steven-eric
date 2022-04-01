@@ -53,12 +53,13 @@ function BrowseVehicle() {
                 <ul className="card-grid">
                     {items.map((item) => (
                         <li>
-                            {/*<article className="card" key={item.callingCodes}>*/}
-                            {/*    <div className="card-image">*/}
-                            {/*        <img src={item.flag} alt={item.name} />*/}
-                            {/*    </div>*/}
+                            <article className="vehicle" key={item.vin}>
+
                                 <div className="card-content">
                                     <h2 className="card-name">{item.vin}</h2>
+                                    <div className="car-image">
+                                        <img src={item.imgURL} alt={item.vin} width="150" height="100"/>
+                                    </div>
                                     <ol className="card-list">
                                         <li>
                                             Make:{" "}
@@ -70,9 +71,15 @@ function BrowseVehicle() {
                                         <li>
                                             Year: <span>{item.year}</span>
                                         </li>
+                                        <li>
+                                            Dealer Price: <span>{item.dealerPrice}</span>
+                                        </li>
+                                        <li>
+                                            Sale Price: <span>{item.salePrice}</span>
+                                        </li>
                                     </ol>
                                 </div>
-                            {/*</article>*/}
+                            </article>
                         </li>
                     ))}
                 </ul>

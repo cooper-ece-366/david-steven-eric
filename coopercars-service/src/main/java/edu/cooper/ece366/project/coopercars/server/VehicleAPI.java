@@ -19,9 +19,10 @@ public class VehicleAPI
         this.theVehicle = theVehicle;
     }
 
-    public VehicleAPI(String myVIN) throws IOException {
+    public VehicleAPI(String myVIN, String dealerPrice, String salePrice) throws IOException {
         String theVIN = myVIN;
         String VIN;
+        String imgURL;
 
         //general
         String make;
@@ -104,7 +105,7 @@ public class VehicleAPI
         int axles;
         String transmissionStyle;
         String theURL = "https://vpic.nhtsa.dot.gov/decoder/Decoder/ExportToExcel?VIN=" + theVIN;
-        String[] populateInitialRow = {"VIN", "Anti-lock Braking System (ABS)", "Electronic Stability Control (ESC)", "Traction Control",
+        String[] populateInitialRow = {"VIN","Anti-lock Braking System (ABS)", "Electronic Stability Control (ESC)", "Traction Control",
                 "Keyless Ignition", "Automatic Crash Notification (ACN) / Advanced Automatic Crash Notification (AACN)",
                 "Backup Camera", "Parking Assist", "Rear Cross Traffic Alert", "Rear Automatic Emergency Braking", "Crash Imminent Braking (CIB)",
                 "Forward Collision Warning (FCW)", "Dynamic Brake Support (DBS)", "Pedestrian Automatic Emergency Braking (PAEB)",
@@ -117,7 +118,7 @@ public class VehicleAPI
                 "Body Class", "Doors", "Windows", "Wheel Base Type", "Bed Length (inches)", "Curb Weight (pounds)", "Wheel Base (inches) From",
                 "Gross Combination Weight Rating From", "Bed Type", "Cab Type", "Number of Wheels", "Wheel Size Front (inches)",
                 "Wheel Size Rear (inches)", "Make", "Model", "Model Year", "Series", "Trim", "Vehicle Type", "Plant Country",
-                "Base Price ($)", "Entertainment System", "Number of Seats", "Number of Seat Rows", "Drive Type", "Axles", "Transmission Style"};
+                "Base Price ($)", "Entertainment System", "Number of Seats", "Number of Seat Rows", "Drive Type", "Axles", "Transmission Style", "Dealer Price", "Sale Price","Image URL"};
 
         List<String[]> initialRow = new ArrayList<String[]>();
         initialRow.add(populateInitialRow);
@@ -155,8 +156,10 @@ public class VehicleAPI
         String[] vehicleData;
 
         List<String[]> vehicleRows = new ArrayList<String[]>();
-        String[] populateVehicleRow = new String[66];
+        String[] populateVehicleRow = new String[69];
+        // TODO: loop through database, if VIN exists, do not add
         populateVehicleRow[0] = theVIN;
+
         boolean populateVehicleRowBool = true;
         while ((currentLine = in.readLine()) != null) {
             vehicleData = currentLine.split(",", 3);
@@ -174,6 +177,9 @@ public class VehicleAPI
                 }
             }
         }
+        populateVehicleRow[66] = dealerPrice;
+        populateVehicleRow[67] = salePrice;
+        populateVehicleRow[68] = "https://pictures.topspeed.com/IMG/crop/201609/smart-fortwo-nypd-ed-9_1600x0w.jpg";
 
         if(populateVehicleRowBool)
         {
@@ -234,6 +240,8 @@ public class VehicleAPI
         numOfSeatRows = Integer.parseInt("0" + populateVehicleRow[62]);
         axles = Integer.parseInt("0" + populateVehicleRow[64]);
 
+        Double theDealerPrice = Double.parseDouble("0"+populateVehicleRow[66]);
+        Double theSalePrice = Double.parseDouble("0"+populateVehicleRow[67]);
 
         fuelTypePrim = populateVehicleRow[29];
         engineConfig = populateVehicleRow[30];
@@ -256,8 +264,9 @@ public class VehicleAPI
         entertainSys = populateVehicleRow[60];
         driveType = populateVehicleRow[63];
         transmissionStyle = populateVehicleRow[65];
+        imgURL = populateVehicleRow[68];
 
-        theVehicle = new Vehicle(VIN, make, model, year, series, trim, vehicleType, plantCountry, basePrice, entertainSys, numOfSeats,
+        theVehicle = new Vehicle(VIN, theDealerPrice, theSalePrice, imgURL, make, model, year, series, trim, vehicleType, plantCountry, basePrice, entertainSys, numOfSeats,
                 numOfSeatRows, antiLockBraking, electronicStability, tractionControl, keylessIgnition, autoCrashNotif, backupCam, parkingAssist, rearCrossTrafficAlert,
                 rearAutoEmergBraking, crashImmBraking, forwColliWarn, dynamicBrakeSupp, pedestrianAutoEmergBrak, blindSpotWarn,
                 laneDepartWarn, laneKeepAssist, blindSpotIntervention, laneCenterAssist, daytimeRunLights, headlampLightSrc, headlampBeamSwitch,
