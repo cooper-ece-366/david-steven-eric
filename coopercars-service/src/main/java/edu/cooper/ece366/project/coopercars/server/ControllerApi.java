@@ -33,4 +33,27 @@ public class ControllerApi {
             return("ex.toString()");
         }
     }
+    @GetMapping(path = "/vehicles/{vin}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getVehicleInfos(@PathVariable final String vin) throws JsonProcessingException {
+        try {
+            VehicleAPI vehicle = new VehicleAPI(vin);
+            String theVIN = vehicle.getVIN();
+            String make = vehicle.getMake();
+            String model = vehicle.getModel();
+            LOGGER.debug(vehicle.toString());
+            String theVehicleJSON = objectMapper.writeValueAsString(vehicle);
+            LOGGER.debug(theVehicleJSON);
+            return(theVehicleJSON);
+        }
+        catch (IOException ex) {
+            System.out.println("Unable to communicate to Vehicle API.");
+            return("ex.toString()");
+        }
+    }
+    @GetMapping(path = "/vehicless/{vin}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getVehicleInfoss(@PathVariable final String vin) throws JsonProcessingException {
+
+        String s = "HISDF";
+        return(s);
+    }
 }
