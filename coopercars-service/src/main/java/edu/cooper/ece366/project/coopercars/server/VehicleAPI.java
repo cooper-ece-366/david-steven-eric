@@ -6,95 +6,103 @@ import java.util.List;
 import java.util.Scanner;
 import java.net.URL;
 
-// VehicleAPI take in a VIN number and returns a Vehicle object
+// VehicleAPI takes in a VIN number and returns a Vehicle object. It also adds the vehicle to a csv database.
 public class VehicleAPI
 {
-    private String VIN;
+    private Vehicle theVehicle;
 
-    //general
-    private String make;
-    private String model;
-    private int year;
-    private String series;
-    private String trim;
-    private String vehicleType;
-    private String plantCountry;
-    private double basePrice;
-    private String entertainSys;
-    private int numOfSeats;
-    private int numOfSeatRows;
+    public Vehicle getTheVehicle() {
+        return theVehicle;
+    }
 
-    //Active Safety systems
-    private String antiLockBraking;
-    private String electronicStability;
-    private String tractionControl;
-    private String keylessIgnition;
-    private String autoCrashNotif;
-    private String backupCam;
-    private String parkingAssist;
-    private String rearCrossTrafficAlert;
-    private String rearAutoEmergBraking;
-    private String crashImmBraking;
-    private String forwColliWarn;
-    private String dynamicBrakeSupp;
-    private String pedestrianAutoEmergBrak;
-    private String blindSpotWarn;
-    private String laneDepartWarn;
-    private String laneKeepAssist;
-    private String blindSpotIntervention;
-    private String laneCenterAssist;
-    private String daytimeRunLights;
-    private String headlampLightSrc;
-    private String headlampBeamSwitch;
-    private String adaptDrivingBeam;
-    private String adaptiveCruiseControl;
-
-    // engine
-    private int numOfCylinders;
-    private double displacementCC;
-    private double displacementCI;
-    private double displacementL;
-    private double enginePowerkW;
-    private String fuelTypePrim;
-    private String fuelTypeSec;
-    private String fuelInjectionType;
-    private String engineConfig;
-    private double horsepower;
-    private String electricificationLevel;
-    private String otherEngineInfo;
-    private String turbo;
-    private int topSpeed;
-    private String engineManufact;
-
-    // body
-    private String bodyClass;
-    private int numOfDoors;
-    private int numOfWindows;
-    private String wheelBaseType;
-
-    // dimension
-    private double bedLength;
-    private double curbWeight;
-    private double wheelBase;
-    private double grossCombWeight;
-
-    //truck
-    private String truckBedType;
-    private String truckCabType;
-
-    //wheels
-    private int numOfWheels;
-    private int wheelSizeFrontIn;
-    private int wheelSizeRearIn;
-
-    //drivetrain
-    private String driveType;
-    private int axles;
-    private String transmissionStyle;
+    public void setTheVehicle(Vehicle theVehicle) {
+        this.theVehicle = theVehicle;
+    }
 
     public VehicleAPI(String myVIN) throws IOException {
         String theVIN = myVIN;
+        String VIN;
 
+        //general
+        String make;
+        String model;
+        int year;
+        String series;
+        String trim;
+        String vehicleType;
+        String plantCountry;
+        double basePrice;
+        String entertainSys;
+        int numOfSeats;
+        int numOfSeatRows;
+
+        //Active Safety systems
+        String antiLockBraking;
+        String electronicStability;
+        String tractionControl;
+        String keylessIgnition;
+        String autoCrashNotif;
+        String backupCam;
+        String parkingAssist;
+        String rearCrossTrafficAlert;
+        String rearAutoEmergBraking;
+        String crashImmBraking;
+        String forwColliWarn;
+        String dynamicBrakeSupp;
+        String pedestrianAutoEmergBrak;
+        String blindSpotWarn;
+        String laneDepartWarn;
+        String laneKeepAssist;
+        String blindSpotIntervention;
+        String laneCenterAssist;
+        String daytimeRunLights;
+        String headlampLightSrc;
+        String headlampBeamSwitch;
+        String adaptDrivingBeam;
+        String adaptiveCruiseControl;
+
+        // engine
+        int numOfCylinders;
+        double displacementCC;
+        double displacementCI;
+        double displacementL;
+        double enginePowerkW;
+        String fuelTypePrim;
+        String fuelTypeSec;
+        String fuelInjectionType;
+        String engineConfig;
+        double horsepower;
+        String electricificationLevel;
+        String otherEngineInfo;
+        String turbo;
+        int topSpeed;
+        String engineManufact;
+
+        // body
+        String bodyClass;
+        int numOfDoors;
+        int numOfWindows;
+        String wheelBaseType;
+
+        // dimension
+        double bedLength;
+        double curbWeight;
+        double wheelBase;
+        double grossCombWeight;
+
+        //truck
+        String truckBedType;
+        String truckCabType;
+
+        //wheels
+        int numOfWheels;
+        int wheelSizeFrontIn;
+        int wheelSizeRearIn;
+
+        //drivetrain
+        String driveType;
+        int axles;
+        String transmissionStyle;
         String theURL = "https://vpic.nhtsa.dot.gov/decoder/Decoder/ExportToExcel?VIN=" + theVIN;
         String[] populateInitialRow = {"VIN", "Anti-lock Braking System (ABS)", "Electronic Stability Control (ESC)", "Traction Control",
                 "Keyless Ignition", "Automatic Crash Notification (ACN) / Advanced Automatic Crash Notification (AACN)",
@@ -110,6 +118,28 @@ public class VehicleAPI
                 "Gross Combination Weight Rating From", "Bed Type", "Cab Type", "Number of Wheels", "Wheel Size Front (inches)",
                 "Wheel Size Rear (inches)", "Make", "Model", "Model Year", "Series", "Trim", "Vehicle Type", "Plant Country",
                 "Base Price ($)", "Entertainment System", "Number of Seats", "Number of Seat Rows", "Drive Type", "Axles", "Transmission Style"};
+
+        List<String[]> initialRow = new ArrayList<String[]>();
+        initialRow.add(populateInitialRow);
+        boolean writeInitialLineBool = false;
+        try {
+            File myFile = new File("vehiclesDatabase.csv");
+            if (myFile.createNewFile()) {
+                writeInitialLineBool = true;
+            }
+        } catch (IOException e) {
+
+        }
+
+        Writer theWriter = new FileWriter("vehiclesDatabase.csv", true);
+
+        if (writeInitialLineBool) {
+            for (String[] data : initialRow) {
+                theWriter.write(String.join(",", data));
+            }
+            theWriter.write("\n");
+        }
+
 
         BufferedReader in = null;
         try {
@@ -127,6 +157,7 @@ public class VehicleAPI
         List<String[]> vehicleRows = new ArrayList<String[]>();
         String[] populateVehicleRow = new String[66];
         populateVehicleRow[0] = theVIN;
+        boolean populateVehicleRowBool = true;
         while ((currentLine = in.readLine()) != null) {
             vehicleData = currentLine.split(",", 3);
             if (vehicleData[1].equals("Error Code") && !(vehicleData[2].equals("0")))
@@ -143,6 +174,17 @@ public class VehicleAPI
                 }
             }
         }
+
+        if(populateVehicleRowBool)
+        {
+            vehicleRows.add(populateVehicleRow);
+            for (String[] data : vehicleRows)
+                theWriter.write(String.join(",", data));
+
+            theWriter.write("\n");
+        }
+
+        theWriter.close();
 
         VIN = populateVehicleRow[0];
         antiLockBraking = populateVehicleRow[1];
@@ -215,549 +257,13 @@ public class VehicleAPI
         driveType = populateVehicleRow[63];
         transmissionStyle = populateVehicleRow[65];
 
+        theVehicle = new Vehicle(VIN, make, model, year, series, trim, vehicleType, plantCountry, basePrice, entertainSys, numOfSeats,
+                numOfSeatRows, antiLockBraking, electronicStability, tractionControl, keylessIgnition, autoCrashNotif, backupCam, parkingAssist, rearCrossTrafficAlert,
+                rearAutoEmergBraking, crashImmBraking, forwColliWarn, dynamicBrakeSupp, pedestrianAutoEmergBrak, blindSpotWarn,
+                laneDepartWarn, laneKeepAssist, blindSpotIntervention, laneCenterAssist, daytimeRunLights, headlampLightSrc, headlampBeamSwitch,
+                adaptDrivingBeam, adaptiveCruiseControl, numOfCylinders, displacementCC, displacementCI, displacementL, enginePowerkW, fuelTypePrim, fuelTypeSec, fuelInjectionType,
+                engineConfig, horsepower, electricificationLevel, otherEngineInfo, turbo, topSpeed, engineManufact, bodyClass, numOfDoors, numOfWindows, wheelBaseType, bedLength, curbWeight,
+                wheelBase, grossCombWeight, truckBedType, truckCabType, numOfWheels, wheelSizeFrontIn, wheelSizeRearIn, driveType, axles, transmissionStyle);
     }
 
-    public String getVIN() {
-        return VIN;
-    }
-
-    public void setVIN(String VIN) {
-        this.VIN = VIN;
-    }
-
-    public String getMake() {
-        return make;
-    }
-
-    public void setMake(String make) {
-        this.make = make;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public String getSeries() {
-        return series;
-    }
-
-    public void setSeries(String series) {
-        this.series = series;
-    }
-
-    public String getTrim() {
-        return trim;
-    }
-
-    public void setTrim(String trim) {
-        this.trim = trim;
-    }
-
-    public String getVehicleType() {
-        return vehicleType;
-    }
-
-    public void setVehicleType(String vehicleType) {
-        this.vehicleType = vehicleType;
-    }
-
-    public String getPlantCountry() {
-        return plantCountry;
-    }
-
-    public void setPlantCountry(String plantCountry) {
-        this.plantCountry = plantCountry;
-    }
-
-    public double getBasePrice() {
-        return basePrice;
-    }
-
-    public void setBasePrice(double basePrice) {
-        this.basePrice = basePrice;
-    }
-
-    public String getEntertainSys() {
-        return entertainSys;
-    }
-
-    public void setEntertainSys(String entertainSys) {
-        this.entertainSys = entertainSys;
-    }
-
-    public int getNumOfSeats() {
-        return numOfSeats;
-    }
-
-    public void setNumOfSeats(int numOfSeats) {
-        this.numOfSeats = numOfSeats;
-    }
-
-    public int getNumOfSeatRows() {
-        return numOfSeatRows;
-    }
-
-    public void setNumOfSeatRows(int numOfSeatRows) {
-        this.numOfSeatRows = numOfSeatRows;
-    }
-
-    public String getAntiLockBraking() {
-        return antiLockBraking;
-    }
-
-    public void setAntiLockBraking(String antiLockBraking) {
-        this.antiLockBraking = antiLockBraking;
-    }
-
-    public String getElectronicStability() {
-        return electronicStability;
-    }
-
-    public void setElectronicStability(String electronicStability) {
-        this.electronicStability = electronicStability;
-    }
-
-    public String getTractionControl() {
-        return tractionControl;
-    }
-
-    public void setTractionControl(String tractionControl) {
-        this.tractionControl = tractionControl;
-    }
-
-    public String getKeylessIgnition() {
-        return keylessIgnition;
-    }
-
-    public void setKeylessIgnition(String keylessIgnition) {
-        this.keylessIgnition = keylessIgnition;
-    }
-
-    public String getAutoCrashNotif() {
-        return autoCrashNotif;
-    }
-
-    public void setAutoCrashNotif(String autoCrashNotif) {
-        this.autoCrashNotif = autoCrashNotif;
-    }
-
-    public String getBackupCam() {
-        return backupCam;
-    }
-
-    public void setBackupCam(String backupCam) {
-        this.backupCam = backupCam;
-    }
-
-    public String getParkingAssist() {
-        return parkingAssist;
-    }
-
-    public void setParkingAssist(String parkingAssist) {
-        this.parkingAssist = parkingAssist;
-    }
-
-    public String getRearCrossTrafficAlert() {
-        return rearCrossTrafficAlert;
-    }
-
-    public void setRearCrossTrafficAlert(String rearCrossTrafficAlert) {
-        this.rearCrossTrafficAlert = rearCrossTrafficAlert;
-    }
-
-    public String getRearAutoEmergBraking() {
-        return rearAutoEmergBraking;
-    }
-
-    public void setRearAutoEmergBraking(String rearAutoEmergBraking) {
-        this.rearAutoEmergBraking = rearAutoEmergBraking;
-    }
-
-    public String getCrashImmBraking() {
-        return crashImmBraking;
-    }
-
-    public void setCrashImmBraking(String crashImmBraking) {
-        this.crashImmBraking = crashImmBraking;
-    }
-
-    public String getForwColliWarn() {
-        return forwColliWarn;
-    }
-
-    public void setForwColliWarn(String forwColliWarn) {
-        this.forwColliWarn = forwColliWarn;
-    }
-
-    public String getDynamicBrakeSupp() {
-        return dynamicBrakeSupp;
-    }
-
-    public void setDynamicBrakeSupp(String dynamicBrakeSupp) {
-        this.dynamicBrakeSupp = dynamicBrakeSupp;
-    }
-
-    public String getPedestrianAutoEmergBrak() {
-        return pedestrianAutoEmergBrak;
-    }
-
-    public void setPedestrianAutoEmergBrak(String pedestrianAutoEmergBrak) {
-        this.pedestrianAutoEmergBrak = pedestrianAutoEmergBrak;
-    }
-
-    public String getBlindSpotWarn() {
-        return blindSpotWarn;
-    }
-
-    public void setBlindSpotWarn(String blindSpotWarn) {
-        this.blindSpotWarn = blindSpotWarn;
-    }
-
-    public String getLaneDepartWarn() {
-        return laneDepartWarn;
-    }
-
-    public void setLaneDepartWarn(String laneDepartWarn) {
-        this.laneDepartWarn = laneDepartWarn;
-    }
-
-    public String getLaneKeepAssist() {
-        return laneKeepAssist;
-    }
-
-    public void setLaneKeepAssist(String laneKeepAssist) {
-        this.laneKeepAssist = laneKeepAssist;
-    }
-
-    public String getBlindSpotIntervention() {
-        return blindSpotIntervention;
-    }
-
-    public void setBlindSpotIntervention(String blindSpotIntervention) {
-        this.blindSpotIntervention = blindSpotIntervention;
-    }
-
-    public String getLaneCenterAssist() {
-        return laneCenterAssist;
-    }
-
-    public void setLaneCenterAssist(String laneCenterAssist) {
-        this.laneCenterAssist = laneCenterAssist;
-    }
-
-    public String getDaytimeRunLights() {
-        return daytimeRunLights;
-    }
-
-    public void setDaytimeRunLights(String daytimeRunLights) {
-        this.daytimeRunLights = daytimeRunLights;
-    }
-
-    public String getHeadlampLightSrc() {
-        return headlampLightSrc;
-    }
-
-    public void setHeadlampLightSrc(String headlampLightSrc) {
-        this.headlampLightSrc = headlampLightSrc;
-    }
-
-    public String getHeadlampBeamSwitch() {
-        return headlampBeamSwitch;
-    }
-
-    public void setHeadlampBeamSwitch(String headlampBeamSwitch) {
-        this.headlampBeamSwitch = headlampBeamSwitch;
-    }
-
-    public String getAdaptDrivingBeam() {
-        return adaptDrivingBeam;
-    }
-
-    public void setAdaptDrivingBeam(String adaptDrivingBeam) {
-        this.adaptDrivingBeam = adaptDrivingBeam;
-    }
-
-    public String getAdaptiveCruiseControl() {
-        return adaptiveCruiseControl;
-    }
-
-    public void setAdaptiveCruiseControl(String adaptiveCruiseControl) {
-        this.adaptiveCruiseControl = adaptiveCruiseControl;
-    }
-
-    public int getNumOfCylinders() {
-        return numOfCylinders;
-    }
-
-    public void setNumOfCylinders(int numOfCylinders) {
-        this.numOfCylinders = numOfCylinders;
-    }
-
-    public double getDisplacementCC() {
-        return displacementCC;
-    }
-
-    public void setDisplacementCC(double displacementCC) {
-        this.displacementCC = displacementCC;
-    }
-
-    public double getDisplacementCI() {
-        return displacementCI;
-    }
-
-    public void setDisplacementCI(double displacementCI) {
-        this.displacementCI = displacementCI;
-    }
-
-    public double getDisplacementL() {
-        return displacementL;
-    }
-
-    public void setDisplacementL(double displacementL) {
-        this.displacementL = displacementL;
-    }
-
-    public double getEnginePowerkW() {
-        return enginePowerkW;
-    }
-
-    public void setEnginePowerkW(double enginePowerkW) {
-        this.enginePowerkW = enginePowerkW;
-    }
-
-    public String getFuelTypePrim() {
-        return fuelTypePrim;
-    }
-
-    public void setFuelTypePrim(String fuelTypePrim) {
-        this.fuelTypePrim = fuelTypePrim;
-    }
-
-    public String getFuelTypeSec() {
-        return fuelTypeSec;
-    }
-
-    public void setFuelTypeSec(String fuelTypeSec) {
-        this.fuelTypeSec = fuelTypeSec;
-    }
-
-    public String getFuelInjectionType() {
-        return fuelInjectionType;
-    }
-
-    public void setFuelInjectionType(String fuelInjectionType) {
-        this.fuelInjectionType = fuelInjectionType;
-    }
-
-    public String getEngineConfig() {
-        return engineConfig;
-    }
-
-    public void setEngineConfig(String engineConfig) {
-        this.engineConfig = engineConfig;
-    }
-
-    public double getHorsepower() {
-        return horsepower;
-    }
-
-    public void setHorsepower(double horsepower) {
-        this.horsepower = horsepower;
-    }
-
-    public String getElectricificationLevel() {
-        return electricificationLevel;
-    }
-
-    public void setElectricificationLevel(String electricificationLevel) {
-        this.electricificationLevel = electricificationLevel;
-    }
-
-    public String getOtherEngineInfo() {
-        return otherEngineInfo;
-    }
-
-    public void setOtherEngineInfo(String otherEngineInfo) {
-        this.otherEngineInfo = otherEngineInfo;
-    }
-
-    public String getTurbo() {
-        return turbo;
-    }
-
-    public void setTurbo(String turbo) {
-        this.turbo = turbo;
-    }
-
-    public int getTopSpeed() {
-        return topSpeed;
-    }
-
-    public void setTopSpeed(int topSpeed) {
-        this.topSpeed = topSpeed;
-    }
-
-    public String getEngineManufact() {
-        return engineManufact;
-    }
-
-    public void setEngineManufact(String engineManufact) {
-        this.engineManufact = engineManufact;
-    }
-
-    public String getBodyClass() {
-        return bodyClass;
-    }
-
-    public void setBodyClass(String bodyClass) {
-        this.bodyClass = bodyClass;
-    }
-
-    public int getNumOfDoors() {
-        return numOfDoors;
-    }
-
-    public void setNumOfDoors(int numOfDoors) {
-        this.numOfDoors = numOfDoors;
-    }
-
-    public int getNumOfWindows() {
-        return numOfWindows;
-    }
-
-    public void setNumOfWindows(int numOfWindows) {
-        this.numOfWindows = numOfWindows;
-    }
-
-    public String getWheelBaseType() {
-        return wheelBaseType;
-    }
-
-    public void setWheelBaseType(String wheelBaseType) {
-        this.wheelBaseType = wheelBaseType;
-    }
-
-    public double getBedLength() {
-        return bedLength;
-    }
-
-    public void setBedLength(double bedLength) {
-        this.bedLength = bedLength;
-    }
-
-    public double getCurbWeight() {
-        return curbWeight;
-    }
-
-    public void setCurbWeight(double curbWeight) {
-        this.curbWeight = curbWeight;
-    }
-
-    public double getWheelBase() {
-        return wheelBase;
-    }
-
-    public void setWheelBase(double wheelBase) {
-        this.wheelBase = wheelBase;
-    }
-
-    public double getGrossCombWeight() {
-        return grossCombWeight;
-    }
-
-    public void setGrossCombWeight(double grossCombWeight) {
-        this.grossCombWeight = grossCombWeight;
-    }
-
-    public String getTruckBedType() {
-        return truckBedType;
-    }
-
-    public void setTruckBedType(String truckBedType) {
-        this.truckBedType = truckBedType;
-    }
-
-    public String getTruckCabType() {
-        return truckCabType;
-    }
-
-    public void setTruckCabType(String truckCabType) {
-        this.truckCabType = truckCabType;
-    }
-
-    public int getNumOfWheels() {
-        return numOfWheels;
-    }
-
-    public void setNumOfWheels(int numOfWheels) {
-        this.numOfWheels = numOfWheels;
-    }
-
-    public int getWheelSizeFrontIn() {
-        return wheelSizeFrontIn;
-    }
-
-    public void setWheelSizeFrontIn(int wheelSizeFrontIn) {
-        this.wheelSizeFrontIn = wheelSizeFrontIn;
-    }
-
-    public int getWheelSizeRearIn() {
-        return wheelSizeRearIn;
-    }
-
-    public void setWheelSizeRearIn(int wheelSizeRearIn) {
-        this.wheelSizeRearIn = wheelSizeRearIn;
-    }
-
-    public String getDriveType() {
-        return driveType;
-    }
-
-    public void setDriveType(String driveType) {
-        this.driveType = driveType;
-    }
-
-    public int getAxles() {
-        return axles;
-    }
-
-    public void setAxles(int axles) {
-        this.axles = axles;
-    }
-
-    public String getTransmissionStyle() {
-        return transmissionStyle;
-    }
-
-    public void setTransmissionStyle(String transmissionStyle) {
-        this.transmissionStyle = transmissionStyle;
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "VIN='" + VIN + '\'' +
-                ", make='" + make + '\'' +
-                ", model='" + model + '\'' +
-                ", year=" + year +
-                ", series='" + series + '\'' +
-                ", trim='" + trim + '\'' +
-                ", vehicleType='" + vehicleType + '\'' +
-                ", plantCountry='" + plantCountry + '\'' +
-                ", basePrice=" + basePrice +
-                ", horsepower=" + horsepower +
-                '}';
-    }
 }
