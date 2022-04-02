@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import coopercars1_logo from '../CooperCars-logos.jpeg';
 import coopercars2_logo from '../CooperCars-logos_black.png';
 import '../App.css';
+import './BrowseVehicle.css'
 import NavBar from './NavBar'
 import TextField from "@material-ui/core/TextField";
 import {
@@ -48,42 +49,45 @@ function BrowseVehicle() {
     } else {
         return (
             /* here we map over the element and display each item as a card  */
-            <div className="wrapper">
+            <div className = "browse">
                 <NavBar />
-                <ul className="card-grid">
-                    {items.map((item) => (
-                        <li>
-                            <article className="vehicle" key={item.vin}>
+                <div className="wrapper">
+                    <ul className="card-grid">
+                        {items.map((item) => (
+                            <li>
+                                <article className="vehicle" key={item.vin}>
 
-                                <div className="card-content">
-                                    <h2 className="card-name">{item.vin}</h2>
-                                    <div className="car-image">
-                                        <img src={item.imgURL} alt={item.vin} width="150" height="100"/>
+                                    <div className="card-content">
+                                        <h4 className="card-name">{item.vin}</h4>
+                                        <div className="car-image">
+                                            <img src={item.imgURL} alt={item.vin}/>
+                                        </div>
+                                        <ol className="card-list">
+                                            <li>
+                                                Make:{" "}
+                                                <span>{item.make}</span>
+                                            </li>
+                                            <li>
+                                                Model: <span>{item.model}</span>
+                                            </li>
+                                            <li>
+                                                Year: <span>{item.year}</span>
+                                            </li>
+                                            <li>
+                                                Dealer Price: <span>{item.dealerPrice}</span>
+                                            </li>
+                                            <li>
+                                                Sale Price: <span>{item.salePrice}</span>
+                                            </li>
+                                        </ol>
                                     </div>
-                                    <ol className="card-list">
-                                        <li>
-                                            Make:{" "}
-                                            <span>{item.make}</span>
-                                        </li>
-                                        <li>
-                                            Model: <span>{item.model}</span>
-                                        </li>
-                                        <li>
-                                            Year: <span>{item.year}</span>
-                                        </li>
-                                        <li>
-                                            Dealer Price: <span>{item.dealerPrice}</span>
-                                        </li>
-                                        <li>
-                                            Sale Price: <span>{item.salePrice}</span>
-                                        </li>
-                                    </ol>
-                                </div>
-                            </article>
-                        </li>
-                    ))}
-                </ul>
+                                </article>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
+
         );
     }
 }
