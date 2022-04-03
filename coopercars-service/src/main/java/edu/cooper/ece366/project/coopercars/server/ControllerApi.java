@@ -36,7 +36,7 @@ public class ControllerApi {
     public String getVehiclesInfo() throws JsonProcessingException {
         try {
             VehiclesAPI vehicles = new VehiclesAPI();
-            LOGGER.debug(vehicles.getTheVehicles().toString());
+            //LOGGER.debug(vehicles.getTheVehicles().toString());
             //ObjectMapper mapper = new ObjectMapper();
             //List<Vehicle> myVehicles = mapper.readValue(jsonInput, new TypeReference<List<Vehicle>>(){});
 
