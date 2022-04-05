@@ -124,6 +124,12 @@ function BrowseVehicle() {
                                         <li>
                                             Year: <span>{item.year}</span>
                                         </li>
+                                        <li>
+                                            Dealer Price: $<span>{item.dealerPrice}</span>
+                                        </li>
+                                        <li>
+                                            Sale Price: $<span>{item.salePrice}</span>
+                                        </li>
                                     </ol>
                                 </div>
                             </li>
