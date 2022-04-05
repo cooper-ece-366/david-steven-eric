@@ -1,4 +1,4 @@
-# CooperCars: US-7 
+# CooperCars: US-4 
 ### Connects a custom-made VehicleAPI to the front-end. This is based on the Borsa project and needs to be renamed and refactored. 
 #### Merged with dguo-us-12 to add title navigation bar and re-implement text box.
 #### WIP!!! Currently, the text box does absolutely nothing (and also doesn't work properly). The vehicle displayed is based on a set of pre-defined VINs.
