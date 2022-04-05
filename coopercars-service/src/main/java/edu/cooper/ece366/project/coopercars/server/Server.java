@@ -15,7 +15,7 @@ public class Server {
 
         try {
 
-            VehicleAPI vehicle = new VehicleAPI("JTMRWRFV7LJ048851");
+            VehicleAPI vehicle = new VehicleAPI("JTMRWRFV7LJ048851","10000","10000");
 //            String theVIN = vehicle.getVIN();
 //            String make = vehicle.getMake();
 //            String model = vehicle.getModel();
