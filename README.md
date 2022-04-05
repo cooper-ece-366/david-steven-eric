@@ -1,4 +1,4 @@
-# CooperCars: US-11 - merged all of our changes
+# CooperCars: US-8 - merged all of our changes
 ## Current Functionality:
 #### 'Add Vehicles' page: User enters a VIN, dealer/sale price. Vehicle details are added to CSV database and info presented.
 ![image1](us-8.png)
