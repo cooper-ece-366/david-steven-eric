@@ -239,7 +239,7 @@ public class VehicleAPI
         transmissionStyle = populateVehicleRow[65];
         //imgURL = populateVehicleRow[68];
         Date date = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String strDate = dateFormat.format(date);
         imgURL = returnLink(year + "+" + make + "+" +model);
 
@@ -256,7 +256,7 @@ public class VehicleAPI
     public String returnLink(String str) {
         String links = null;
         try {
-            String url = "https://www.google.com/search?tbm=isch&q="+str+"cars.com";
+            String url = "https://www.google.com/search?tbm=isch&q="+str+"+exterior+image+cars.com";
             System.out.println(url);
             Document doc = Jsoup.connect(url).get();
             Elements el = doc.getElementsByAttribute("data-src");

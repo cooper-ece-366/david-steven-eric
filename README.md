@@ -1,4 +1,5 @@
 # CooperCars: US-10 - transitioned CSV database to mySQL database
+## Note: mySql command: create database coopercars; (do this before running)
 ## Current Functionality:
 #### 'Browse Vehicles' page: Reads all the vehicles in the database. Filter by Make currently working.
 ![image1](us-10.png)
