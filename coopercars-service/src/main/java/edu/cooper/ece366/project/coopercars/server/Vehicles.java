@@ -3,6 +3,7 @@ package edu.cooper.ece366.project.coopercars.server;
 import java.util.ArrayList;
 import java.util.List;
 
+// NOTE: replaced by mySQL database; this is no longer needed.
 public class Vehicles
 {
     // instance variables

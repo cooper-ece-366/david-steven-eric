@@ -1,11 +1,18 @@
 package edu.cooper.ece366.project.coopercars.server;
 
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+@Table(name = "vehicles")
 public class Vehicle
 {
+    @Id
     private String VIN;
     private double dealerPrice;
     private double salePrice;
     private String imgURL;
+    private String enteredDate;
     //general
     private String make;
     private String model;
@@ -87,11 +94,12 @@ public class Vehicle
     private int axles;
     private String transmissionStyle;
 
-    public Vehicle(String VIN, Double dealerPrice, Double salePrice, String imgURL, String make, String model, int year, String series, String trim, String vehicleType, String plantCountry, double basePrice, String entertainSys, int numOfSeats, int numOfSeatRows, String antiLockBraking, String electronicStability, String tractionControl, String keylessIgnition, String autoCrashNotif, String backupCam, String parkingAssist, String rearCrossTrafficAlert, String rearAutoEmergBraking, String crashImmBraking, String forwColliWarn, String dynamicBrakeSupp, String pedestrianAutoEmergBrak, String blindSpotWarn, String laneDepartWarn, String laneKeepAssist, String blindSpotIntervention, String laneCenterAssist, String daytimeRunLights, String headlampLightSrc, String headlampBeamSwitch, String adaptDrivingBeam, String adaptiveCruiseControl, int numOfCylinders, double displacementCC, double displacementCI, double displacementL, double enginePowerkW, String fuelTypePrim, String fuelTypeSec, String fuelInjectionType, String engineConfig, double horsepower, String electricificationLevel, String otherEngineInfo, String turbo, int topSpeed, String engineManufact, String bodyClass, int numOfDoors, int numOfWindows, String wheelBaseType, double bedLength, double curbWeight, double wheelBase, double grossCombWeight, String truckBedType, String truckCabType, int numOfWheels, int wheelSizeFrontIn, int wheelsSizeRearIn, String driveType, int axles, String transmissionStyle) {
+    public Vehicle(String VIN, Double dealerPrice, Double salePrice, String imgURL, String enteredDate, String make, String model, int year, String series, String trim, String vehicleType, String plantCountry, double basePrice, String entertainSys, int numOfSeats, int numOfSeatRows, String antiLockBraking, String electronicStability, String tractionControl, String keylessIgnition, String autoCrashNotif, String backupCam, String parkingAssist, String rearCrossTrafficAlert, String rearAutoEmergBraking, String crashImmBraking, String forwColliWarn, String dynamicBrakeSupp, String pedestrianAutoEmergBrak, String blindSpotWarn, String laneDepartWarn, String laneKeepAssist, String blindSpotIntervention, String laneCenterAssist, String daytimeRunLights, String headlampLightSrc, String headlampBeamSwitch, String adaptDrivingBeam, String adaptiveCruiseControl, int numOfCylinders, double displacementCC, double displacementCI, double displacementL, double enginePowerkW, String fuelTypePrim, String fuelTypeSec, String fuelInjectionType, String engineConfig, double horsepower, String electricificationLevel, String otherEngineInfo, String turbo, int topSpeed, String engineManufact, String bodyClass, int numOfDoors, int numOfWindows, String wheelBaseType, double bedLength, double curbWeight, double wheelBase, double grossCombWeight, String truckBedType, String truckCabType, int numOfWheels, int wheelSizeFrontIn, int wheelsSizeRearIn, String driveType, int axles, String transmissionStyle) {
         this.VIN = VIN;
         this.dealerPrice = dealerPrice;
         this.salePrice = salePrice;
         this.imgURL = imgURL;
+        this.enteredDate = enteredDate;
         this.make = make;
         this.model = model;
         this.year = year;
@@ -157,6 +165,18 @@ public class Vehicle
         this.driveType = driveType;
         this.axles = axles;
         this.transmissionStyle = transmissionStyle;
+    }
+
+    public Vehicle() {
+
+    }
+
+    public String getEnteredDate() {
+        return enteredDate;
+    }
+
+    public void setEnteredDate(String enteredDate) {
+        this.enteredDate = enteredDate;
     }
 
     public String getImgURL() {

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+// NOTE: replaced by mySQL database; this is no longer needed.
 //VehiclesAPI (with an 'S') reads from the database and returns a Vehicles (again with an 'S') object which is a list of Vehicle objects
 public class VehiclesAPI
 {
@@ -22,6 +23,7 @@ public class VehiclesAPI
 
     public VehiclesAPI() throws IOException
     {
+        String enteredDate = "";
         String filename = "vehiclesDatabase.csv";
         File inputFile = new File(filename);
         if (!inputFile.exists())
@@ -127,7 +129,7 @@ public class VehiclesAPI
                 imgURL = vehicleData[68];
 
 
-                theVehicle = new Vehicle(VIN,dealerPrice,salePrice,imgURL,make,model,year,series,trim,vehicleType,plantCountry,basePrice,entertainSys,numOfSeats,
+                theVehicle = new Vehicle(VIN,dealerPrice,salePrice,imgURL,enteredDate, make,model,year,series,trim,vehicleType,plantCountry,basePrice,entertainSys,numOfSeats,
                         numOfSeatRows,antiLockBraking,electronicStability,tractionControl,keylessIgnition,autoCrashNotif,backupCam,parkingAssist,rearCrossTrafficAlert,
                         rearAutoEmergBraking,crashImmBraking,forwColliWarn,dynamicBrakeSupp,pedestrianAutoEmergBrak,blindSpotWarn,
                         laneDepartWarn,laneKeepAssist,blindSpotIntervention,laneCenterAssist,daytimeRunLights,headlampLightSrc,headlampBeamSwitch,

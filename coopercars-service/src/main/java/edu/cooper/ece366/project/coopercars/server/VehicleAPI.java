@@ -1,12 +1,17 @@
 package edu.cooper.ece366.project.coopercars.server;
 
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+import org.springframework.web.context.request.WebRequest;
+import org.jsoup.Jsoup;
+import java.lang.Object;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.net.URL;
 
-// VehicleAPI takes in a VIN number and returns a Vehicle object. It also adds the vehicle to a csv database.
+// VehicleAPI takes in a VIN number and returns a Vehicle object.
 public class VehicleAPI
 {
     private Vehicle theVehicle;
@@ -122,25 +127,6 @@ public class VehicleAPI
 
         List<String[]> initialRow = new ArrayList<String[]>();
         initialRow.add(populateInitialRow);
-        boolean writeInitialLineBool = false;
-        try {
-            File myFile = new File("vehiclesDatabase.csv");
-            if (myFile.createNewFile()) {
-                writeInitialLineBool = true;
-            }
-        } catch (IOException e) {
-
-        }
-
-        Writer theWriter = new FileWriter("vehiclesDatabase.csv", true);
-
-        if (writeInitialLineBool) {
-            for (String[] data : initialRow) {
-                theWriter.write(String.join(",", data));
-            }
-            theWriter.write("\n");
-        }
-
 
         BufferedReader in = null;
         try {
@@ -151,7 +137,6 @@ public class VehicleAPI
             System.out.println("An error occured!");
         }
 
-        //int lineCtr = 0;
         String currentLine = null;
         String[] vehicleData;
 
@@ -160,7 +145,6 @@ public class VehicleAPI
         // TODO: loop through database, if VIN exists, do not add
         populateVehicleRow[0] = theVIN;
 
-        boolean populateVehicleRowBool = true;
         while ((currentLine = in.readLine()) != null) {
             vehicleData = currentLine.split(",", 3);
             if (vehicleData[1].equals("Error Code") && !(vehicleData[2].equals("0")))
@@ -179,18 +163,7 @@ public class VehicleAPI
         }
         populateVehicleRow[66] = dealerPrice;
         populateVehicleRow[67] = salePrice;
-        populateVehicleRow[68] = "https://pictures.topspeed.com/IMG/crop/201609/smart-fortwo-nypd-ed-9_1600x0w.jpg";
-
-        if(populateVehicleRowBool)
-        {
-            vehicleRows.add(populateVehicleRow);
-            for (String[] data : vehicleRows)
-                theWriter.write(String.join(",", data));
-
-            theWriter.write("\n");
-        }
-
-        theWriter.close();
+        //populateVehicleRow[68] = "https://pictures.topspeed.com/IMG/crop/201609/smart-fortwo-nypd-ed-9_1600x0w.jpg";
 
         VIN = populateVehicleRow[0];
         antiLockBraking = populateVehicleRow[1];
@@ -264,15 +237,37 @@ public class VehicleAPI
         entertainSys = populateVehicleRow[60];
         driveType = populateVehicleRow[63];
         transmissionStyle = populateVehicleRow[65];
-        imgURL = populateVehicleRow[68];
+        //imgURL = populateVehicleRow[68];
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String strDate = dateFormat.format(date);
+        imgURL = returnLink(year + "+" + make + "+" +model);
 
-        theVehicle = new Vehicle(VIN, theDealerPrice, theSalePrice, imgURL, make, model, year, series, trim, vehicleType, plantCountry, basePrice, entertainSys, numOfSeats,
+        theVehicle = new Vehicle(VIN, theDealerPrice, theSalePrice, imgURL, strDate, make, model, year, series, trim, vehicleType, plantCountry, basePrice, entertainSys, numOfSeats,
                 numOfSeatRows, antiLockBraking, electronicStability, tractionControl, keylessIgnition, autoCrashNotif, backupCam, parkingAssist, rearCrossTrafficAlert,
                 rearAutoEmergBraking, crashImmBraking, forwColliWarn, dynamicBrakeSupp, pedestrianAutoEmergBrak, blindSpotWarn,
                 laneDepartWarn, laneKeepAssist, blindSpotIntervention, laneCenterAssist, daytimeRunLights, headlampLightSrc, headlampBeamSwitch,
                 adaptDrivingBeam, adaptiveCruiseControl, numOfCylinders, displacementCC, displacementCI, displacementL, enginePowerkW, fuelTypePrim, fuelTypeSec, fuelInjectionType,
                 engineConfig, horsepower, electricificationLevel, otherEngineInfo, turbo, topSpeed, engineManufact, bodyClass, numOfDoors, numOfWindows, wheelBaseType, bedLength, curbWeight,
                 wheelBase, grossCombWeight, truckBedType, truckCabType, numOfWheels, wheelSizeFrontIn, wheelSizeRearIn, driveType, axles, transmissionStyle);
+    }
+
+    // reference: https://stackoverflow.com/questions/67852467/java-load-first-link-from-google-image-search-jsoup
+    public String returnLink(String str) {
+        String links = null;
+        try {
+            String url = "https://www.google.com/search?tbm=isch&q="+str+"cars.com";
+            System.out.println(url);
+            Document doc = Jsoup.connect(url).get();
+            Elements el = doc.getElementsByAttribute("data-src");
+            if(!el.isEmpty()) {
+                links = el.get(0).attr("data-src");
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return links;
     }
 
 }

@@ -130,6 +130,9 @@ function BrowseVehicle() {
                                         <li>
                                             Sale Price: $<span>{item.salePrice}</span>
                                         </li>
+                                        <li>
+                                            Date Entered: <span>{item.enteredDate}</span>
+                                        </li>
                                     </ol>
                                 </div>
                             </li>

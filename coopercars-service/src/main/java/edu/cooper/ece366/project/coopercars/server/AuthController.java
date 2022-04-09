@@ -1,8 +1,6 @@
 package edu.cooper.ece366.project.coopercars.server;
 
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RestController;
-import ch.qos.logback.core.encoder.EchoEncoder;
+
 import edu.cooper.ece366.project.coopercars.server.model.User;
 import edu.cooper.ece366.project.coopercars.server.payload.SignUpRequest;
 import edu.cooper.ece366.project.coopercars.server.repository.UserRepository;

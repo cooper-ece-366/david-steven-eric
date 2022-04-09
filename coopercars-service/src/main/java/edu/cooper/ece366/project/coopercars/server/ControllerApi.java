@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,8 @@ import java.util.List;
 //@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RequestMapping(value = "/api")
 public class ControllerApi {
+    @Autowired
+    private VehicleRepository vehicleRepository;
     private static final Logger LOGGER = LoggerFactory.getLogger(ControllerApi.class);
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -21,6 +24,7 @@ public class ControllerApi {
     public String getVehicleInfo(@PathVariable final String vin, @PathVariable final String dealerPrice, @PathVariable final String salePrice) throws JsonProcessingException {
         try {
             VehicleAPI vehicle = new VehicleAPI(vin,dealerPrice,salePrice);
+            Vehicle theVehicle = vehicleRepository.save(vehicle.getTheVehicle());
             LOGGER.debug(vehicle.getTheVehicle().toString());
             String theVehicleJSON = objectMapper.writeValueAsString(vehicle.getTheVehicle());
             LOGGER.debug(theVehicleJSON);
@@ -33,20 +37,8 @@ public class ControllerApi {
     }
 
     @GetMapping(path = "/vehicles", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getVehiclesInfo() throws JsonProcessingException {
-        try {
-            VehiclesAPI vehicles = new VehiclesAPI();
-            //LOGGER.debug(vehicles.getTheVehicles().toString());
-            //ObjectMapper mapper = new ObjectMapper();
-            //List<Vehicle> myVehicles = mapper.readValue(jsonInput, new TypeReference<List<Vehicle>>(){});
-
-            String theVehiclesJSON = objectMapper.writeValueAsString(vehicles.getTheVehicles().getVehiclesList());
-            LOGGER.debug(theVehiclesJSON);
-            return(theVehiclesJSON);
-        }
-        catch (IOException ex) {
-            System.out.println("Unable to communicate to Vehicles API.");
-            return("ex.toString()");
-        }
+    public @ResponseBody Iterable<Vehicle> getAllVehicles() {
+        // This returns a JSON or XML with the users
+        return vehicleRepository.findAll();
     }
 }
