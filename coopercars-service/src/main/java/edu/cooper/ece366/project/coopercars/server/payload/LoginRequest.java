@@ -1,4 +1,4 @@
-package edu.cooper.ece366.project.coopercars.server;
+package edu.cooper.ece366.project.coopercars.server.payload;
 
 public class LoginRequest {
     private String email;

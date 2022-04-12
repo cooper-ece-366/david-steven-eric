@@ -1,4 +1,4 @@
-package edu.cooper.ece366.project.coopercars.server;
+package edu.cooper.ece366.project.coopercars.server.utils;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

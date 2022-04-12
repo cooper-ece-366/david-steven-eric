@@ -1,10 +1,10 @@
-package edu.cooper.ece366.project.coopercars.server;
+package edu.cooper.ece366.project.coopercars.server.model;
 
+import edu.cooper.ece366.project.coopercars.server.model.Vehicle;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.springframework.web.context.request.WebRequest;
 import org.jsoup.Jsoup;
-import java.lang.Object;
+
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
