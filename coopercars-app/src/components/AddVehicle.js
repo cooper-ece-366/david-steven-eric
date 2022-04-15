@@ -1,25 +1,13 @@
 import React, { useState } from 'react';
-//import useInterval from './useInterval';
 import coopercars1_logo from '../CooperCars-logos.jpeg';
 import coopercars2_logo from '../CooperCars-logos_black.png';
 import '../App.css';
 import NavBar from './NavBar'
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import {
-    BrowserRouter as Router,
-    Route,
-    Link,
-    Navigate,
-    Routes,
-} from "react-router-dom";
 
-function getRandomColor() {
-    let colorValues = ["red", "blue", "green"];
-    return colorValues[Math.floor(Math.random() * colorValues.length)];
-}
-
-function AddVehicle() {
+function AddVehicle()
+{
     const apiUrlPrefix = "http://localhost:8080";
 
     const [currentVIN, setCurrentVIN] = useState("");
@@ -36,7 +24,8 @@ function AddVehicle() {
     const [dealerPrice, setDealerPrice] = useState("");
 
 
-    AddVehicle.refreshVehicleInfo = (vin, dealerPrice,salePrice) => {
+    AddVehicle.refreshVehicleInfo = () =>
+    {
         console.log("Refreshing ... %s vehicle ...", currentVIN);
 
         setCurrentVIN(vin);
@@ -47,7 +36,21 @@ function AddVehicle() {
         setCurrentVehicleFeatures4(vin);
         setCurrentVehicleFeatures5(vin);
 
-        var vehicleApiUrl = apiUrlPrefix.concat("/api/vehicle/",vin+"/"+dealerPrice+"/"+salePrice);
+
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                vin,
+                dealerPrice,
+                salePrice,
+            }),
+        };
+        fetch("http://localhost:8080/api/vehicle/addvehicle", requestOptions).then((response) => console.log(response)).then((data) => console.log(data)); //response.json()
+
+
+
+        var vehicleApiUrl = apiUrlPrefix.concat("/api/vehicle/getinfo/",vin);
         fetch(vehicleApiUrl)
             .then(response => response.json())
             .then(data => {
@@ -103,7 +106,8 @@ function AddVehicle() {
     }
 
 
-    AddVehicle.buttonClicked = () => {
+    AddVehicle.buttonClicked = () =>
+    {
         console.log('Button was clicked!');
         AddVehicle.refreshVehicleInfo(vin,dealerPrice,salePrice);
     }
