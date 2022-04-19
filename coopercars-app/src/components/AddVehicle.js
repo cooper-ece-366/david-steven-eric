@@ -6,10 +6,10 @@ import NavBar from './NavBar'
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
+
 function AddVehicle()
 {
     const apiUrlPrefix = "http://localhost:8080";
-
     const [currentVIN, setCurrentVIN] = useState("");
     const [currentVehicleInfo, setCurrentVehicleInfo] = useState("");
     const [currentVehicleImg, setCurrentVehicleImg] = useState("");
@@ -18,25 +18,19 @@ function AddVehicle()
     const [currentVehicleFeatures3, setCurrentVehicleFeatures3] = useState("");
     const [currentVehicleFeatures4, setCurrentVehicleFeatures4] = useState("");
     const [currentVehicleFeatures5, setCurrentVehicleFeatures5] = useState("");
-
     const [vin, setVin] = useState("");
     const [salePrice, setSalePrice] = useState("");
     const [dealerPrice, setDealerPrice] = useState("");
 
-
-    AddVehicle.refreshVehicleInfo = () =>
+    AddVehicle.buttonClicked = () =>
     {
-        console.log("Refreshing ... %s vehicle ...", currentVIN);
+        console.log('Button was clicked!');
+        AddVehicle.addVehicle();
+        setTimeout(()=> {AddVehicle.refreshInfo()},1000);
+    }
 
-        setCurrentVIN(vin);
-        setCurrentVehicleInfo(vin);
-        setCurrentVehicleFeatures1(vin);
-        setCurrentVehicleFeatures2(vin);
-        setCurrentVehicleFeatures3(vin);
-        setCurrentVehicleFeatures4(vin);
-        setCurrentVehicleFeatures5(vin);
-
-
+    AddVehicle.addVehicle = () =>
+    {
         const requestOptions = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -46,16 +40,24 @@ function AddVehicle()
                 salePrice,
             }),
         };
-        fetch("http://localhost:8080/api/vehicle/addvehicle", requestOptions).then((response) => console.log(response)).then((data) => console.log(data)); //response.json()
+        fetch("http://localhost:8080/api/vehicle/addvehicle", requestOptions).then((response) => console.log(response)).then((data) => console.log(data));
+    }
 
-
-
+    AddVehicle.refreshInfo = () =>
+    {
+        console.log("Refreshing ... %s vehicle ...", currentVIN);
+        setCurrentVIN(vin);
+        setCurrentVehicleInfo(vin);
+        setCurrentVehicleFeatures1(vin);
+        setCurrentVehicleFeatures2(vin);
+        setCurrentVehicleFeatures3(vin);
+        setCurrentVehicleFeatures4(vin);
+        setCurrentVehicleFeatures5(vin);
         var vehicleApiUrl = apiUrlPrefix.concat("/api/vehicle/getinfo/",vin);
         fetch(vehicleApiUrl)
             .then(response => response.json())
             .then(data => {
                 setCurrentVehicleImg(data.imgURL);
-                // the following is an example for presentation purposes... we ultimately want to present this in a better way than just sentences
                 setCurrentVehicleInfo(data.year + " " + data.make + " " + data.model + " " + data.trim + " " + data.series);
                 var hasFCW = "";
                 var hasBSW = "";
@@ -68,28 +70,24 @@ function AddVehicle()
                 else{
                     hasFCW = "- Is not equipped "
                 }
-
                 if (data.blindSpotWarn == "Standard"){
                     hasBSW = "- Is equipped "
                 }
                 else{
                     hasBSW = "- Is not equipped "
                 }
-
                 if (data.adaptiveCruiseControl == "Standard"){
                     hasACC = "- Is equipped "
                 }
                 else{
                     hasACC = "- Is not equipped "
                 }
-
                 if (data.backupCam == "Standard"){
                     hasBackup = "- Is equipped "
                 }
                 else{
                     hasBackup = "- Is not equipped "
                 }
-
 
                 setCurrentVehicleFeatures1(hasFCW + "with forward collision warning. ");
                 setCurrentVehicleFeatures2(hasBSW + "with blind spot warning. ");
@@ -104,14 +102,6 @@ function AddVehicle()
             });
         console.log("Refreshed %s VIN.", currentVIN);
     }
-
-
-    AddVehicle.buttonClicked = () =>
-    {
-        console.log('Button was clicked!');
-        AddVehicle.refreshVehicleInfo(vin,dealerPrice,salePrice);
-    }
-
 
     return (
         <div className="App">

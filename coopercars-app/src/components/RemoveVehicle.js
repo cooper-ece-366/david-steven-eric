@@ -11,24 +11,27 @@ function RemoveVehicle()
     const apiUrlPrefix = "http://localhost:8080";
 
     const [vin, setVin] = useState("");
+    const [status,setStatus] = useState("");
 
-
-    RemoveVehicle.refreshVehicleInfo = (vin) =>
+    RemoveVehicle.removeVehicle = () =>
     {
-
         var vehicleApiUrl = apiUrlPrefix.concat("/api/vehicle/remove/",vin);
         fetch(vehicleApiUrl)
             .then(response => response.json())
+            .then(data => {
+                setStatus("Vehicle "+data.vin+" removed.");
+            })
             .catch(err => {
-                console.log("Vehicle no longer exists: %s", vehicleApiUrl);
+                setStatus("Vehicle does not exist.")
             });
+        console.log("Refreshed %s VIN.", vin);
     }
 
 
     RemoveVehicle.buttonClicked = () =>
     {
         console.log('Button was clicked!');
-        RemoveVehicle.refreshVehicleInfo(vin);
+        RemoveVehicle.removeVehicle(vin);
     }
 
     return (
@@ -47,8 +50,9 @@ function RemoveVehicle()
                     value={vin}
                 />
                 <Button variant="contained" className="button" onClick={RemoveVehicle.buttonClicked}>Submit</Button>
+                {status}<br></br>
 
-                </header>
+            </header>
         </div>
     );
 }

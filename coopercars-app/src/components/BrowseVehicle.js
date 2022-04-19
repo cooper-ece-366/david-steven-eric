@@ -31,6 +31,7 @@ function BrowseVehicle() {
     // just add it to this array
     const [searchParam] = useState(["make", "model"]);
     const [filterParam, setFilterParam] = useState(["All"]);
+
     useEffect(() => {
         fetch("http://localhost:8080/api/vehicles")
             .then((res) => res.json())
@@ -51,11 +52,7 @@ function BrowseVehicle() {
 
     function search(items) {
         return items.filter((item) => {
-            /*
-//             in here we check if our region is equal to our c state
-// if it's equal to then only return the items that match
-// if not return All the countries
-            */
+
             if (item.make == filterParam) {
                 return searchParam.some((newItem) => {
                     return (
