@@ -1,7 +1,7 @@
 # CooperCars: US-12 - re-organized directory structure, implemented remove from database
 ## Note: mySql command: create database coopercars; (do this before running)
 ## Refer to US-10 for current functionality. 
-## Backend:
+## API endpts:
 #### http://localhost:8080/api/vehicle/getinfo/{vin} returns info about ONE vehicle
 #### http://localhost:8080/api/vehicle/addvehicle adds from front end input
 #### http://localhost:8080/api/vehicle/remove/{vin} deletes vehicle by VIN
