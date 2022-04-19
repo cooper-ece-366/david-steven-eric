@@ -103,37 +103,43 @@ function BrowseVehicle() {
                         </label>
                     </div>
                     <ul className="card-grid">
-                        {search(items).map((item) => (
-                            <li>
-                                <div className="card-content">
-                                    <h4 className="card-name">{item.vin}</h4>
-                                    <div className="car-image">
-                                        <img src={item.imgURL} alt={item.vin}/>
+
+                        {search(items).map((item) => {
+                            var myLink = item.vin
+                            return (
+                                <li>
+                                    <div className="card-content">
+                                        <Link to={myLink}>
+                                            <h4 className="card-name">{item.vin}</h4>
+                                            <div className="car-image">
+                                                <img src={item.imgURL} alt={item.vin}/>
+                                            </div>
+                                        </Link>
+                                        <ol className="card-list">
+                                            <li>
+                                                Make:{" "}
+                                                <span>{item.make}</span>
+                                            </li>
+                                            <li>
+                                                Model: <span>{item.model}</span>
+                                            </li>
+                                            <li>
+                                                Year: <span>{item.year}</span>
+                                            </li>
+                                            <li>
+                                                Dealer Price: $<span>{item.dealerPrice}</span>
+                                            </li>
+                                            <li>
+                                                Sale Price: $<span>{item.salePrice}</span>
+                                            </li>
+                                            <li>
+                                                Date Entered: <span>{item.enteredDate}</span>
+                                            </li>
+                                        </ol>
                                     </div>
-                                    <ol className="card-list">
-                                        <li>
-                                            Make:{" "}
-                                            <span>{item.make}</span>
-                                        </li>
-                                        <li>
-                                            Model: <span>{item.model}</span>
-                                        </li>
-                                        <li>
-                                            Year: <span>{item.year}</span>
-                                        </li>
-                                        <li>
-                                            Dealer Price: $<span>{item.dealerPrice}</span>
-                                        </li>
-                                        <li>
-                                            Sale Price: $<span>{item.salePrice}</span>
-                                        </li>
-                                        <li>
-                                            Date Entered: <span>{item.enteredDate}</span>
-                                        </li>
-                                    </ol>
-                                </div>
-                            </li>
-                        ))}
+                                </li>
+                            );
+                        })}
                     </ul>
                 </div></div>
 
