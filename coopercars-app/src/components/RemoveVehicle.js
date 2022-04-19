@@ -15,16 +15,19 @@ function RemoveVehicle()
 
     RemoveVehicle.removeVehicle = () =>
     {
+        const requestOptions = {
+            method: "DELETE"
+        };
         var vehicleApiUrl = apiUrlPrefix.concat("/api/vehicle/remove/",vin);
-        fetch(vehicleApiUrl)
-            .then(response => response.json())
-            .then(data => {
-                setStatus("Vehicle "+data.vin+" removed.");
-            })
-            .catch(err => {
-                setStatus("Vehicle does not exist.")
-            });
-        console.log("Refreshed %s VIN.", vin);
+        fetch(vehicleApiUrl,requestOptions)
+                .then((response) =>
+                {
+                    console.log("Succesfully deleted %s VIN.", vin);
+                    setStatus("Vehicle "+vin+" removed.")
+                })
+            // .catch(err => {
+            //     setStatus("Vehicle does not exist.")
+            // });
     }
 
 
@@ -49,7 +52,7 @@ function RemoveVehicle()
                     onChange={(e) => setVin(e.target.value)}
                     value={vin}
                 />
-                <Button variant="contained" className="button" onClick={RemoveVehicle.buttonClicked}>Submit</Button>
+                <Button variant="contained" className="button" onClick={RemoveVehicle.buttonClicked}>Delete Vehicle</Button>
                 {status}<br></br>
 
             </header>

@@ -33,7 +33,7 @@ public class ControllerApi
         return vehicleRepository.findByVIN(vin);
     }
 
-    @GetMapping(path = "/vehicle/remove/{vin}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(path = "/vehicle/remove/{vin}", produces = MediaType.APPLICATION_JSON_VALUE)
     public void removeVehicle(@PathVariable final String vin)
     {
         vehicleRepository.deleteById(vin);

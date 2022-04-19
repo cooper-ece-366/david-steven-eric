@@ -26,7 +26,6 @@ function AddVehicle()
     {
         console.log('Button was clicked!');
         AddVehicle.addVehicle();
-        setTimeout(()=> {AddVehicle.refreshInfo()},1000);
     }
 
     AddVehicle.addVehicle = () =>
@@ -40,7 +39,11 @@ function AddVehicle()
                 salePrice,
             }),
         };
-        fetch("http://localhost:8080/api/vehicle/addvehicle", requestOptions).then((response) => console.log(response)).then((data) => console.log(data));
+        fetch("http://localhost:8080/api/vehicle/addvehicle", requestOptions)
+            .then((response) => console.log(response))
+            .then((data) => console.log(data))
+            .then(()=>AddVehicle.refreshInfo());
+
     }
 
     AddVehicle.refreshInfo = () =>
