@@ -17,7 +17,6 @@ import BrowseVehicle from "./components/BrowseVehicle";
 import AddVehicle from "./components/AddVehicle";
 import RemoveVehicle from "./components/RemoveVehicle";
 import VehicleDetails from "./components/VehicleDetails";
-import Login, {Register} from "./components/Login";
 
 function getRandomColor() {
   let colorValues = ["red", "blue", "green"];
@@ -37,8 +36,6 @@ function App() {
                 <Route path='/browse/:VIN' element = { <VehicleDetails/>}/>
                 <Route path='/addVehicle' element = { <AddVehicle/>}/>
                 <Route path='/removeVehicle' element = { <RemoveVehicle/>}/>
-                <Route path='/login' element = {<Login/>}/>
-                <Route path='/register' element = {<Register/>} />
             </Routes>
         </Router>
 
