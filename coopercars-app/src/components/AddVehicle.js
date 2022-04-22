@@ -20,8 +20,9 @@ function getRandomColor() {
 }
 
 function AddVehicle() {
-    const apiUrlPrefix = "http://localhost:8080";
 
+    const apiUrlPrefix = "http://localhost:8080";
+    const [file, setFile] = useState(null);
     const [currentVIN, setCurrentVIN] = useState("");
     const [currentVehicleInfo, setCurrentVehicleInfo] = useState("");
     const [currentVehicleImg, setCurrentVehicleImg] = useState("");
@@ -34,7 +35,9 @@ function AddVehicle() {
     const [vin, setVin] = useState("");
     const [salePrice, setSalePrice] = useState("");
     const [dealerPrice, setDealerPrice] = useState("");
-
+    function handleChange(event) {
+        setFile(event.target.files[0]);
+    }
 
     AddVehicle.refreshVehicleInfo = (vin, dealerPrice,salePrice) => {
         console.log("Refreshing ... %s vehicle ...", currentVIN);
@@ -107,7 +110,13 @@ function AddVehicle() {
         console.log('Button was clicked!');
         AddVehicle.refreshVehicleInfo(vin,dealerPrice,salePrice);
     }
-
+   AddVehicle.onFileChange = () => {
+        console.log('File loaded');
+   }
+   AddVehicle.handleSubmit = () =>{
+        console.log('Button was clicked!');
+        console.log('File name: '+ file.name);
+    }
 
     return (
         <div className="App">
@@ -156,6 +165,11 @@ function AddVehicle() {
                 {currentVehicleFeatures4}<br></br>
                 {currentVehicleFeatures5}<br></br>
             </header>
+            <div>
+            <h1>Upload Spreadsheet Here</h1>
+            <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
+            <button variant="contained" className="button" onClick = {AddVehicle.handleSubmit}>Upload</button>
+            </div>
         </div>
     );
 }
