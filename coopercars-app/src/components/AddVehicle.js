@@ -6,6 +6,8 @@ import '../App.css';
 import NavBar from './NavBar'
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import * as XLSX from 'xlsx';
+
 import {
     BrowserRouter as Router,
     Route,
@@ -20,7 +22,6 @@ function getRandomColor() {
 }
 
 function AddVehicle() {
-
     const apiUrlPrefix = "http://localhost:8080";
     const [file, setFile] = useState(null);
     const [currentVIN, setCurrentVIN] = useState("");
@@ -116,6 +117,35 @@ function AddVehicle() {
    AddVehicle.handleSubmit = () =>{
         console.log('Button was clicked!');
         console.log('File name: '+ file.name);
+       const reader = new FileReader();
+       reader.onload = (evt) => { // evt = on_file_select event
+           /* Parse data */
+           const bstr = evt.target.result;
+           const wb = XLSX.read(bstr, {type: 'binary'});
+           /* Get first worksheet */
+           const wsname = wb.SheetNames[0];
+           const ws = wb.Sheets[wsname];
+           /* Convert array of arrays */
+           const data = XLSX.utils.sheet_to_csv(ws, {header: 1});
+           /* Update state */
+           console.log("Data>>> \n" + data);
+           var sheet = wb.Sheets[wb.SheetNames[0]];
+           /* loop through every cell manually */
+           var range = XLSX.utils.decode_range(sheet['!ref']); // get the range
+           for(var R = range.s.r; R <= range.e.r; ++R) {
+               for (var C = range.s.c; C <= range.e.c; ++C) {
+                   /* find the cell object */
+                   console.log('Row : ' + R);
+                   console.log('Column : ' + C);
+                   var cellref = XLSX.utils.encode_cell({c: C, r: R}); // construct A1 reference for cell
+                   if (!sheet[cellref]) continue; // if cell doesn't exist, move on
+                   var cell = sheet[cellref];
+                   console.log("VIN: " + cell.v);
+                   AddVehicle.refreshVehicleInfo(cell.v,1,1);
+               }
+           }
+       }
+       reader.readAsBinaryString(file);
     }
 
     return (
