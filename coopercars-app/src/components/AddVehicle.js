@@ -108,13 +108,6 @@ function AddVehicle()
     AddVehicle.refreshInfo = () =>
     {
         console.log("Refreshing ... %s vehicle ...", currentVIN);
-        setCurrentVIN(vin);
-        setCurrentVehicleInfo(vin);
-        setCurrentVehicleFeatures1(vin);
-        setCurrentVehicleFeatures2(vin);
-        setCurrentVehicleFeatures3(vin);
-        setCurrentVehicleFeatures4(vin);
-        setCurrentVehicleFeatures5(vin);
         var vehicleApiUrl = apiUrlPrefix.concat("/api/vehicle/getinfo/",vin);
         fetch(vehicleApiUrl)
             .then(response => response.json())
