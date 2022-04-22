@@ -52,6 +52,9 @@ function AddVehicle()
             /* loop through every cell manually */
             var range = XLSX.utils.decode_range(sheet['!ref']); // get the range
             for(var R = range.s.r; R <= range.e.r; ++R) {
+                var vi = null;
+                var dealer = null;
+                var sale = null;
                 for (var C = range.s.c; C <= range.e.c; ++C) {
                     /* find the cell object */
                     console.log('Row : ' + R);
@@ -59,10 +62,27 @@ function AddVehicle()
                     var cellref = XLSX.utils.encode_cell({c: C, r: R}); // construct A1 reference for cell
                     if (!sheet[cellref]) continue; // if cell doesn't exist, move on
                     var cell = sheet[cellref];
-                    console.log("VIN: " + cell.v);
 
-                    addVehicleXlsx(cell.v,1,1);
+                    if(C==0){
+                        vi = cell.v;
+                        console.log("VIN: " + vi);
+                    }
+                    else if(C==1){
+                        dealer = cell.v;
+                        console.log("Dealer Price: " + dealer);
+                    }
+                    else if(C==2){
+                        sale = cell.v;
+                        console.log("Sale Price: " + sale);
+                    }
                 }
+                console.log(vi + ", " + dealer + ", " + sale);
+                //addVehicleXlsx(vi, dealer, sale);
+                setVin(vi);
+                setCurrentVIN(vi);
+                setDealerPrice(dealer);
+                setSalePrice(sale);
+                AddVehicle.addVehicle();
 
             }
         }
