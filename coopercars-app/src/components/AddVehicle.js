@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import coopercars1_logo from '../CooperCars-logos.jpeg';
 import coopercars2_logo from '../CooperCars-logos_black.png';
 import '../App.css';
@@ -14,7 +14,9 @@ function AddVehicle()
     const [file, setFile] = useState(null);
     const [currentVIN, setCurrentVIN] = useState("");
     const [currentVehicleInfo, setCurrentVehicleInfo] = useState("");
-    const [currentVehicleImg, setCurrentVehicleImg] = useState("");
+    const [currentVehicleInfo1, setCurrentVehicleInfo1] = useState("");
+    const [uploadMsg, setUploadMsg] = useState("");
+    const [currentVehicleImg, setCurrentVehicleImg] = useState(null);
     const [currentVehicleFeatures1, setCurrentVehicleFeatures1] = useState("");
     const [currentVehicleFeatures2, setCurrentVehicleFeatures2] = useState("");
     const [currentVehicleFeatures3, setCurrentVehicleFeatures3] = useState("");
@@ -23,6 +25,9 @@ function AddVehicle()
     const [vin, setVin] = useState("");
     const [salePrice, setSalePrice] = useState("");
     const [dealerPrice, setDealerPrice] = useState("");
+    const [vinXlsx, setVinXlsx] = useState("");
+    const [salePriceXlsx, setSalePriceXlsx] = useState("");
+    const [dealerPriceXlsx, setDealerPriceXlsx] = useState("");
 
     AddVehicle.buttonClicked = () =>
     {
@@ -34,6 +39,7 @@ function AddVehicle()
         console.log('File loaded');
     }
     AddVehicle.handleSubmit = () =>{
+        setUploadMsg(file.name + " successfully uploaded!");
         console.log('Button was clicked!');
         console.log('File name: '+ file.name);
         const reader = new FileReader();
@@ -76,14 +82,10 @@ function AddVehicle()
                         console.log("Sale Price: " + sale);
                     }
                 }
-                console.log(vi + ", " + dealer + ", " + sale);
-                //addVehicleXlsx(vi, dealer, sale);
                 setVin(vi);
-                setCurrentVIN(vi);
                 setDealerPrice(dealer);
                 setSalePrice(sale);
                 AddVehicle.addVehicle();
-
             }
         }
         reader.readAsBinaryString(file);
@@ -105,25 +107,24 @@ function AddVehicle()
             .then((response) => console.log(response))
             .then((data) => console.log(data))
             .then(()=>AddVehicle.refreshInfo());
-
     }
 
-    function addVehicleXlsx(myVin,myDealerPrice,mySalePrice)
-    {
-        const requestOptions = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                myVin,
-                myDealerPrice,
-                mySalePrice,
-            }),
-        };
-        fetch("http://localhost:8080/api/vehicle/addvehicle", requestOptions)
-            .then((response) => console.log(response))
-            .then((data) => console.log(data))
-            .then(()=>AddVehicle.refreshInfo());
-    }
+
+    // function addVehicleXlsx()
+    // {
+    //     const requestOptionsXlsx = {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify({
+    //             vinXlsx,
+    //             dealerPriceXlsx,
+    //             salePriceXlsx,
+    //         }),
+    //     };
+    //     fetch("http://localhost:8080/api/vehicle/addvehicle", requestOptionsXlsx)
+    //         .then((response) => console.log(response))
+    //         .then((data) => console.log(data))
+    // }
 
     AddVehicle.refreshInfo = () =>
     {
@@ -133,7 +134,8 @@ function AddVehicle()
             .then(response => response.json())
             .then(data => {
                 setCurrentVehicleImg(data.imgURL);
-                setCurrentVehicleInfo(data.year + " " + data.make + " " + data.model + " " + data.trim + " " + data.series);
+                setCurrentVehicleInfo("VIN: " + data.vin)
+                setCurrentVehicleInfo1(data.year + " " + data.make + " " + data.model + " " + data.trim + " " + data.series);
                 var hasFCW = "";
                 var hasBSW = "";
                 var hasACC = "";
@@ -182,12 +184,15 @@ function AddVehicle()
         <div className="App">
             <NavBar />
             <header className="App-header">
+                <br></br>
                 <div>
-                    <h1>Upload Spreadsheet (VIN, Dealer Price, Sale Price)</h1>
+                    <h3>Upload Spreadsheet (VIN, Dealer Price, Sale Price)</h3>
                     <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
                     <button variant="contained" className="button" onClick = {AddVehicle.handleSubmit}>Upload</button>
                 </div>
                 <br></br>
+                {uploadMsg}
+                <br></br><br></br>
                 <p>
                     Or manually enter VIN, dealer price, sale price of vehicle to add to inventory:
                 </p>
@@ -220,8 +225,9 @@ function AddVehicle()
 
                 <br></br>
 
-                <p>The vehicle for VIN {vin} is </p>
+                {/*<p>The vehicle for VIN {vin} is </p>*/}
                 {currentVehicleInfo}<br></br>
+                {currentVehicleInfo1}<br></br>
                 <div className="car-image">
                     <img src={currentVehicleImg} height="100"/>
                 </div>
