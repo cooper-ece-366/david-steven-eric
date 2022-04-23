@@ -12,7 +12,6 @@
 ## Notes:
 #### I updated react to work with mui's tables, but this broke the login page. Will need to check on this when we merge this feature with login. 
 ## Next steps:
-#### IMP: idk why but every time I do a fetch call it makes the API call like 50 times..........
 #### IMP: Secure endpoints (after login is working ofc)!!!!!!!!
 #### WIP: Add sorting/filtering by vehicle specification. Reference: https://www.freecodecamp.org/news/search-and-filter-component-in-reactjs/
 #### WIP: allow user to upload a spreadsheet to add vehicles.
