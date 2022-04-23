@@ -1,6 +1,7 @@
 package edu.cooper.ece366.project.coopercars.server;
 
 
+import edu.cooper.ece366.project.coopercars.server.model.VehicleAPI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

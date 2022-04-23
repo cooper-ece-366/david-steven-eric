@@ -1,15 +1,19 @@
-# CooperCars: US-11
-## Current Functionality:
-#### 'Add Vehicles' page: User enters a VIN, dealer/sale price. Vehicle details are added to CSV database and info presented.
-![image1](us-8.png)
-#### 'Browse Vehicles' page: Reads all the vehicles in the CSV database.
-![image1](us-11.png)
-## Backend:
-#### http://localhost:8080/api/vehicle/{vin}/{dealerPrice}/{salePrice} returns info about ONE vehicle, passes to back end price info from front end.
+# CooperCars: US-14 - vehicle details page
+## Functionality:
+#### In the Browse Vehicles page, each vehicle's image and VIN number is linked to a dynamically routed page. 
+#### By clicking on the vehicle's image/VIN, React will link to that vehicle's specific landing page where we plan to show an in-depth view of the vehicle
+#### Ie: http://localhost:3000/browse/{VIN} will show vehicle details pertaining to that specific VIN.
+![image1](us-14.png)
+## API endpts:
+#### http://localhost:8080/api/vehicle/getinfo/{vin} returns info about ONE vehicle
+#### http://localhost:8080/api/vehicle/addvehicle adds from front end input
+#### http://localhost:8080/api/vehicle/remove/{vin} deletes vehicle by VIN
 #### http://localhost:8080/api/vehicles returns info about ALL vehicles in database
+## Notes:
+#### I updated react to work with mui's tables, but this broke the login page. Will need to check on this when we merge this feature with login. 
 ## Next steps:
-#### Social login. Seperate platforms for dealer/consumer.
-#### Add sorting/filtering by vehicle specification. Reference: https://www.freecodecamp.org/news/search-and-filter-component-in-reactjs/
-#### CSV database to SQL :-)
-#### DONE: When adding a vehicle, prompt for sale price and dealer price
+#### IMP: idk why but every time I do a fetch call it makes the API call like 50 times..........
+#### IMP: Secure endpoints (after login is working ofc)!!!!!!!!
+#### WIP: Add sorting/filtering by vehicle specification. Reference: https://www.freecodecamp.org/news/search-and-filter-component-in-reactjs/
+#### WIP: allow user to upload a spreadsheet to add vehicles.
 
