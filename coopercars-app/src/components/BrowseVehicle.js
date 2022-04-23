@@ -53,7 +53,7 @@ function BrowseVehicle() {
     function search(items) {
         return items.filter((item) => {
 
-            if (item.make == filterParam) {
+            if (item.year==filterParam || item.make == filterParam) {
                 return searchParam.some((newItem) => {
                     return (
                         item[newItem]
@@ -101,6 +101,51 @@ function BrowseVehicle() {
                             />
                             <span className="sr-only">Search for vehicle here</span>
                         </label>
+                        <div className="select">
+                            <select
+                                /*
+    //                         here we create a basic select input
+    //                     we set the value to the selected value
+    //                     and update the setC() state every time onChange is called
+                        */
+                                onChange={(e) => {
+                                    setFilterParam(e.target.value);
+                                }}
+                                className="custom-select"
+                                aria-label="Filter Vehicles by Manufacturer"
+                            >
+                                <option value="All">Filter By Make</option>
+                                <option value="BUICK">Buick</option>
+                                <option value="FORD">Ford</option>
+                                <option value="HONDA">Honda</option>
+                                <option value="HYUNDAI">Hyundai</option>
+                                <option value="LINCOLN">Lincoln</option>
+                                <option value="TOYOTA">Toyota</option>
+                            </select>
+                            <span className="focus"></span>
+                        </div>
+                        <div className="select">
+                            <select
+                                /*
+    //                         here we create a basic select input
+    //                     we set the value to the selected value
+    //                     and update the setC() state every time onChange is called
+                        */
+                                onChange={(e) => {
+                                    setFilterParam(e.target.value);
+                                }}
+                                className="custom-select"
+                                aria-label="Filter Vehicles by Manufacturer"
+                            >
+                                <option value="All">Filter By Year</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                            </select>
+                            <span className="focus"></span>
+                        </div>
                     </div>
                     <ul className="card-grid">
 

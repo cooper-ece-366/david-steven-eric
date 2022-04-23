@@ -82,10 +82,15 @@ function AddVehicle()
                         console.log("Sale Price: " + sale);
                     }
                 }
+
+                console.log(vi + ", " + dealer + ", " + sale);
+                //addVehicleXlsx(vi, dealer, sale);
                 setVin(vi);
+                setCurrentVIN(vi);
                 setDealerPrice(dealer);
                 setSalePrice(sale);
                 AddVehicle.addVehicle();
+
             }
         }
         reader.readAsBinaryString(file);
