@@ -199,7 +199,7 @@ function AddVehicle()
                 {uploadMsg}
                 <br></br><br></br>
                 <p>
-                    Or manually enter VIN, dealer price, sale price of vehicle to add to inventory:
+                    Or, manually enter VIN, dealer price, and sale price of vehicle to add to / update inventory:
                 </p>
                 <TextField
                     id="filled-basic"
