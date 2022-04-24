@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import "./boostrap.min.css";
+import "./Login.css";
 import NavBar from './NavBar'
 import {Link} from "react-router-dom";
 import { login } from '../util/APIUtils';
@@ -13,6 +14,12 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL, ACCESS_TOKEN } from '../constants';
+import Alert from 'react-s-alert';
+import fbLogo from "../img/fb-logo.png";
+import githubLogo from "../img/github-logo.png";
+import googleLogo from "../img/google-logo.png";
+
 
 export default function Login(){
   const [email, changeEmail] = useState("");
@@ -29,21 +36,28 @@ export default function Login(){
     }
 
     const handleSubmit = () => {
-        const requestOptions = {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                email,
-                password,
-              }),
-        };
-        fetch("http://localhost:8080/auth/login", requestOptions).then((response) => console.log(response)).then((data) => console.log(data)); //response.json()
+        const loginRequest = Object.assign({}, {"email": email, "password": password});
+        login(loginRequest).then(response => {
+            localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+            console.log("ACCESS_TOKEN = " + response.accessToken);
+            Alert.success("You're successfully logged in!");
+
+        }).catch(error =>{
+            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+        });
 
   }
 
     return(
         <div>
-        <NavBar/>
+        <div className="social-login">
+                        <a className="btn btn-block social-btn google" href={GOOGLE_AUTH_URL}>
+                            <img width="100" height="100" src={googleLogo} alt="Google" /> Log in with Google</a>
+                        <a className="btn btn-block social-btn facebook" href={FACEBOOK_AUTH_URL}>
+                            <img width="100" height="100" src={fbLogo} alt="Facebook" /> Log in with Facebook</a>
+                        <a className="btn btn-block social-btn github" href={GITHUB_AUTH_URL}>
+                            <img width="50" height="50" src={githubLogo} alt="Github" /> Log in with Github</a>
+                    </div>
             <h3>Sign In</h3>
             <div className="form-group">
                 <label>Email address</label>

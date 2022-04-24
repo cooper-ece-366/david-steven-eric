@@ -82,7 +82,7 @@ function BrowseVehicle() {
     } else {
         return (
             /* here we map over the element and display each item as a card  */
-            <div className="browse"><NavBar />
+            <div className="browse">
                 <div className="wrapper">
                     <div>
                         <label htmlFor="search-form">

@@ -108,7 +108,6 @@ function AddVehicle()
 
     return (
         <div className="App">
-            <NavBar />
             <header className="App-header">
                 <p>
                     Enter VIN, dealer price, sale price of vehicle to add to inventory:

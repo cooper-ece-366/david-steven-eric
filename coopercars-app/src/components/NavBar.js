@@ -10,7 +10,9 @@ import {Link} from "react-router-dom";
 const pages = ['Browse Vehicles', 'Add Vehicles'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const NavBar = () => {
+const NavBar = (props) => {
+
+    const authenticated = props.authenticated;
     return(
         <div>
             <AppBar position="static" >
@@ -41,9 +43,10 @@ const NavBar = () => {
                     <Button to="/browse" component={Link} color="inherit">Browse Vehicles</Button>
                     <Button to="/addVehicle" component={Link} color="inherit">Add Vehicle</Button>
                     <Button to="/removeVehicle" component={Link} color="inherit">Remove Vehicle</Button>
-                    <Tooltip>
-                        <Button to="/login" component={Link} color="inherit" align = "right" sx={{ p: 0 }}>Login</Button>
-                    </Tooltip>
+                    {authenticated == false ?
+                                                         <Tooltip>
+                                                             <Button to="/login" component={Link} color="inherit" align = "right" sx={{ p: 0 }}>Login</Button>
+                                                         </Tooltip> : <p></p>}
                 </Toolbar>
                 </Container>
             </AppBar>

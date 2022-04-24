@@ -39,7 +39,6 @@ function RemoveVehicle()
 
     return (
         <div className="App">
-            <NavBar />
             <header className="App-header">
                 <p>
                     Enter VIN to remove from Inventory:
