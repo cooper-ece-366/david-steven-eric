@@ -279,7 +279,7 @@ function VehicleDetails()
                 <img src={currentVehicleImg} height="200"/>
             </div>
                 <br></br>
-                <TableContainer component={Paper} style={{ maxHeight: 400 , maxWidth: 1400 }}>
+                <TableContainer component={Paper} style={{ maxHeight: 350 , maxWidth: 1400 }}>
                     <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
@@ -304,7 +304,7 @@ function VehicleDetails()
                     </Table>
                 </TableContainer>
                 <br></br>
-                <TableContainer component={Paper} style={{ maxHeight: 400 , maxWidth: 1400 }  } >
+                <TableContainer component={Paper} style={{ maxHeight: 350 , maxWidth: 1400 }  } >
                     <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
@@ -329,7 +329,7 @@ function VehicleDetails()
                     </Table>
                 </TableContainer>
                 <br></br>
-                <TableContainer component={Paper} style={{ maxHeight: 400 , maxWidth: 1400 }}>
+                <TableContainer component={Paper} style={{ maxHeight: 350 , maxWidth: 1400 }}>
                     <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
@@ -355,7 +355,7 @@ function VehicleDetails()
                 </TableContainer>
 
                 <br></br>
-                <TableContainer component={Paper} style={{ maxHeight: 400 , maxWidth: 1400 }}>
+                <TableContainer component={Paper} style={{ maxHeight: 350 , maxWidth: 1400 }}>
                     <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
