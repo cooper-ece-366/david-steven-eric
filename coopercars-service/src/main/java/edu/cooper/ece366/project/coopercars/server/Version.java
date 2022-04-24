@@ -21,28 +21,28 @@ public final class Version {
     static {
         Properties props = new Properties();
         try {
-            ClassPathResource resource = new ClassPathResource("application.properties");
+            ClassPathResource resource = new ClassPathResource("application.yml");
             LOGGER.info(resource.toString());
             InputStream is = resource.getInputStream();
-//            InputStream is = ClassLoader.getSystemResourceAsStream("/application.properties");
+//            InputStream is = ClassLoader.getSystemResourceAsStream("/application.yml");
             props.load(is);
         } catch (NullPointerException e0) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             e0.printStackTrace(pw);
-            LOGGER.error("Null pointer exception initializing loading of system properties: application.properties file",e0);
+            LOGGER.error("Null pointer exception initializing loading of system properties: application.yml file",e0);
             LOGGER.error(pw.toString());
         } catch (ExceptionInInitializerError e1) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             e1.printStackTrace(pw);
-            LOGGER.error("Exception initializing loading of system properties: application.properties files",e1);
+            LOGGER.error("Exception initializing loading of system properties: application.yml files",e1);
             LOGGER.error(pw.toString());
         } catch (IOException e) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             e.printStackTrace(pw);
-            LOGGER.error("Error loading version of totem-os from application.properties file",e);
+            LOGGER.error("Error loading version of totem-os from application.yml file",e);
                     LOGGER.error(pw.toString());
         }
         APP_VERSION = props.getProperty("app.version");
