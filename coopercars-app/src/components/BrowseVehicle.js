@@ -33,6 +33,7 @@ function BrowseVehicle() {
     const [filterParam, setFilterParam] = useState(["All"]);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         fetch("http://localhost:8080/api/vehicles")
             .then((res) => res.json())
             .then(

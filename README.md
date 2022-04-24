@@ -2,6 +2,8 @@
 - merged features US-13 (add vehicle with spreadsheet)
 - merged features US-14 (vehicle details page)
 - merged features US-5 (login page WIP)
+- recommended to update npm and do an npm install
+- note: change mysql from local to remote in application.yml under coopercars-service
 ## Functionality:
 #### In the Browse Vehicles page, each vehicle's image and VIN number is linked to a dynamically routed page. 
 #### By clicking on the vehicle's image/VIN, React will link to that vehicle's specific landing page where we plan to show an in-depth view of the vehicle
