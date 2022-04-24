@@ -92,6 +92,7 @@ function VehicleDetails()
 
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         console.log("Refreshing ... %s vehicle ...", VIN);
         var vehicleApiUrl = apiUrlPrefix.concat("/api/vehicle/getinfo/",VIN);
         fetch(vehicleApiUrl)
