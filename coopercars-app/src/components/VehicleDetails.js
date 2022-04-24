@@ -1,11 +1,7 @@
 import {useEffect, useState} from 'react';
-import {Outlet, useParams} from 'react-router-dom'
-import coopercars1_logo from '../CooperCars-logos.jpeg';
-import coopercars2_logo from '../CooperCars-logos_black.png';
+import {useParams} from 'react-router-dom'
 import '../App.css';
 import NavBar from './NavBar'
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -383,7 +379,7 @@ function VehicleDetails()
                         </TableBody>
                     </Table>
                 </TableContainer>
-
+                <br></br>
             </header>
 
         </div>
