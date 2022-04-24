@@ -7,8 +7,6 @@ public class SignUpRequest {
     @NotBlank
     private String firstName;
 
-    @NotBlank
-    private String lastName;
 
     @NotBlank
     @Email
@@ -25,13 +23,6 @@ public class SignUpRequest {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public String getEmail() {
         return email;
