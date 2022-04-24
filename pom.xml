@@ -40,10 +40,16 @@
 		<junit-version>4.13.1</junit-version>
 		<testng.version>7.3.0</testng.version>
 		<jackson.version>2.13.1</jackson.version>
+		<mysql.version>8.0.28</mysql.version>
 
 
 		<spring.boot.version>2.6.3</spring.boot.version>
+		<spring.jpa.version>2.6.2</spring.jpa.version>
 		<spring.webmvc.version>5.3.15</spring.webmvc.version>
+		<spring.security.core>5.6.2</spring.security.core>
+		<spring.security.oauth2>2.5.1.RELEASE</spring.security.oauth2>
+
+		<jsonwebtoken.version>0.11.2</jsonwebtoken.version>
 <!--
 		<apache.commons.logging.version>1.0.4.v200706111724</apache.commons.logging.version>
 -->
@@ -72,9 +78,9 @@
 
 	<!-- TODO: update the url to your team's one on the cooper-ece-366 GitHub organization. -->
 	<scm>
-		<url>git@github.com:cooper-ece-366/exempli-gratia.git</url>
-		<connection>git@github.com:cooper-ece-366/exempli-gratia.git</connection>
-		<developerConnection>scm:git:git@github.com:cooper-ece-366/exempli-gratia.git</developerConnection>
+		<url>git@github.com:cooper-ece-366/david-steven-eric.git</url>
+		<connection>git@github.com:cooper-ece-366/david-steven-eric.git</connection>
+		<developerConnection>scm:git:git@github.com:cooper-ece-366/david-steven-eric.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -110,6 +116,33 @@
 				<groupId>org.jsoup</groupId>
 				<artifactId>jsoup</artifactId>
 				<version>1.14.3</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-oauth2-client</artifactId>
+				<version>5.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security.oauth</groupId>
+				<artifactId>spring-security-oauth2</artifactId>
+				<version>2.5.1.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt-api</artifactId>
+				<version>${jsonwebtoken.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt-impl</artifactId>
+				<version>${jsonwebtoken.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt-jackson</artifactId>
+				<version>${jsonwebtoken.version}</version>
+				<scope>runtime</scope>
 			</dependency>
 			<dependency>
 				<!-- Import dependency management from Spring Boot -->
