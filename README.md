@@ -1,4 +1,7 @@
-# CooperCars: merged-US-14 - merged features US-13 (add vehicle with spreadsheet) and US-14 (vehicle details page)
+# CooperCars: SDE-merged-US-14
+- merged features US-13 (add vehicle with spreadsheet)
+- merged features US-14 (vehicle details page)
+- merged features US-5 (login page WIP)
 ## Functionality:
 #### In the Browse Vehicles page, each vehicle's image and VIN number is linked to a dynamically routed page. 
 #### By clicking on the vehicle's image/VIN, React will link to that vehicle's specific landing page where we plan to show an in-depth view of the vehicle
