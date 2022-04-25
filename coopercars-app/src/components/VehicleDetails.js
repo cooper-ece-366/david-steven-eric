@@ -384,7 +384,7 @@ function VehicleDetails()
                         </TableBody>
                     </Table>
                 </TableContainer>
-
+                <br></br>
             </header>
 
         </div>
