@@ -10,7 +10,9 @@ import {Link} from "react-router-dom";
 const pages = ['Browse Vehicles', 'Add Vehicles'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const NavBar = () => {
+const NavBar = (props) => {
+
+    const authenticated = props.authenticated;
     return(
         <div>
             <AppBar position="static" >
@@ -39,11 +41,14 @@ const NavBar = () => {
                         <img src={logo} className="App-logo" alt="logo" sx={{ p: 0 }} width = "100" height = "100"/>
                     </Button>
                     <Button to="/browse" component={Link} color="inherit">Browse Vehicles</Button>
+
                     <Button to="/addVehicle" component={Link} color="inherit">Add/Update Vehicles</Button>
                     <Button to="/removeVehicle" component={Link} color="inherit">Remove Vehicles</Button>
-                    <Tooltip>
-                        <Button to="/login" component={Link} color="inherit" align = "right" sx={{ p: 0 }}>Login/Signup</Button>
-                    </Tooltip>
+                    {authenticated == false ?
+                                                         <Tooltip>
+                                                             <Button to="/login" component={Link} color="inherit" align = "right" sx={{ p: 0 }}>Login</Button>
+                                                         </Tooltip> : <Button to="/login" component={Link} color="inherit" align = "right" sx={{ p: 0 }}>Logout</Button>}
+
                 </Toolbar>
                 </Container>
             </AppBar>

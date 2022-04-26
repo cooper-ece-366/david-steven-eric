@@ -180,7 +180,6 @@ function AddVehicle()
 
     return (
         <div className="App">
-            <NavBar />
             <header className="App-header">
                 <div>
                     <h1>Upload Spreadsheet (VIN, Dealer Price, Sale Price)</h1>

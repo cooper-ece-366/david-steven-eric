@@ -3,6 +3,7 @@ package edu.cooper.ece366.project.coopercars.server.controller;
 //import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RestController;
 import edu.cooper.ece366.project.coopercars.server.exception.BadRequestException;
+import edu.cooper.ece366.project.coopercars.server.model.AuthProvider;
 import edu.cooper.ece366.project.coopercars.server.payload.AuthResponse;
 import edu.cooper.ece366.project.coopercars.server.payload.LoginRequest;
 import edu.cooper.ece366.project.coopercars.server.model.User;
@@ -18,6 +19,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 
 
@@ -65,6 +69,7 @@ public class AuthController {
         user.setName(signUpRequest.getFirstName());
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(signUpRequest.getPassword());
+        user.setProvider(AuthProvider.local);
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
