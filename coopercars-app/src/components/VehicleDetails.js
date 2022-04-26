@@ -273,7 +273,6 @@ function VehicleDetails()
 
     return (
         <div className="App">
-            <NavBar />
             <header className="App-header">
                 <br></br>
             <p>VIN {VIN} </p>
