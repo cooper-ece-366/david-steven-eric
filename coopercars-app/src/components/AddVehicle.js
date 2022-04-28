@@ -28,7 +28,7 @@ function AddVehicle()
     const [vin, setVin] = useState("");
     const [salePrice, setSalePrice] = useState("");
     const [dealerPrice, setDealerPrice] = useState("");
-    const [status, setStatus] = useState("        ");
+    const [status, setStatus] = useState("");
 
     AddVehicle.buttonClicked = () =>
     {
@@ -229,7 +229,7 @@ function AddVehicle()
                     value={salePrice}
                 />
 
-                <FormControl variant="filled" sx={{ m: 1, minWidth: 210 }}>
+                <FormControl variant="filled" sx={{ m: 1, minWidth: 218 }}>
                     <InputLabel id="demo-simple-select-filled-label">Status</InputLabel>
                     <Select
                         style={{background: "rgb(232, 241, 250)"}}
@@ -239,9 +239,6 @@ function AddVehicle()
                         label="Status"
                         onChange={(e) => setStatus(e.target.value)}
                     >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
                         <MenuItem value={"For sale"}>For sale</MenuItem>
                         <MenuItem value={"In-transit"}>In-transit</MenuItem>
                         <MenuItem value={"Sold"}>Sold</MenuItem>

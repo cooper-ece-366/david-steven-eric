@@ -2,8 +2,9 @@
 This US marks each vehicle as In-transit, for sale, or sold.
 Note: this adds onto SDE-merged-US-15, refer that for functionality
 ## Functionality:
-#### Status shows up on vehicle details page.  
-#### WIP: working on remove by status. 
+#### Status shows up on vehicle details page. Add vehicle by spreadsheet working.
+#### Remove by status is now working. 
+#### WIP: clean up outputs and UI
 ![image1](us-14.png)
 ## API endpts:
 #### http://localhost:8080/api/vehicle/getinfo/{vin} returns info about ONE vehicle
