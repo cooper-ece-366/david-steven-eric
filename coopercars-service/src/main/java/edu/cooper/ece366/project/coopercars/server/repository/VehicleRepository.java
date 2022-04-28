@@ -10,5 +10,6 @@ import java.util.Optional;
 public interface VehicleRepository extends JpaRepository<Vehicle, String> {
     Vehicle findByVIN(String VIN);
     void deleteById(String VIN);
+    void deleteByStatus(String myStatus);
 }
 

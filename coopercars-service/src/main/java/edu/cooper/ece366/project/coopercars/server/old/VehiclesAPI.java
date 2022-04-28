@@ -40,7 +40,7 @@ public class VehiclesAPI
 
             input.nextLine();
 
-            String VIN, make, model, imgURL, series, trim, vehicleType, plantCountry, entertainSys, antiLockBraking, electronicStability,
+            String VIN, status, make, model, imgURL, series, trim, vehicleType, plantCountry, entertainSys, antiLockBraking, electronicStability,
                     tractionControl, keylessIgnition, autoCrashNotif, backupCam, parkingAssist, rearCrossTrafficAlert, rearAutoEmergBraking,
                     crashImmBraking, forwColliWarn, dynamicBrakeSupp, pedestrianAutoEmergBrak, blindSpotWarn, laneDepartWarn,
                     laneKeepAssist, blindSpotIntervention, laneCenterAssist, daytimeRunLights, headlampLightSrc, headlampBeamSwitch,
@@ -54,7 +54,7 @@ public class VehiclesAPI
             while(input.hasNextLine())
             {
                 currentLine = input.nextLine();
-                vehicleData = currentLine.split(",",69);
+                vehicleData = currentLine.split(",",70);
                 VIN = vehicleData[0];
                 antiLockBraking = vehicleData[1];
                 electronicStability = vehicleData[2];
@@ -129,9 +129,10 @@ public class VehiclesAPI
                 transmissionStyle = vehicleData[65];
 
                 imgURL = vehicleData[68];
+                status = vehicleData[69];
 
 
-                theVehicle = new Vehicle(VIN,dealerPrice,salePrice,imgURL,enteredDate, make,model,year,series,trim,vehicleType,plantCountry,basePrice,entertainSys,numOfSeats,
+                theVehicle = new Vehicle(VIN,status,dealerPrice,salePrice,imgURL,enteredDate, make,model,year,series,trim,vehicleType,plantCountry,basePrice,entertainSys,numOfSeats,
                         numOfSeatRows,antiLockBraking,electronicStability,tractionControl,keylessIgnition,autoCrashNotif,backupCam,parkingAssist,rearCrossTrafficAlert,
                         rearAutoEmergBraking,crashImmBraking,forwColliWarn,dynamicBrakeSupp,pedestrianAutoEmergBrak,blindSpotWarn,
                         laneDepartWarn,laneKeepAssist,blindSpotIntervention,laneCenterAssist,daytimeRunLights,headlampLightSrc,headlampBeamSwitch,

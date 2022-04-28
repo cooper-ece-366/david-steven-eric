@@ -180,6 +180,9 @@ function BrowseVehicle() {
                                             <li>
                                                 Date Entered: <span>{item.enteredDate}</span>
                                             </li>
+                                            <li>
+                                                Status: <span>{item.status}</span>
+                                            </li>
                                         </ol>
                                     </div>
                                 </li>

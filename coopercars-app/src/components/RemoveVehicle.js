@@ -6,6 +6,7 @@ import NavBar from './NavBar'
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import * as XLSX from "xlsx";
+import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
 function RemoveVehicle()
 {
@@ -14,6 +15,7 @@ function RemoveVehicle()
     const [file, setFile] = useState(null);
     const [vin, setVin] = useState("");
     const [status,setStatus] = useState("");
+    const [info, setInfo] = useState("");
 
     RemoveVehicle.handleSubmit = () =>{
         console.log('Button was clicked!');
@@ -77,13 +79,26 @@ function RemoveVehicle()
                 .then((response) =>
                 {
                     console.log("Succesfully deleted %s VIN.", vin);
-                    setStatus("Vehicle "+vin+" removed.")
+                    setInfo("Vehicle "+vin+" removed.")
                 })
-            // .catch(err => {
-            //     setStatus("Vehicle does not exist.")
-            // });
     }
 
+    RemoveVehicle.removeVehicleStatus = () =>
+    {
+        const requestOptions = {
+            method: "DELETE"
+        };
+        var vehicleApiUrl = apiUrlPrefix.concat("/api/vehicle/remove/status/", status);
+        fetch(vehicleApiUrl,requestOptions)
+            .then((response) =>
+            {
+                console.log("Succesfully deleted sold");
+                setInfo("Vehicles marked as sold removed.")
+            })
+        // .catch(err => {
+        //     setStatus("Vehicle does not exist.")
+        // });
+    }
 
     RemoveVehicle.buttonClicked = () =>
     {
@@ -95,13 +110,13 @@ function RemoveVehicle()
         <div className="App">
             <header className="App-header">
                 <div>
-                    <h1>Upload Spreadsheet (VIN)</h1>
+                    <h1>Upload Spreadsheet to remove from inventory (VIN)</h1>
                     <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
                     <button variant="contained" className="button" onClick = {RemoveVehicle.handleSubmit}>Upload</button>
                 </div>
                 <br></br>
                 <p>
-                    Enter VIN to remove from Inventory:
+                    Or, enter VIN to remove from Inventory:
                 </p>
                 <TextField
                     id="filled-basic"
@@ -112,8 +127,30 @@ function RemoveVehicle()
                     value={vin}
                 />
                 <Button variant="contained" className="button" onClick={RemoveVehicle.buttonClicked}>Delete Vehicle</Button>
-                {status}<br></br>
+                {/*{info}*/}
+                <br></br>
 
+                <p>
+                    Or, remove from inventory by status (default is sold):
+                </p>
+                <FormControl variant="filled" sx={{ m: 1, minWidth: 210 }}>
+                    <InputLabel id="demo-simple-select-filled-label">Status</InputLabel>
+                    <Select
+                        style={{background: "rgb(232, 241, 250)"}}
+                        labelId="demo-simple-select-filled-label"
+                        id="demo-simple-select-filled"
+                        value={status}
+                        label="Status"
+                        onChange={(e) => setStatus(e.target.value)}
+                    >
+                        <MenuItem value={"For sale"}>For sale</MenuItem>
+                        <MenuItem value={"In-transit"}>In-transit</MenuItem>
+                        <MenuItem value={"Sold"}>Sold</MenuItem>
+                    </Select>
+                </FormControl>
+                <Button variant="contained" className="button" onClick={RemoveVehicle.removeVehicleStatus()}>Remove Vehicle by Status</Button>
+
+                <br></br>
             </header>
         </div>
     );

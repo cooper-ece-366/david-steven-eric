@@ -39,10 +39,16 @@ public class ControllerApi
         vehicleRepository.deleteById(vin);
     }
 
+    @DeleteMapping(path = "/vehicle/remove/status/{theStat}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void removeVehicleSold(@PathVariable final String theStat)
+    {
+        vehicleRepository.deleteByStatus(theStat);
+    }
+
     @PostMapping(value ="/vehicle/addvehicle", produces = MediaType.APPLICATION_JSON_VALUE)
     public String addVehicle(@RequestBody AddVehicleRequest addVehicleRequest) throws IOException {
         try {
-            VehicleAPI myVehicleAPI = new VehicleAPI(addVehicleRequest.getVIN(), addVehicleRequest.getDealerPrice(),addVehicleRequest.getSalePrice() );
+            VehicleAPI myVehicleAPI = new VehicleAPI(addVehicleRequest.getVIN(), addVehicleRequest.getStatus(), addVehicleRequest.getDealerPrice(),addVehicleRequest.getSalePrice() );
             Vehicle theVehicle = vehicleRepository.save(myVehicleAPI.getTheVehicle());
             LOGGER.debug(myVehicleAPI.getTheVehicle().toString());
             String theVehicleJSON = objectMapper.writeValueAsString(myVehicleAPI.getTheVehicle());

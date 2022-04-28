@@ -6,6 +6,11 @@ import NavBar from './NavBar'
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import * as XLSX from 'xlsx';
+import { FormControl } from '@mui/material';
+import { InputLabel } from '@mui/material';
+import { Select } from '@mui/material';
+import { MenuItem } from '@mui/material';
+
 
 
 function AddVehicle()
@@ -23,6 +28,7 @@ function AddVehicle()
     const [vin, setVin] = useState("");
     const [salePrice, setSalePrice] = useState("");
     const [dealerPrice, setDealerPrice] = useState("");
+    const [status, setStatus] = useState("        ");
 
     AddVehicle.buttonClicked = () =>
     {
@@ -55,6 +61,7 @@ function AddVehicle()
                 var vi = null;
                 var dealer = null;
                 var sale = null;
+                var stat = null;
                 for (var C = range.s.c; C <= range.e.c; ++C) {
                     /* find the cell object */
                     console.log('Row : ' + R);
@@ -75,13 +82,18 @@ function AddVehicle()
                         sale = cell.v;
                         console.log("Sale Price: " + sale);
                     }
+                    else if(C==3){
+                        stat = cell.v;
+                        console.log("Status: " + stat);
+                    }
                 }
-                console.log(vi + ", " + dealer + ", " + sale);
+                console.log(vi + ", " + dealer + ", " + sale + "," + stat);
                 //addVehicleXlsx(vi, dealer, sale);
                 setVin(vi);
                 setCurrentVIN(vi);
                 setDealerPrice(dealer);
                 setSalePrice(sale);
+                setStatus(stat);
                 AddVehicle.addVehicle();
 
             }
@@ -99,6 +111,7 @@ function AddVehicle()
                 vin,
                 dealerPrice,
                 salePrice,
+                status,
             }),
         };
         fetch("http://localhost:8080/api/vehicle/addvehicle", requestOptions)
@@ -215,6 +228,27 @@ function AddVehicle()
                     onChange={(e) => setSalePrice(e.target.value)}
                     value={salePrice}
                 />
+
+                <FormControl variant="filled" sx={{ m: 1, minWidth: 210 }}>
+                    <InputLabel id="demo-simple-select-filled-label">Status</InputLabel>
+                    <Select
+                        style={{background: "rgb(232, 241, 250)"}}
+                        labelId="demo-simple-select-filled-label"
+                        id="demo-simple-select-filled"
+                        value={status}
+                        label="Status"
+                        onChange={(e) => setStatus(e.target.value)}
+                    >
+                        <MenuItem value="">
+                            <em>None</em>
+                        </MenuItem>
+                        <MenuItem value={"For sale"}>For sale</MenuItem>
+                        <MenuItem value={"In-transit"}>In-transit</MenuItem>
+                        <MenuItem value={"Sold"}>Sold</MenuItem>
+                    </Select>
+                </FormControl>
+
+
                 <Button variant="contained" className="button" onClick={AddVehicle.buttonClicked}>Submit</Button>
 
                 <br></br>

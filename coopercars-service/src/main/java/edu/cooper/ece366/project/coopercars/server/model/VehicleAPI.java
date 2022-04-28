@@ -24,8 +24,9 @@ public class VehicleAPI
         this.theVehicle = theVehicle;
     }
 
-    public VehicleAPI(String myVIN, String dealerPrice, String salePrice) throws IOException {
+    public VehicleAPI(String myVIN, String myStatus, String dealerPrice, String salePrice) throws IOException {
         String theVIN = myVIN;
+        String theStatus = myStatus;
         String VIN;
         String imgURL;
 
@@ -243,7 +244,7 @@ public class VehicleAPI
         String strDate = dateFormat.format(date);
         imgURL = returnLink(year + "+" + make + "+" +model);
 
-        theVehicle = new Vehicle(VIN, theDealerPrice, theSalePrice, imgURL, strDate, make, model, year, series, trim, vehicleType, plantCountry, basePrice, entertainSys, numOfSeats,
+        theVehicle = new Vehicle(VIN, theStatus, theDealerPrice, theSalePrice, imgURL, strDate, make, model, year, series, trim, vehicleType, plantCountry, basePrice, entertainSys, numOfSeats,
                 numOfSeatRows, antiLockBraking, electronicStability, tractionControl, keylessIgnition, autoCrashNotif, backupCam, parkingAssist, rearCrossTrafficAlert,
                 rearAutoEmergBraking, crashImmBraking, forwColliWarn, dynamicBrakeSupp, pedestrianAutoEmergBrak, blindSpotWarn,
                 laneDepartWarn, laneKeepAssist, blindSpotIntervention, laneCenterAssist, daytimeRunLights, headlampLightSrc, headlampBeamSwitch,

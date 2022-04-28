@@ -30,6 +30,7 @@ function VehicleDetails()
     const [profit, setProfit] = useState("");
     const [salePrice, setSalePrice] = useState("");
     const [enterDate, setEnterDate] = useState("");
+    const [status, setStatus] = useState("");
 
     const [currentVehicleImg, setCurrentVehicleImg] = useState("");
     const [vehicleType, setVehicleType] = useState("");
@@ -109,6 +110,7 @@ function VehicleDetails()
                 setSalePrice(data.salePrice);
                 setProfit(data.salePrice - data.dealerPrice);
                 setEnterDate(data.enteredDate);
+                setStatus(data.status);
                 setVehicleType(data.vehicleType);
                 setPlaceOfManufacture(data.plantCountry);
                 setBodyClass(data.bodyClass);
@@ -206,6 +208,7 @@ function VehicleDetails()
         createData('Sale Price', "$"+salePrice),
         createData('Profit', "$"+profit),
         createData('Entered Date', enterDate),
+        createData('Status', status),
     ];
 
     const rows1 =[
