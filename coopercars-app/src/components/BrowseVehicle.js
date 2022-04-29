@@ -132,10 +132,16 @@ function BrowseVehicle()
                             >
                                 <option value="All">Filter By Make</option>
                                 <option value="BUICK">Buick</option>
+                                <option value="CHEVROLET">Chevrolet</option>
                                 <option value="FORD">Ford</option>
                                 <option value="HONDA">Honda</option>
                                 <option value="HYUNDAI">Hyundai</option>
+                                <option value="JAGUAR">Jaguar</option>
+                                <option value="JEEP">Jeep</option>
                                 <option value="LINCOLN">Lincoln</option>
+                                <option value="MERCEDES-BENZ">Mercedes-Benz</option>
+                                <option value="NISSAN">Nissan</option>
+                                <option value="TESLA">Tesla</option>
                                 <option value="TOYOTA">Toyota</option>
                             </select>
                             <span className="focus"></span>
@@ -154,6 +160,13 @@ function BrowseVehicle()
                                 aria-label="Filter Vehicles by Manufacturer"
                             >
                                 <option value="All">Filter By Year</option>
+                                <option value="2010">2010</option>
+                                <option value="2011">2011</option>
+                                <option value="2012">2012</option>
+                                <option value="2013">2013</option>
+                                <option value="2014">2014</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>
                                 <option value="2019">2019</option>
