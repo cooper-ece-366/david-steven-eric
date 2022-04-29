@@ -5,11 +5,18 @@ import '../App.css';
 import NavBar from './NavBar'
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import * as XLSX from 'xlsx';
+import { FormControl } from '@mui/material';
+import { InputLabel } from '@mui/material';
+import { Select } from '@mui/material';
+import { MenuItem } from '@mui/material';
+
 
 
 function AddVehicle()
 {
     const apiUrlPrefix = "http://localhost:8080";
+    const [file, setFile] = useState(null);
     const [currentVIN, setCurrentVIN] = useState("");
     const [currentVehicleInfo, setCurrentVehicleInfo] = useState("");
     const [currentVehicleImg, setCurrentVehicleImg] = useState("");
@@ -21,12 +28,86 @@ function AddVehicle()
     const [vin, setVin] = useState("");
     const [salePrice, setSalePrice] = useState("");
     const [dealerPrice, setDealerPrice] = useState("");
+    const [mileage, setMileage] = useState("");
+    const [status, setStatus] = useState("");
 
     AddVehicle.buttonClicked = () =>
     {
         console.log('Button was clicked!');
         AddVehicle.addVehicle();
     }
+
+    AddVehicle.onFileChange = () => {
+        console.log('File loaded');
+    }
+    AddVehicle.handleSubmit = () =>{
+        console.log('Button was clicked!');
+        console.log('File name: '+ file.name);
+        const reader = new FileReader();
+        reader.onload = (evt) => { // evt = on_file_select event
+            /* Parse data */
+            const bstr = evt.target.result;
+            const wb = XLSX.read(bstr, {type: 'binary'});
+            /* Get first worksheet */
+            const wsname = wb.SheetNames[0];
+            const ws = wb.Sheets[wsname];
+            /* Convert array of arrays */
+            const data = XLSX.utils.sheet_to_csv(ws, {header: 1});
+            /* Update state */
+            console.log("Data>>> \n" + data);
+            var sheet = wb.Sheets[wb.SheetNames[0]];
+            /* loop through every cell manually */
+            var range = XLSX.utils.decode_range(sheet['!ref']); // get the range
+            for(var R = range.s.r; R <= range.e.r; ++R) {
+                var vi = null;
+                var dealer = null;
+                var sale = null;
+                var mile = null;
+                var stat = null;
+                for (var C = range.s.c; C <= range.e.c; ++C) {
+                    /* find the cell object */
+                    console.log('Row : ' + R);
+                    console.log('Column : ' + C);
+                    var cellref = XLSX.utils.encode_cell({c: C, r: R}); // construct A1 reference for cell
+                    if (!sheet[cellref]) continue; // if cell doesn't exist, move on
+                    var cell = sheet[cellref];
+
+                    if(C==0){
+                        vi = cell.v;
+                        console.log("VIN: " + vi);
+                    }
+                    else if(C==1){
+                        dealer = cell.v;
+                        console.log("Dealer Price: " + dealer);
+                    }
+                    else if(C==2){
+                        sale = cell.v;
+                        console.log("Sale Price: " + sale);
+                    }
+                    else if(C==3){
+                        mile = cell.v;
+                        console.log("Mileage: " + mile);
+                    }
+                    else if(C==4){
+                        stat = cell.v;
+                        console.log("Status: " + stat);
+                    }
+                }
+                console.log(vi + ", " + dealer + ", " + sale + "," + stat + "," + mile);
+                //addVehicleXlsx(vi, dealer, sale);
+                setVin(vi);
+                setCurrentVIN(vi);
+                setDealerPrice(dealer);
+                setSalePrice(sale);
+                setMileage(mile);
+                setStatus(stat);
+                AddVehicle.addVehicle();
+
+            }
+        }
+        reader.readAsBinaryString(file);
+    }
+
 
     AddVehicle.addVehicle = () =>
     {
@@ -37,6 +118,8 @@ function AddVehicle()
                 vin,
                 dealerPrice,
                 salePrice,
+                mileage,
+                status,
             }),
         };
         fetch("http://localhost:8080/api/vehicle/addvehicle", requestOptions)
@@ -46,16 +129,26 @@ function AddVehicle()
 
     }
 
+    function addVehicleXlsx(myVin,myDealerPrice,mySalePrice)
+    {
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                myVin,
+                myDealerPrice,
+                mySalePrice,
+            }),
+        };
+        fetch("http://localhost:8080/api/vehicle/addvehicle", requestOptions)
+            .then((response) => console.log(response))
+            .then((data) => console.log(data))
+            .then(()=>AddVehicle.refreshInfo());
+    }
+
     AddVehicle.refreshInfo = () =>
     {
         console.log("Refreshing ... %s vehicle ...", currentVIN);
-        setCurrentVIN(vin);
-        setCurrentVehicleInfo(vin);
-        setCurrentVehicleFeatures1(vin);
-        setCurrentVehicleFeatures2(vin);
-        setCurrentVehicleFeatures3(vin);
-        setCurrentVehicleFeatures4(vin);
-        setCurrentVehicleFeatures5(vin);
         var vehicleApiUrl = apiUrlPrefix.concat("/api/vehicle/getinfo/",vin);
         fetch(vehicleApiUrl)
             .then(response => response.json())
@@ -108,10 +201,15 @@ function AddVehicle()
 
     return (
         <div className="App">
-            <NavBar />
             <header className="App-header">
+                <div>
+                    <h1>Upload Spreadsheet (VIN, Dealer Price, Sale Price, Mileage, Status)</h1>
+                    <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
+                    <button variant="contained" className="button" onClick = {AddVehicle.handleSubmit}>Upload</button>
+                </div>
+                <br></br>
                 <p>
-                    Enter VIN, dealer price, sale price of vehicle to add to inventory:
+                    Or manually enter VIN, dealer price, sale price of vehicle to add to inventory:
                 </p>
                 <TextField
                     id="filled-basic"
@@ -138,6 +236,31 @@ function AddVehicle()
                     onChange={(e) => setSalePrice(e.target.value)}
                     value={salePrice}
                 />
+
+                <TextField
+                    id="filled-basic"
+                    label="Enter mileage"
+                    variant="filled"
+                    style={{background: "rgb(232, 241, 250)"}}
+                    onChange={(e) => setMileage(e.target.value)}
+                    value={mileage}
+                />
+
+                <FormControl variant="filled" sx={{ m: 1, minWidth: 218 }}>
+                    <InputLabel id="demo-simple-select-filled-label">Status</InputLabel>
+                    <Select
+                        style={{background: "rgb(232, 241, 250)"}}
+                        labelId="demo-simple-select-filled-label"
+                        id="demo-simple-select-filled"
+                        value={status}
+                        label="Status"
+                        onChange={(e) => setStatus(e.target.value)}
+                    >
+                        <MenuItem value={"For sale"}>For sale</MenuItem>
+                        <MenuItem value={"In-transit"}>In-transit</MenuItem>
+                        <MenuItem value={"Sold"}>Sold</MenuItem>
+                    </Select>
+                </FormControl>
                 <Button variant="contained" className="button" onClick={AddVehicle.buttonClicked}>Submit</Button>
 
                 <br></br>

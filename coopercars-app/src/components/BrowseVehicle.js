@@ -17,9 +17,12 @@ import {
     Routes,
 } from "react-router-dom";
 import AddVehicle from "./AddVehicle";
+import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import Button from "@material-ui/core/Button";
 
 
-function BrowseVehicle() {
+function BrowseVehicle()
+{
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
@@ -31,9 +34,18 @@ function BrowseVehicle() {
     // just add it to this array
     const [searchParam] = useState(["make", "model"]);
     const [filterParam, setFilterParam] = useState(["All"]);
+    const [sortParam, setSortParam] = useState("");
+    const fetchURLSort = "http://localhost:8080/api/vehicles"
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/vehicles")
+        BrowseVehicle.handleSort("");
+    }, []);
+
+    BrowseVehicle.handleSort = (val) =>{
+        var sortURL = fetchURLSort.concat(val);
+        console.log(val);
+        console.log(sortURL);
+        fetch(sortURL)
             .then((res) => res.json())
             .then(
                 (result) => {
@@ -47,13 +59,17 @@ function BrowseVehicle() {
                     setIsLoaded(true);
                     setError(error);
                 }
-            );
-    }, []);
+            )
+            .catch(err => {
+                console.log("Cannot connect to API endpoint: %s", sortURL);
+            });
+                console.log("Refreshed");
+    }
 
     function search(items) {
         return items.filter((item) => {
 
-            if (item.make == filterParam) {
+            if (item.year==filterParam || item.make == filterParam) {
                 return searchParam.some((newItem) => {
                     return (
                         item[newItem]
@@ -82,7 +98,7 @@ function BrowseVehicle() {
     } else {
         return (
             /* here we map over the element and display each item as a card  */
-            <div className="browse"><NavBar />
+            <div className="browse">
                 <div className="wrapper">
                     <div>
                         <label htmlFor="search-form">
@@ -101,6 +117,100 @@ function BrowseVehicle() {
                             />
                             <span className="sr-only">Search for vehicle here</span>
                         </label>
+                        <div className="select">
+                            <select
+                                /*
+    //                         here we create a basic select input
+    //                     we set the value to the selected value
+    //                     and update the setC() state every time onChange is called
+                        */
+                                onChange={(e) => {
+                                    setFilterParam(e.target.value);
+                                }}
+                                className="custom-select"
+                                aria-label="Filter Vehicles by Manufacturer"
+                            >
+                                <option value="All">Filter By Make</option>
+                                <option value="BUICK">Buick</option>
+                                <option value="CHEVROLET">Chevrolet</option>
+                                <option value="FORD">Ford</option>
+                                <option value="HONDA">Honda</option>
+                                <option value="HYUNDAI">Hyundai</option>
+                                <option value="JAGUAR">Jaguar</option>
+                                <option value="JEEP">Jeep</option>
+                                <option value="LINCOLN">Lincoln</option>
+                                <option value="MERCEDES-BENZ">Mercedes-Benz</option>
+                                <option value="NISSAN">Nissan</option>
+                                <option value="TESLA">Tesla</option>
+                                <option value="TOYOTA">Toyota</option>
+                            </select>
+                            <span className="focus"></span>
+                        </div>
+                        <div className="select">
+                            <select
+                                /*
+    //                         here we create a basic select input
+    //                     we set the value to the selected value
+    //                     and update the setC() state every time onChange is called
+                        */
+                                onChange={(e) => {
+                                    setFilterParam(e.target.value);
+                                }}
+                                className="custom-select"
+                                aria-label="Filter Vehicles by Manufacturer"
+                            >
+                                <option value="All">Filter By Year</option>
+                                <option value="2010">2010</option>
+                                <option value="2011">2011</option>
+                                <option value="2012">2012</option>
+                                <option value="2013">2013</option>
+                                <option value="2014">2014</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                            </select>
+                            <span className="focus"></span>
+                        </div>
+                        <FormControl variant="filled" sx={{ m: 1, minWidth: 500 }}>
+                            <InputLabel id="demo-simple-select-filled-label">Sort by:</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-filled-label"
+                                id="demo-simple-select-filled"
+                                value={sortParam}
+                                label="Sort by:"
+                                onChange={(e) => {setSortParam(e.target.value); BrowseVehicle.handleSort(e.target.value)}}
+                            >
+                                <MenuItem value={""}>None</MenuItem>
+                                <MenuItem value={"/sort/dealer-asc"}>Dealer Price: Low to High</MenuItem>
+                                <MenuItem value={"/sort/dealer-desc"}>Dealer Price: High to low</MenuItem>
+                                <MenuItem value={"/sort/sale-asc"}>Sale Price: Low to High</MenuItem>
+                                <MenuItem value={"/sort/sale-desc"}>Sale Price: High to low</MenuItem>
+                                <MenuItem value={"/sort/profit-asc"}>Profit: Low to High</MenuItem>
+                                <MenuItem value={"/sort/profit-desc"}>Profit: High to low</MenuItem>
+                                <MenuItem value={"/sort/date-asc"}>Date Entered: Low to High</MenuItem>
+                                <MenuItem value={"/sort/date-desc"}>Date Entered: High to low</MenuItem>
+                                <MenuItem value={"/sort/mileage-asc"}>Mileage: Low to High</MenuItem>
+                                <MenuItem value={"/sort/mileage-desc"}>Mileage: High to low</MenuItem>
+                                <MenuItem value={"/sort/year-asc"}>Model Year: Low to High</MenuItem>
+                                <MenuItem value={"/sort/year-desc"}>Model Year: High to low</MenuItem>
+                                <MenuItem value={"/sort/make-asc"}>Make: A to Z</MenuItem>
+                                <MenuItem value={"/sort/make-desc"}>Make: Z to A</MenuItem>
+                                <MenuItem value={"/sort/model-asc"}>Model: A to Z</MenuItem>
+                                <MenuItem value={"/sort/model-desc"}>Model: Z to A</MenuItem>
+                                <MenuItem value={"/sort/enginepower-asc"}>Engine Power (kW): Low to High</MenuItem>
+                                <MenuItem value={"/sort/enginepower-desc"}>Engine Power (kW): High to low</MenuItem>
+                                <MenuItem value={"/sort/horsepower-asc"}>Horsepower: Low to High</MenuItem>
+                                <MenuItem value={"/sort/horsepower-desc"}>Horsepower: High to low</MenuItem>
+
+                            </Select>
+                        </FormControl>
+                        {/*<Button variant="contained" className="button" onClick={BrowseVehicle.handleSort}>Sort</Button>*/}
+
+
                     </div>
                     <ul className="card-grid">
 
@@ -133,7 +243,13 @@ function BrowseVehicle() {
                                                 Sale Price: $<span>{item.salePrice}</span>
                                             </li>
                                             <li>
+                                                Profit: $<span>{item.profit}</span>
+                                            </li>
+                                            <li>
                                                 Date Entered: <span>{item.enteredDate}</span>
+                                            </li>
+                                            <li>
+                                                Status: <span>{item.status}</span>
                                             </li>
                                         </ol>
                                     </div>

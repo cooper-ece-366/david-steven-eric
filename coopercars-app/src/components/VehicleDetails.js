@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import {Outlet, useParams} from 'react-router-dom'
 import coopercars1_logo from '../CooperCars-logos.jpeg';
 import coopercars2_logo from '../CooperCars-logos_black.png';
@@ -28,8 +28,10 @@ function VehicleDetails()
     const [vehicleTrim, setVehicleTrim] = useState("");
     const [dealerPrice, setDealerPrice] = useState("");
     const [profit, setProfit] = useState("");
+    const [mileage, setMileage] = useState("");
     const [salePrice, setSalePrice] = useState("");
     const [enterDate, setEnterDate] = useState("");
+    const [status, setStatus] = useState("");
 
     const [currentVehicleImg, setCurrentVehicleImg] = useState("");
     const [vehicleType, setVehicleType] = useState("");
@@ -91,87 +93,91 @@ function VehicleDetails()
     const [engineManufact, setEngineManufact] = useState("");
 
 
-    // TODO: makes multiple API calls, check this
-    console.log("Refreshing ... %s vehicle ...", VIN);
-    var vehicleApiUrl = apiUrlPrefix.concat("/api/vehicle/getinfo/",VIN);
-    fetch(vehicleApiUrl)
-        .then(response => response.json())
-        .then(data => {
-            setCurrentVehicleImg(data.imgURL);
-            setCurrentVehicleInfo(data.year + " " + data.make + " " + data.model + " " + data.trim + " " + data.series);
-            setVehicleMake(data.make);
-            setVehicleModel(data.model);
-            setVehicleYear(data.year);
-            setVehicleSeries(data.series);
-            setVehicleTrim(data.trim);
-            setDealerPrice(data.dealerPrice);
-            setSalePrice(data.salePrice);
-            setProfit(data.salePrice - data.dealerPrice);
-            setEnterDate(data.enteredDate);
-            setVehicleType(data.vehicleType);
-            setPlaceOfManufacture(data.plantCountry);
-            setBodyClass(data.bodyClass);
-            setNumOfSeats(returnVal(data.numOfSeats));
-            setNumOfSeatRows(returnVal(data.numOfSeatRows));
-            setWheelSizeFrontIn(returnVal(data.wheelSizeFrontIn));
-            setWheelSizeRearIn(returnVal(data.wheelSizeRearIn));
-            setDriveType(data.driveType);
-            setAxles(returnVal(data.axles));
-            setTransmission(data.transmissionStyle);
-            setWheelBaseType(data.wheelBaseType);
-            setWheelBase(returnVal(data.wheelBase));
-            setGrossWeight(returnVal(data.grossCombWeight));
-            setCurbWeight(returnVal(data.curbWeight));
-            setTruckBed(data.truckBedType);
-            setTruckCab(data.truckCabType);
-            setBedLength(returnVal(data.bedLength));
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        console.log("Refreshing ... %s vehicle ...", VIN);
+        var vehicleApiUrl = apiUrlPrefix.concat("/api/vehicle/getinfo/",VIN);
+        fetch(vehicleApiUrl)
+            .then(response => response.json())
+            .then(data => {
+                setCurrentVehicleImg(data.imgURL);
+                setCurrentVehicleInfo(data.year + " " + data.make + " " + data.model + " " + data.trim + " " + data.series);
+                setVehicleMake(data.make);
+                setVehicleModel(data.model);
+                setVehicleYear(data.year);
+                setVehicleSeries(data.series);
+                setVehicleTrim(data.trim);
+                setDealerPrice(data.dealerPrice);
+                setSalePrice(data.salePrice);
+                setMileage(data.mileage);
+                setProfit(data.salePrice - data.dealerPrice);
+                setEnterDate(data.enteredDate);
+                setStatus(data.status);
+                setVehicleType(data.vehicleType);
+                setPlaceOfManufacture(data.plantCountry);
+                setBodyClass(data.bodyClass);
+                setNumOfSeats(returnVal(data.numOfSeats));
+                setNumOfSeatRows(returnVal(data.numOfSeatRows));
+                setWheelSizeFrontIn(returnVal(data.wheelSizeFrontIn));
+                setWheelSizeRearIn(returnVal(data.wheelSizeRearIn));
+                setDriveType(data.driveType);
+                setAxles(returnVal(data.axles));
+                setTransmission(data.transmissionStyle);
+                setWheelBaseType(data.wheelBaseType);
+                setWheelBase(returnVal(data.wheelBase));
+                setGrossWeight(returnVal(data.grossCombWeight));
+                setCurbWeight(returnVal(data.curbWeight));
+                setTruckBed(data.truckBedType);
+                setTruckCab(data.truckCabType);
+                setBedLength(returnVal(data.bedLength));
 
-            setAntiLock(data.antiLockBraking);
-            setElecStab(data.electronicStability);
-            setTraction(data.tractionControl);
-            setKeyless(data.keylessIgnition);
-            setAutoCrash(data.autoCrashNotif);
-            setBackup(data.backupCam);
-            setParking(data.parkingAssist);
-            setRearCross(data.rearCrossTrafficAlert);
-            setRearAutoBrake(data.rearAutoEmergBraking);
-            setCrashImm(data.crashImmBraking);
-            setForwColli(data.forwColliWarn);
-            setDynamicBrake(data.dynamicBrakeSupp);
-            setPedBrake(data.pedestrianAutoEmergBrak);
-            setBlindSpotWarn(data.blindSpotWarn);
-            setLaneDepart(data.laneDepartWarn);
-            setLaneKeep(data.laneKeepAssist);
-            setBlindSpotIntervene(data.blindSpotIntervention);
-            setLaneCenter(data.laneCenterAssist);
-            setDRL(data.daytimeRunLights);
-            setHeadlampSrc(data.headlampLightSrc);
-            setHeadlampBeam(data.headlampBeamSwitch);
-            setAdaptDrivingBeam(data.adaptDrivingBeam);
-            setACC(data.adaptiveCruiseControl);
+                setAntiLock(data.antiLockBraking);
+                setElecStab(data.electronicStability);
+                setTraction(data.tractionControl);
+                setKeyless(data.keylessIgnition);
+                setAutoCrash(data.autoCrashNotif);
+                setBackup(data.backupCam);
+                setParking(data.parkingAssist);
+                setRearCross(data.rearCrossTrafficAlert);
+                setRearAutoBrake(data.rearAutoEmergBraking);
+                setCrashImm(data.crashImmBraking);
+                setForwColli(data.forwColliWarn);
+                setDynamicBrake(data.dynamicBrakeSupp);
+                setPedBrake(data.pedestrianAutoEmergBrak);
+                setBlindSpotWarn(data.blindSpotWarn);
+                setLaneDepart(data.laneDepartWarn);
+                setLaneKeep(data.laneKeepAssist);
+                setBlindSpotIntervene(data.blindSpotIntervention);
+                setLaneCenter(data.laneCenterAssist);
+                setDRL(data.daytimeRunLights);
+                setHeadlampSrc(data.headlampLightSrc);
+                setHeadlampBeam(data.headlampBeamSwitch);
+                setAdaptDrivingBeam(data.adaptDrivingBeam);
+                setACC(data.adaptiveCruiseControl);
 
-            setNumCylind(returnVal(data.numOfCylinders));
-            setDisCC(returnVal(data.displacementCC));
-            setDisCI(returnVal(data.displacementCI));
-            setdisL(returnVal(data.displacementL));
-            setEnginePower(returnVal(data.enginePowerkW));
-            setFuelPrim(data.fuelTypePrim);
-            setFuelSec(data.fuelTypeSec);
-            setFuelInject(data.fuelInjectionType);
-            setEngineConfig(data.engineConfig);
-            setHP(returnVal(data.horsepower));
-            setElectrification(data.electricificationLevel);
-            setOtherEngine(data.otherEngineInfo);
-            setTurbo(data.turbo);
-            setTopSpeed(returnVal(data.topSpeed));
-            setEngineManufact(data.engineManufact);
+                setNumCylind(returnVal(data.numOfCylinders));
+                setDisCC(returnVal(data.displacementCC));
+                setDisCI(returnVal(data.displacementCI));
+                setdisL(returnVal(data.displacementL));
+                setEnginePower(returnVal(data.enginePowerkW));
+                setFuelPrim(data.fuelTypePrim);
+                setFuelSec(data.fuelTypeSec);
+                setFuelInject(data.fuelInjectionType);
+                setEngineConfig(data.engineConfig);
+                setHP(returnVal(data.horsepower));
+                setElectrification(data.electricificationLevel);
+                setOtherEngine(data.otherEngineInfo);
+                setTurbo(data.turbo);
+                setTopSpeed(returnVal(data.topSpeed));
+                setEngineManufact(data.engineManufact);
 
-            console.log(data);
-        })
-        .catch(err => {
-            console.log("Cannot connect to API endpoint: %s", vehicleApiUrl);
-        });
-    console.log("Refreshed %s VIN.", VIN);
+                console.log(data);
+            })
+            .catch(err => {
+                console.log("Cannot connect to API endpoint: %s", vehicleApiUrl);
+            });
+        console.log("Refreshed %s VIN.", VIN);
+    }, []);
 
 
     function createData(
@@ -203,7 +209,9 @@ function VehicleDetails()
         createData('Dealer Price', "$"+dealerPrice),
         createData('Sale Price', "$"+salePrice),
         createData('Profit', "$"+profit),
+        createData('Mileage (mi)', mileage),
         createData('Entered Date', enterDate),
+        createData('Status', status),
     ];
 
     const rows1 =[
@@ -273,7 +281,6 @@ function VehicleDetails()
 
     return (
         <div className="App">
-            <NavBar />
             <header className="App-header">
                 <br></br>
             <p>VIN {VIN} </p>
@@ -282,12 +289,12 @@ function VehicleDetails()
                 <img src={currentVehicleImg} height="200"/>
             </div>
                 <br></br>
-                <TableContainer component={Paper} style={{ maxHeight: 400 , maxWidth: 1400 }}>
+                <TableContainer component={Paper} style={{ maxHeight: 450 , maxWidth: 1400 }}>
                     <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
                                 <TableCell align="center" colSpan={2}>
-                                    <h1>Inventory Information</h1>
+                                    <h2>Inventory Information</h2>
                                 </TableCell>
                             </TableRow>
                         </TableHead>
@@ -307,12 +314,12 @@ function VehicleDetails()
                     </Table>
                 </TableContainer>
                 <br></br>
-                <TableContainer component={Paper} style={{ maxHeight: 400 , maxWidth: 1400 }  } >
+                <TableContainer component={Paper} style={{ maxHeight: 350 , maxWidth: 1400 }  } >
                     <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
                                 <TableCell align="center" colSpan={2}>
-                                    <h1>Basic Vehicle Specifications</h1>
+                                    <h2>Basic Vehicle Specifications</h2>
                                 </TableCell>
                             </TableRow>
                         </TableHead>
@@ -332,12 +339,12 @@ function VehicleDetails()
                     </Table>
                 </TableContainer>
                 <br></br>
-                <TableContainer component={Paper} style={{ maxHeight: 400 , maxWidth: 1400 }}>
+                <TableContainer component={Paper} style={{ maxHeight: 350 , maxWidth: 1400 }}>
                     <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
                                 <TableCell align="center" colSpan={2}>
-                                    <h1>Advanced Safety/Convenience Features</h1>
+                                    <h2>Advanced Safety/Convenience Features</h2>
                                 </TableCell>
                             </TableRow>
                         </TableHead>
@@ -358,12 +365,12 @@ function VehicleDetails()
                 </TableContainer>
 
                 <br></br>
-                <TableContainer component={Paper} style={{ maxHeight: 400 , maxWidth: 1400 }}>
+                <TableContainer component={Paper} style={{ maxHeight: 350 , maxWidth: 1400 }}>
                     <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
                                 <TableCell align="center" colSpan={2}>
-                                    <h1>Engine Specifications</h1>
+                                    <h2>Engine Specifications</h2>
                                 </TableCell>
                             </TableRow>
                         </TableHead>
@@ -382,7 +389,7 @@ function VehicleDetails()
                         </TableBody>
                     </Table>
                 </TableContainer>
-
+                <br></br>
             </header>
 
         </div>

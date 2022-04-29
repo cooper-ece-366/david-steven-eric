@@ -119,7 +119,6 @@ function HomePage() {
 
   return (
     <div className="App">
-      <NavBar />
       <header className="App-header">
       <img src={logo} className="App-logo" alt="cooper-logo" height = "400" width = "200"/>
 

@@ -112,7 +112,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auth/**", "/oauth2/**")
                 .permitAll()
                 .anyRequest()
-                .authenticated()
+                .permitAll() // changed this from authenticated -> permitAll()
                 .and()
                 .oauth2Login()
                 .authorizationEndpoint()
@@ -130,5 +130,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Add our custom Token based authentication filter
         http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
     }
 }

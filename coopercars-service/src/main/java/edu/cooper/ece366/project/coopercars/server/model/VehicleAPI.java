@@ -24,8 +24,9 @@ public class VehicleAPI
         this.theVehicle = theVehicle;
     }
 
-    public VehicleAPI(String myVIN, String dealerPrice, String salePrice) throws IOException {
+    public VehicleAPI(String myVIN, String myStatus, String dealerPrice, String salePrice, String mileage) throws IOException {
         String theVIN = myVIN;
+        String theStatus = myStatus;
         String VIN;
         String imgURL;
 
@@ -142,7 +143,6 @@ public class VehicleAPI
 
         List<String[]> vehicleRows = new ArrayList<String[]>();
         String[] populateVehicleRow = new String[69];
-        // TODO: loop through database, if VIN exists, do not add
         populateVehicleRow[0] = theVIN;
 
         while ((currentLine = in.readLine()) != null) {
@@ -215,6 +215,8 @@ public class VehicleAPI
 
         Double theDealerPrice = Double.parseDouble("0"+populateVehicleRow[66]);
         Double theSalePrice = Double.parseDouble("0"+populateVehicleRow[67]);
+        Double theProfit = theSalePrice - theDealerPrice;
+        Double theMileage = Double.parseDouble("0" + mileage);
 
         fuelTypePrim = populateVehicleRow[29];
         engineConfig = populateVehicleRow[30];
@@ -243,7 +245,7 @@ public class VehicleAPI
         String strDate = dateFormat.format(date);
         imgURL = returnLink(year + "+" + make + "+" +model);
 
-        theVehicle = new Vehicle(VIN, theDealerPrice, theSalePrice, imgURL, strDate, make, model, year, series, trim, vehicleType, plantCountry, basePrice, entertainSys, numOfSeats,
+        theVehicle = new Vehicle(VIN, theStatus, theDealerPrice, theSalePrice, theProfit, theMileage, imgURL, strDate, make, model, year, series, trim, vehicleType, plantCountry, basePrice, entertainSys, numOfSeats,
                 numOfSeatRows, antiLockBraking, electronicStability, tractionControl, keylessIgnition, autoCrashNotif, backupCam, parkingAssist, rearCrossTrafficAlert,
                 rearAutoEmergBraking, crashImmBraking, forwColliWarn, dynamicBrakeSupp, pedestrianAutoEmergBrak, blindSpotWarn,
                 laneDepartWarn, laneKeepAssist, blindSpotIntervention, laneCenterAssist, daytimeRunLights, headlampLightSrc, headlampBeamSwitch,

@@ -11,6 +11,9 @@ public class Vehicle
     private String VIN;
     private double dealerPrice;
     private double salePrice;
+    private double profit;
+    private double mileage;
+    private String status;
     private String imgURL;
     private String enteredDate;
     //general
@@ -94,10 +97,13 @@ public class Vehicle
     private int axles;
     private String transmissionStyle;
 
-    public Vehicle(String VIN, Double dealerPrice, Double salePrice, String imgURL, String enteredDate, String make, String model, int year, String series, String trim, String vehicleType, String plantCountry, double basePrice, String entertainSys, int numOfSeats, int numOfSeatRows, String antiLockBraking, String electronicStability, String tractionControl, String keylessIgnition, String autoCrashNotif, String backupCam, String parkingAssist, String rearCrossTrafficAlert, String rearAutoEmergBraking, String crashImmBraking, String forwColliWarn, String dynamicBrakeSupp, String pedestrianAutoEmergBrak, String blindSpotWarn, String laneDepartWarn, String laneKeepAssist, String blindSpotIntervention, String laneCenterAssist, String daytimeRunLights, String headlampLightSrc, String headlampBeamSwitch, String adaptDrivingBeam, String adaptiveCruiseControl, int numOfCylinders, double displacementCC, double displacementCI, double displacementL, double enginePowerkW, String fuelTypePrim, String fuelTypeSec, String fuelInjectionType, String engineConfig, double horsepower, String electricificationLevel, String otherEngineInfo, String turbo, int topSpeed, String engineManufact, String bodyClass, int numOfDoors, int numOfWindows, String wheelBaseType, double bedLength, double curbWeight, double wheelBase, double grossCombWeight, String truckBedType, String truckCabType, int numOfWheels, int wheelSizeFrontIn, int wheelsSizeRearIn, String driveType, int axles, String transmissionStyle) {
+    public Vehicle(String VIN, String status, Double dealerPrice, Double salePrice, Double profit, Double mileage, String imgURL, String enteredDate, String make, String model, int year, String series, String trim, String vehicleType, String plantCountry, double basePrice, String entertainSys, int numOfSeats, int numOfSeatRows, String antiLockBraking, String electronicStability, String tractionControl, String keylessIgnition, String autoCrashNotif, String backupCam, String parkingAssist, String rearCrossTrafficAlert, String rearAutoEmergBraking, String crashImmBraking, String forwColliWarn, String dynamicBrakeSupp, String pedestrianAutoEmergBrak, String blindSpotWarn, String laneDepartWarn, String laneKeepAssist, String blindSpotIntervention, String laneCenterAssist, String daytimeRunLights, String headlampLightSrc, String headlampBeamSwitch, String adaptDrivingBeam, String adaptiveCruiseControl, int numOfCylinders, double displacementCC, double displacementCI, double displacementL, double enginePowerkW, String fuelTypePrim, String fuelTypeSec, String fuelInjectionType, String engineConfig, double horsepower, String electricificationLevel, String otherEngineInfo, String turbo, int topSpeed, String engineManufact, String bodyClass, int numOfDoors, int numOfWindows, String wheelBaseType, double bedLength, double curbWeight, double wheelBase, double grossCombWeight, String truckBedType, String truckCabType, int numOfWheels, int wheelSizeFrontIn, int wheelsSizeRearIn, String driveType, int axles, String transmissionStyle) {
         this.VIN = VIN;
         this.dealerPrice = dealerPrice;
         this.salePrice = salePrice;
+        this.profit = profit;
+        this.mileage = mileage;
+        this.status = status;
         this.imgURL = imgURL;
         this.enteredDate = enteredDate;
         this.make = make;
@@ -169,6 +175,30 @@ public class Vehicle
 
     public Vehicle() {
 
+    }
+
+    public double getProfit() {
+        return profit;
+    }
+
+    public void setProfit(double profit) {
+        this.profit = profit;
+    }
+
+    public double getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(double mileage) {
+        this.mileage = mileage;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getEnteredDate() {
