@@ -11,6 +11,7 @@ import edu.cooper.ece366.project.coopercars.server.repository.VehicleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -64,7 +65,121 @@ public class ControllerApi
 
     @GetMapping(path = "/vehicles", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Iterable<Vehicle> getAllVehicles() {
-        // This returns a JSON or XML with the users
         return vehicleRepository.findAll();
     }
+
+    // desc meaning high to low
+
+    @GetMapping(path = "/vehicles/sort/mileage-asc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortByMileageAsc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.ASC, "mileage"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/mileage-desc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortByMileageDesc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.DESC, "mileage"));
+    }
+
+    // sale price, dealer price, profit, date, year, engine power, hp
+
+    @GetMapping(path = "/vehicles/sort/sale-asc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortSalePriceAsc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.ASC, "salePrice"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/sale-desc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortSalePriceDesc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.DESC, "salePrice"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/dealer-asc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortDealerPriceAsc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.ASC, "dealerPrice"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/dealer-desc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortDealerPriceDesc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.DESC, "dealerPrice"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/profit-asc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortProfitAsc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.ASC, "profit"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/profit-desc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortProfitDesc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.DESC, "profit"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/date-asc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortDateAsc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.ASC, "enteredDate"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/date-desc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortDateDesc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.DESC, "enteredDate"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/year-asc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortYearAsc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.ASC, "year"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/year-desc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortYearDesc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.DESC, "year"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/enginepower-asc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortEnginePowerAsc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.ASC, "enginePowerkW"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/enginepower-desc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortEnginePowerDesc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.DESC, "enginePowerkW"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/horsepower-asc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortHPAsc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.ASC, "horsepower"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/horsepower-desc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortHPDesc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.DESC, "horsepower"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/displacementCC-asc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortDisCCAsc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.ASC, "displacementCC"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/displacementCC-desc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortDisCCDesc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.DESC, "displacementCC"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/make-asc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortMakeAsc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.ASC, "make"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/make-desc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortMakeDesc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.DESC, "make"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/model-asc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortModelAsc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.ASC, "model"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/model-desc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortModelDesc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.DESC, "model"));
+    }
+
 }

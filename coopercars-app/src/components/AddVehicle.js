@@ -261,8 +261,6 @@ function AddVehicle()
                         <MenuItem value={"Sold"}>Sold</MenuItem>
                     </Select>
                 </FormControl>
-
-
                 <Button variant="contained" className="button" onClick={AddVehicle.buttonClicked}>Submit</Button>
 
                 <br></br>

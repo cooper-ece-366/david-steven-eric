@@ -1,8 +1,21 @@
-# CooperCars: US-16a (add status & mileage tag to vehicle, remove by status)
+# CooperCars: US-16 (add status & mileage tag to vehicle, remove by status, sort by params)
 This US marks each vehicle as In-transit, for sale, or sold and adds mileage to inventory details.
+Also adds functionality to sort by asc/desc parameters (see below).
 Adds onto SDE-merged-US-15, refer that for functionality.
+## Sorting APIs:
+#### http://localhost:8080//vehicles/sort/sale/{asc/desc}
+#### http://localhost:8080//vehicles/sort/dealer/{asc/desc}
+#### http://localhost:8080//vehicles/sort/profit/{asc/desc}
+#### http://localhost:8080//vehicles/sort/date/{asc/desc}
+#### http://localhost:8080//vehicles/sort/year/{asc/desc}
+#### http://localhost:8080//vehicles/sort/enginepower/{asc/desc}
+#### http://localhost:8080//vehicles/sort/horsepower/{asc/desc}
+#### http://localhost:8080//vehicles/sort/displacementCC/{asc/desc}
+#### http://localhost:8080//vehicles/sort/make/{asc/desc}
+#### http://localhost:8080//vehicles/sort/model/{asc/desc}
 ## Functionality:
 #### Status and mileage shows up on vehicle details page. Add vehicle by spreadsheet working.
+#### Sort by params working. 
 #### Remove by status is now working. 
 #### WIP: clean up outputs and UI
 ![image1](us-16.png)

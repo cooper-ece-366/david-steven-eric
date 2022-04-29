@@ -17,9 +17,12 @@ import {
     Routes,
 } from "react-router-dom";
 import AddVehicle from "./AddVehicle";
+import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import Button from "@material-ui/core/Button";
 
 
-function BrowseVehicle() {
+function BrowseVehicle()
+{
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
@@ -31,9 +34,18 @@ function BrowseVehicle() {
     // just add it to this array
     const [searchParam] = useState(["make", "model"]);
     const [filterParam, setFilterParam] = useState(["All"]);
+    const [sortParam, setSortParam] = useState("");
+    const fetchURLSort = "http://localhost:8080/api/vehicles"
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/vehicles")
+        BrowseVehicle.handleSort();
+    }, []);
+
+    BrowseVehicle.handleSort = () =>{
+        var sortURL = fetchURLSort.concat(sortParam);
+        console.log(sortParam);
+        console.log(sortURL);
+        fetch(sortURL)
             .then((res) => res.json())
             .then(
                 (result) => {
@@ -47,8 +59,12 @@ function BrowseVehicle() {
                     setIsLoaded(true);
                     setError(error);
                 }
-            );
-    }, []);
+            )
+            .catch(err => {
+                console.log("Cannot connect to API endpoint: %s", sortURL);
+            });
+                console.log("Refreshed");
+    }
 
     function search(items) {
         return items.filter((item) => {
@@ -146,6 +162,42 @@ function BrowseVehicle() {
                             </select>
                             <span className="focus"></span>
                         </div>
+                        <FormControl variant="filled" sx={{ m: 1, minWidth: 500 }}>
+                            <InputLabel id="demo-simple-select-filled-label">Sort by:</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-filled-label"
+                                id="demo-simple-select-filled"
+                                value={sortParam}
+                                label="Sort by:"
+                                onChange={(e) => setSortParam(e.target.value)}
+                            >
+                                <MenuItem value={""}>None</MenuItem>
+                                <MenuItem value={"/sort/dealer-asc"}>Dealer Price: Low to High</MenuItem>
+                                <MenuItem value={"/sort/dealer-desc"}>Dealer Price: High to low</MenuItem>
+                                <MenuItem value={"/sort/sale-asc"}>Sale Price: Low to High</MenuItem>
+                                <MenuItem value={"/sort/sale-desc"}>Sale Price: High to low</MenuItem>
+                                <MenuItem value={"/sort/profit-asc"}>Profit: Low to High</MenuItem>
+                                <MenuItem value={"/sort/profit-desc"}>Profit: High to low</MenuItem>
+                                <MenuItem value={"/sort/date-asc"}>Date Entered: Low to High</MenuItem>
+                                <MenuItem value={"/sort/date-desc"}>Date Entered: High to low</MenuItem>
+                                <MenuItem value={"/sort/mileage-asc"}>Mileage: Low to High</MenuItem>
+                                <MenuItem value={"/sort/mileage-desc"}>Mileage: High to low</MenuItem>
+                                <MenuItem value={"/sort/year-asc"}>Model Year: Low to High</MenuItem>
+                                <MenuItem value={"/sort/year-desc"}>Model Year: High to low</MenuItem>
+                                <MenuItem value={"/sort/make-asc"}>Make: A to Z</MenuItem>
+                                <MenuItem value={"/sort/make-desc"}>Make: Z to A</MenuItem>
+                                <MenuItem value={"/sort/model-asc"}>Model: A to Z</MenuItem>
+                                <MenuItem value={"/sort/model-desc"}>Model: Z to A</MenuItem>
+                                <MenuItem value={"/sort/enginepower-asc"}>Engine Power (kW): Low to High</MenuItem>
+                                <MenuItem value={"/sort/enginepower-desc"}>Engine Power (kW): High to low</MenuItem>
+                                <MenuItem value={"/sort/horsepower-asc"}>Horsepower: Low to High</MenuItem>
+                                <MenuItem value={"/sort/horsepower-desc"}>Horsepower: High to low</MenuItem>
+
+                            </Select>
+                        </FormControl>
+                        <Button variant="contained" className="button" onClick={BrowseVehicle.handleSort}>Sort</Button>
+
+
                     </div>
                     <ul className="card-grid">
 
