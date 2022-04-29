@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import coopercars1_logo from '../CooperCars-logos.jpeg';
 import coopercars2_logo from '../CooperCars-logos_black.png';
 import '../App.css';
@@ -16,6 +16,9 @@ function RemoveVehicle()
     const [vin, setVin] = useState("");
     const [status,setStatus] = useState("");
     const [info, setInfo] = useState("");
+
+    useEffect(() => {
+    }, []);
 
     RemoveVehicle.handleSubmit = () =>{
         console.log('Button was clicked!');
