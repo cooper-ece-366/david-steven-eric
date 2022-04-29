@@ -1,11 +1,11 @@
-# CooperCars: US-16 (add status tag to vehicle, remove by status)
-This US marks each vehicle as In-transit, for sale, or sold.
-Note: this adds onto SDE-merged-US-15, refer that for functionality
+# CooperCars: US-16a (add status & mileage tag to vehicle, remove by status)
+This US marks each vehicle as In-transit, for sale, or sold and adds mileage to inventory details.
+Adds onto SDE-merged-US-15, refer that for functionality.
 ## Functionality:
-#### Status shows up on vehicle details page. Add vehicle by spreadsheet working.
+#### Status and mileage shows up on vehicle details page. Add vehicle by spreadsheet working.
 #### Remove by status is now working. 
 #### WIP: clean up outputs and UI
-![image1](us-14.png)
+![image1](us-16.png)
 ## API endpts:
 #### http://localhost:8080/api/vehicle/getinfo/{vin} returns info about ONE vehicle
 #### http://localhost:8080/api/vehicle/addvehicle adds from front end input

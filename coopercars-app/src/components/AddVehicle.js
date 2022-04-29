@@ -28,6 +28,7 @@ function AddVehicle()
     const [vin, setVin] = useState("");
     const [salePrice, setSalePrice] = useState("");
     const [dealerPrice, setDealerPrice] = useState("");
+    const [mileage, setMileage] = useState("");
     const [status, setStatus] = useState("");
 
     AddVehicle.buttonClicked = () =>
@@ -61,6 +62,7 @@ function AddVehicle()
                 var vi = null;
                 var dealer = null;
                 var sale = null;
+                var mile = null;
                 var stat = null;
                 for (var C = range.s.c; C <= range.e.c; ++C) {
                     /* find the cell object */
@@ -83,16 +85,21 @@ function AddVehicle()
                         console.log("Sale Price: " + sale);
                     }
                     else if(C==3){
+                        mile = cell.v;
+                        console.log("Mileage: " + mile);
+                    }
+                    else if(C==4){
                         stat = cell.v;
                         console.log("Status: " + stat);
                     }
                 }
-                console.log(vi + ", " + dealer + ", " + sale + "," + stat);
+                console.log(vi + ", " + dealer + ", " + sale + "," + stat + "," + mile);
                 //addVehicleXlsx(vi, dealer, sale);
                 setVin(vi);
                 setCurrentVIN(vi);
                 setDealerPrice(dealer);
                 setSalePrice(sale);
+                setMileage(mile);
                 setStatus(stat);
                 AddVehicle.addVehicle();
 
@@ -111,6 +118,7 @@ function AddVehicle()
                 vin,
                 dealerPrice,
                 salePrice,
+                mileage,
                 status,
             }),
         };
@@ -195,7 +203,7 @@ function AddVehicle()
         <div className="App">
             <header className="App-header">
                 <div>
-                    <h1>Upload Spreadsheet (VIN, Dealer Price, Sale Price)</h1>
+                    <h1>Upload Spreadsheet (VIN, Dealer Price, Sale Price, Mileage, Status)</h1>
                     <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
                     <button variant="contained" className="button" onClick = {AddVehicle.handleSubmit}>Upload</button>
                 </div>
@@ -227,6 +235,15 @@ function AddVehicle()
                     style={{background: "rgb(232, 241, 250)"}}
                     onChange={(e) => setSalePrice(e.target.value)}
                     value={salePrice}
+                />
+
+                <TextField
+                    id="filled-basic"
+                    label="Enter mileage"
+                    variant="filled"
+                    style={{background: "rgb(232, 241, 250)"}}
+                    onChange={(e) => setMileage(e.target.value)}
+                    value={mileage}
                 />
 
                 <FormControl variant="filled" sx={{ m: 1, minWidth: 218 }}>

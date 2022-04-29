@@ -49,7 +49,7 @@ public class ControllerApi
     @PostMapping(value ="/vehicle/addvehicle", produces = MediaType.APPLICATION_JSON_VALUE)
     public String addVehicle(@RequestBody AddVehicleRequest addVehicleRequest) throws IOException {
         try {
-            VehicleAPI myVehicleAPI = new VehicleAPI(addVehicleRequest.getVIN(), addVehicleRequest.getStatus(), addVehicleRequest.getDealerPrice(),addVehicleRequest.getSalePrice() );
+            VehicleAPI myVehicleAPI = new VehicleAPI(addVehicleRequest.getVIN(), addVehicleRequest.getStatus(), addVehicleRequest.getDealerPrice(),addVehicleRequest.getSalePrice(), addVehicleRequest.getMileage());
             Vehicle theVehicle = vehicleRepository.save(myVehicleAPI.getTheVehicle());
             LOGGER.debug(myVehicleAPI.getTheVehicle().toString());
             String theVehicleJSON = objectMapper.writeValueAsString(myVehicleAPI.getTheVehicle());

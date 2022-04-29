@@ -14,6 +14,9 @@ public class AddVehicleRequest {
     private String salePrice;
 
     @NotBlank
+    private String mileage;
+
+    @NotBlank
     private String status;
 
     public String getVIN() {
@@ -38,6 +41,14 @@ public class AddVehicleRequest {
 
     public void setSalePrice(String salePrice) {
         this.salePrice = salePrice;
+    }
+
+    public String getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(String mileage) {
+        this.mileage = mileage;
     }
 
     public String getStatus() {

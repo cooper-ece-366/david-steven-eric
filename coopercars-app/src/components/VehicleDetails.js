@@ -28,6 +28,7 @@ function VehicleDetails()
     const [vehicleTrim, setVehicleTrim] = useState("");
     const [dealerPrice, setDealerPrice] = useState("");
     const [profit, setProfit] = useState("");
+    const [mileage, setMileage] = useState("");
     const [salePrice, setSalePrice] = useState("");
     const [enterDate, setEnterDate] = useState("");
     const [status, setStatus] = useState("");
@@ -108,6 +109,7 @@ function VehicleDetails()
                 setVehicleTrim(data.trim);
                 setDealerPrice(data.dealerPrice);
                 setSalePrice(data.salePrice);
+                setMileage(data.mileage);
                 setProfit(data.salePrice - data.dealerPrice);
                 setEnterDate(data.enteredDate);
                 setStatus(data.status);
@@ -207,6 +209,7 @@ function VehicleDetails()
         createData('Dealer Price', "$"+dealerPrice),
         createData('Sale Price', "$"+salePrice),
         createData('Profit', "$"+profit),
+        createData('Mileage (mi)', mileage),
         createData('Entered Date', enterDate),
         createData('Status', status),
     ];
@@ -286,12 +289,12 @@ function VehicleDetails()
                 <img src={currentVehicleImg} height="200"/>
             </div>
                 <br></br>
-                <TableContainer component={Paper} style={{ maxHeight: 400 , maxWidth: 1400 }}>
+                <TableContainer component={Paper} style={{ maxHeight: 450 , maxWidth: 1400 }}>
                     <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
                                 <TableCell align="center" colSpan={2}>
-                                    <h1>Inventory Information</h1>
+                                    <h2>Inventory Information</h2>
                                 </TableCell>
                             </TableRow>
                         </TableHead>
@@ -311,12 +314,12 @@ function VehicleDetails()
                     </Table>
                 </TableContainer>
                 <br></br>
-                <TableContainer component={Paper} style={{ maxHeight: 400 , maxWidth: 1400 }  } >
+                <TableContainer component={Paper} style={{ maxHeight: 350 , maxWidth: 1400 }  } >
                     <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
                                 <TableCell align="center" colSpan={2}>
-                                    <h1>Basic Vehicle Specifications</h1>
+                                    <h2>Basic Vehicle Specifications</h2>
                                 </TableCell>
                             </TableRow>
                         </TableHead>
@@ -336,12 +339,12 @@ function VehicleDetails()
                     </Table>
                 </TableContainer>
                 <br></br>
-                <TableContainer component={Paper} style={{ maxHeight: 400 , maxWidth: 1400 }}>
+                <TableContainer component={Paper} style={{ maxHeight: 350 , maxWidth: 1400 }}>
                     <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
                                 <TableCell align="center" colSpan={2}>
-                                    <h1>Advanced Safety/Convenience Features</h1>
+                                    <h2>Advanced Safety/Convenience Features</h2>
                                 </TableCell>
                             </TableRow>
                         </TableHead>
@@ -362,12 +365,12 @@ function VehicleDetails()
                 </TableContainer>
 
                 <br></br>
-                <TableContainer component={Paper} style={{ maxHeight: 400 , maxWidth: 1400 }}>
+                <TableContainer component={Paper} style={{ maxHeight: 350 , maxWidth: 1400 }}>
                     <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
                                 <TableCell align="center" colSpan={2}>
-                                    <h1>Engine Specifications</h1>
+                                    <h2>Engine Specifications</h2>
                                 </TableCell>
                             </TableRow>
                         </TableHead>
