@@ -38,12 +38,12 @@ function BrowseVehicle()
     const fetchURLSort = "http://localhost:8080/api/vehicles"
 
     useEffect(() => {
-        BrowseVehicle.handleSort();
+        BrowseVehicle.handleSort("");
     }, []);
 
-    BrowseVehicle.handleSort = () =>{
-        var sortURL = fetchURLSort.concat(sortParam);
-        console.log(sortParam);
+    BrowseVehicle.handleSort = (val) =>{
+        var sortURL = fetchURLSort.concat(val);
+        console.log(val);
         console.log(sortURL);
         fetch(sortURL)
             .then((res) => res.json())
@@ -169,7 +169,7 @@ function BrowseVehicle()
                                 id="demo-simple-select-filled"
                                 value={sortParam}
                                 label="Sort by:"
-                                onChange={(e) => setSortParam(e.target.value)}
+                                onChange={(e) => {setSortParam(e.target.value); BrowseVehicle.handleSort(e.target.value)}}
                             >
                                 <MenuItem value={""}>None</MenuItem>
                                 <MenuItem value={"/sort/dealer-asc"}>Dealer Price: Low to High</MenuItem>
@@ -195,7 +195,7 @@ function BrowseVehicle()
 
                             </Select>
                         </FormControl>
-                        <Button variant="contained" className="button" onClick={BrowseVehicle.handleSort}>Sort</Button>
+                        {/*<Button variant="contained" className="button" onClick={BrowseVehicle.handleSort}>Sort</Button>*/}
 
 
                     </div>
