@@ -19,6 +19,7 @@ Adds onto SDE-merged-US-15, refer that for functionality.
 #### Remove by status is now working. 
 #### WIP: clean up outputs and UI
 ![image1](us-16.png)
+![image1](us-16a.png)
 ## API endpts:
 #### http://localhost:8080/api/vehicle/getinfo/{vin} returns info about ONE vehicle
 #### http://localhost:8080/api/vehicle/addvehicle adds from front end input
