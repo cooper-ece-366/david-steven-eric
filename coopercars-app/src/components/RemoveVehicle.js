@@ -112,6 +112,7 @@ function RemoveVehicle()
     return (
         <div className="App">
             <header className="App-header">
+                <br></br>
                 <div>
                     <h1>Upload Spreadsheet to remove from inventory (VIN)</h1>
                     <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
@@ -152,7 +153,7 @@ function RemoveVehicle()
                     </Select>
                 </FormControl>
                 <Button variant="contained" className="button" onClick={RemoveVehicle.removeVehicleStatus()}>Remove Vehicle by Status</Button>
-
+                <br></br>
                 <br></br>
             </header>
         </div>

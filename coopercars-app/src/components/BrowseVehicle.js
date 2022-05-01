@@ -227,29 +227,25 @@ function BrowseVehicle()
                                         </Link>
                                         <ol className="card-list">
                                             <li>
-                                                Make:{" "}
-                                                <span>{item.make}</span>
+                                                <h6><span>{item.year + " " + item.make +  " " +item.model}</span></h6>
                                             </li>
                                             <li>
-                                                Model: <span>{item.model}</span>
+                                                <b>Dealer Price:</b> $<span>{item.dealerPrice}</span>
                                             </li>
                                             <li>
-                                                Year: <span>{item.year}</span>
+                                                <b>Sale Price:</b> $<span>{item.salePrice}</span>
                                             </li>
                                             <li>
-                                                Dealer Price: $<span>{item.dealerPrice}</span>
+                                                <b>Mileage:</b> <span>{item.mileage}</span>
                                             </li>
                                             <li>
-                                                Sale Price: $<span>{item.salePrice}</span>
+                                                <b>Profit:</b> $<span>{item.profit}</span>
                                             </li>
                                             <li>
-                                                Profit: $<span>{item.profit}</span>
+                                                <b>Date Entered:</b> <span>{item.enteredDate}</span>
                                             </li>
                                             <li>
-                                                Date Entered: <span>{item.enteredDate}</span>
-                                            </li>
-                                            <li>
-                                                Status: <span>{item.status}</span>
+                                                <b>Status:</b> <span>{item.status}</span>
                                             </li>
                                         </ol>
                                     </div>

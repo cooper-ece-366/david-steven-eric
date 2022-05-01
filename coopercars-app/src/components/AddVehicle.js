@@ -202,6 +202,7 @@ function AddVehicle()
     return (
         <div className="App">
             <header className="App-header">
+                <br></br>
                 <div>
                     <h1>Upload Spreadsheet (VIN, Dealer Price, Sale Price, Mileage, Status)</h1>
                     <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
