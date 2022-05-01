@@ -229,10 +229,10 @@ function BrowseVehicle()
                                                 <b>Sale Price:</b> $<span>{item.salePrice}</span>
                                             </li>
                                             <li>
-                                                <b>Mileage:</b> <span>{item.mileage}</span>
+                                                <b>Profit:</b> $<span>{item.profit}</span>
                                             </li>
                                             <li>
-                                                <b>Profit:</b> $<span>{item.profit}</span>
+                                                <b>Mileage:</b> <span>{item.mileage}</span>
                                             </li>
                                             <li>
                                                 <b>Date Entered:</b> <span>{item.enteredDate}</span>
