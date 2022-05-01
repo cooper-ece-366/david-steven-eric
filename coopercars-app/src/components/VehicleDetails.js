@@ -177,7 +177,7 @@ function VehicleDetails()
                 console.log("Cannot connect to API endpoint: %s", vehicleApiUrl);
             });
         console.log("Refreshed %s VIN.", VIN);
-    }, []);
+    }, [VIN]);
 
 
     function createData(
@@ -314,7 +314,7 @@ function VehicleDetails()
                     </Table>
                 </TableContainer>
                 <br></br>
-                <TableContainer component={Paper} style={{ maxHeight: 350 , maxWidth: 1400 }  } >
+                <TableContainer component={Paper} style={{ maxHeight: 375 , maxWidth: 1400 }  } >
                     <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
@@ -339,7 +339,7 @@ function VehicleDetails()
                     </Table>
                 </TableContainer>
                 <br></br>
-                <TableContainer component={Paper} style={{ maxHeight: 350 , maxWidth: 1400 }}>
+                <TableContainer component={Paper} style={{ maxHeight: 375 , maxWidth: 1400 }}>
                     <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
@@ -365,7 +365,7 @@ function VehicleDetails()
                 </TableContainer>
 
                 <br></br>
-                <TableContainer component={Paper} style={{ maxHeight: 350 , maxWidth: 1400 }}>
+                <TableContainer component={Paper} style={{ maxHeight: 375 , maxWidth: 1400 }}>
                     <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>

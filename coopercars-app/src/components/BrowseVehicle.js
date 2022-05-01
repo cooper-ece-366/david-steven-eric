@@ -27,11 +27,6 @@ function BrowseVehicle()
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
     const [q, setQ] = useState("");
-    //     set search parameters
-    //     we only what to search countries by capital and name
-    //     this list can be longer if you want
-    //     you can search countries even by their population
-    // just add it to this array
     const [searchParam] = useState(["make", "model"]);
     const [filterParam, setFilterParam] = useState(["All"]);
     const [sortParam, setSortParam] = useState("");
@@ -208,8 +203,6 @@ function BrowseVehicle()
 
                             </Select>
                         </FormControl>
-                        {/*<Button variant="contained" className="button" onClick={BrowseVehicle.handleSort}>Sort</Button>*/}
-
 
                     </div>
                     <ul className="card-grid">

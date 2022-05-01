@@ -155,6 +155,8 @@ function RemoveVehicle()
                 <Button variant="contained" className="button" onClick={RemoveVehicle.removeVehicleStatus()}>Remove Vehicle by Status</Button>
                 <br></br>
                 <br></br>
+                <br></br>
+                <br></br>
             </header>
         </div>
     );
