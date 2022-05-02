@@ -196,6 +196,8 @@ function BrowseVehicle()
                                 <MenuItem value={"/sort/make-desc"}>Make: Z to A</MenuItem>
                                 <MenuItem value={"/sort/model-asc"}>Model: A to Z</MenuItem>
                                 <MenuItem value={"/sort/model-desc"}>Model: Z to A</MenuItem>
+                                <MenuItem value={"/sort/displacementcc-asc"}>Displacement CC: Low to High</MenuItem>
+                                <MenuItem value={"/sort/displacementcc-desc"}>Displacement CC: High to low</MenuItem>
                                 <MenuItem value={"/sort/enginepower-asc"}>Engine Power (kW): Low to High</MenuItem>
                                 <MenuItem value={"/sort/enginepower-desc"}>Engine Power (kW): High to low</MenuItem>
                                 <MenuItem value={"/sort/horsepower-asc"}>Horsepower: Low to High</MenuItem>

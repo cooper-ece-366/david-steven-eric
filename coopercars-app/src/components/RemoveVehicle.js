@@ -95,7 +95,7 @@ function RemoveVehicle()
         fetch(vehicleApiUrl,requestOptions)
             .then((response) =>
             {
-                console.log("Succesfully deleted sold");
+                console.log("Successfully deleted sold");
                 setInfo("Vehicles marked as sold removed.")
             })
         // .catch(err => {
