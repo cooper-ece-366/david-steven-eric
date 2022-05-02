@@ -28,14 +28,14 @@ function BrowseVehicle()
     const [items, setItems] = useState([]);
     const [q, setQ] = useState("");
     //     set search parameters
-    //     we only what to search countries by capital and name
-    //     this list can be longer if you want
-    //     you can search countries even by their population
-    // just add it to this array
     const [searchParam] = useState(["make", "model"]);
     const [filterParam, setFilterParam] = useState(["All"]);
     const [sortParam, setSortParam] = useState("");
     const [filtParam, setFiltParam] = useState("");
+
+    const[search_query, setSearchQuery] = useState("");
+    const[filterBackupCam, setFilterBackupCam] = useState("");
+    const[filterAdaptiveCruiseControl, setFilterAdaptiveCruiseControl] = useState("");
     const fetchURLSort = "http://localhost:8080/api/vehicles"
 
     useEffect(() => {
@@ -68,6 +68,35 @@ function BrowseVehicle()
     }
 
 
+    function adaptiveCruiseControlFilter(items){
+        if(filterAdaptiveCruiseControl==""){
+            return items;
+        }
+        return items.filter((item) => {
+            if(item.adaptiveCruiseControl==filterAdaptiveCruiseControl){
+                return item;
+            }
+        });
+    }
+    function backupCamFilter(items){
+        if(filterBackupCam==""){
+            return adaptiveCruiseControlFilter(items);
+        }
+        return adaptiveCruiseControlFilter(items.filter((item) => {
+            if(item.backupCam==filterBackupCam){
+                return item;
+                {/*
+                return searchParam.some((newItem) => {
+                    return (
+                        item[newItem]
+                            .toString()
+                            .toLowerCase()
+                            .indexOf(q.toLowerCase()) > -1
+                    );
+                });*/}
+            }
+        }));
+    }
     function search(items) {
         return items.filter((item) => {
 
@@ -119,6 +148,34 @@ function BrowseVehicle()
                             />
                             <span className="sr-only">Search for vehicle here</span>
                         </label>
+                        <div className="select">
+                            <select
+                                onChange={(e) => {
+                                    setFilterAdaptiveCruiseControl(e.target.value);
+                                }}
+                                className="custom-select"
+                                aria-label="Filter Vehicles by Manufacturer"
+                            >
+                                <option value="">Filter by Adaptive Cruise Control</option>
+                                <option value="Standard">Standard</option>
+                                <option value="Optional">Optional</option>
+                            </select>
+                            <span className="focus"></span>
+                        </div>
+                        <div className="select">
+                            <select
+                                onChange={(e) => {
+                                    setFilterBackupCam(e.target.value);
+                                }}
+                                className="custom-select"
+                                aria-label="Filter Vehicles by Manufacturer"
+                            >
+                                <option value="">Filter by Backup Cam</option>
+                                <option value="Standard">Standard</option>
+                                <option value="Optional">Optional</option>
+                            </select>
+                            <span className="focus"></span>
+                        </div>
                         <div className="select">
                             <select
                                 /*
@@ -252,7 +309,7 @@ function BrowseVehicle()
                     </div>
                     <ul className="card-grid">
 
-                        {search(items).map((item) => {
+                        {search(backupCamFilter(items)).map((item) => {
                             var myLink = item.vin
                             return (
                                 <li>
