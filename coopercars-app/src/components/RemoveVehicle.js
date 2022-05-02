@@ -14,7 +14,7 @@ function RemoveVehicle()
 
     const [file, setFile] = useState(null);
     const [vin, setVin] = useState("");
-    const [status,setStatus] = useState("Sold");
+    const [status,setStatus] = useState("");
     const [info, setInfo] = useState("");
 
     useEffect(() => {
