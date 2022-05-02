@@ -46,7 +46,9 @@ const NavBar = (props) => {
                     {authenticated == false ?
                                                          <Tooltip>
                                                              <Button to="/login" component={Link} color="inherit" align = "right" sx={{ p: 0 }}>Login</Button>
-                                                         </Tooltip> : <Button to="/login" component={Link} color="inherit" align = "right" sx={{ p: 0 }}>Logout</Button>}
+                                                         </Tooltip> :  <Button onClick={props.onLogout}>Logout</Button>}
+                    {authenticated == true ?  <Button to="/profile" component={Link} color="inherit">Profile</Button> : <p></p>}
+
                 </Toolbar>
                 </Container>
             </AppBar>

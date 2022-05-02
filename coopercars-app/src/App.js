@@ -21,6 +21,7 @@ import Login, {Register} from "./components/Login";
 import { getCurrentUser } from './util/APIUtils';
 import Alert from "react-s-alert";
 import {ACCESS_TOKEN} from "./constants/";
+import Profile from "./components/Profile";
 
 function getRandomColor() {
   let colorValues = ["red", "blue", "green"];
@@ -29,9 +30,11 @@ function getRandomColor() {
 
 function App() {
 
+    const [currentUser, setCurrentUser] = useState([])
     const [authenticated, setAuthenticated] = useState(false);
     useEffect(() => {
         getCurrentUser().then(res => {
+        setCurrentUser(res);
         console.log(res);
         setAuthenticated(true);
         }).catch(error => console.log(error));
@@ -39,10 +42,7 @@ function App() {
 
     function handleLogout() {
         localStorage.removeItem(ACCESS_TOKEN);
-        this.setState({
-          authenticated: false,
-          currentUser: null
-        });
+        setAuthenticated(false);
         Alert.success("You're safely logged out!");
       }
 
@@ -62,6 +62,7 @@ function App() {
                 <Route path='/removeVehicle' element = { <RemoveVehicle/>}/>
                 <Route path='/login' element= {<Login/>}/>
                 <Route path='/register' element= {<Register/>}/>
+                <Route path='/profile' element = {<Profile currentUser={currentUser}/>}/>
             </Routes>
         </Router>
 
