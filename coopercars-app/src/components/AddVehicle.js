@@ -210,7 +210,7 @@ function AddVehicle()
                 </div>
                 <br></br>
                 <p>
-                    Or manually enter VIN, dealer price, sale price of vehicle to add to inventory:
+                    Or, manually enter details of the vehicle to add to inventory:
                 </p>
                 <TextField
                     id="filled-basic"

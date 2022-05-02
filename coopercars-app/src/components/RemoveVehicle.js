@@ -14,7 +14,7 @@ function RemoveVehicle()
 
     const [file, setFile] = useState(null);
     const [vin, setVin] = useState("");
-    const [status,setStatus] = useState("");
+    const [status,setStatus] = useState("Sold");
     const [info, setInfo] = useState("");
 
     useEffect(() => {
@@ -141,15 +141,16 @@ function RemoveVehicle()
                     <InputLabel id="demo-simple-select-filled-label">Status</InputLabel>
                     <Select
                         style={{background: "rgb(232, 241, 250)"}}
+                        displayEmpty
                         labelId="demo-simple-select-filled-label"
                         id="demo-simple-select-filled"
                         value={status}
                         label="Status"
                         onChange={(e) => setStatus(e.target.value)}
                     >
+                        <MenuItem value={"Sold"}>Sold</MenuItem>
                         <MenuItem value={"For sale"}>For sale</MenuItem>
                         <MenuItem value={"In-transit"}>In-transit</MenuItem>
-                        <MenuItem value={"Sold"}>Sold</MenuItem>
                     </Select>
                 </FormControl>
                 <Button variant="contained" className="button" onClick={RemoveVehicle.removeVehicleStatus()}>Remove Vehicle by Status</Button>
