@@ -259,7 +259,6 @@ public class VehicleAPI
         String links = null;
         try {
             String url = "https://www.google.com/search?tbm=isch&q="+str+"+exterior+image+cars.com";
-            System.out.println(url);
             Document doc = Jsoup.connect(url).get();
             Elements el = doc.getElementsByAttribute("data-src");
             if(!el.isEmpty()) {
@@ -268,8 +267,6 @@ public class VehicleAPI
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
         return links;
     }
-
 }

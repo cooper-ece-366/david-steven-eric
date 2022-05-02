@@ -27,9 +27,15 @@ function BrowseVehicle()
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
     const [q, setQ] = useState("");
+
     const [searchParam] = useState(["make", "model"]);
     const [filterParam, setFilterParam] = useState(["All"]);
     const [sortParam, setSortParam] = useState("");
+    const [filtParam, setFiltParam] = useState("");
+
+    const[search_query, setSearchQuery] = useState("");
+    const[filterBackupCam, setFilterBackupCam] = useState("");
+    const[filterAdaptiveCruiseControl, setFilterAdaptiveCruiseControl] = useState("");
     const fetchURLSort = "http://localhost:8080/api/vehicles"
 
     useEffect(() => {
@@ -61,6 +67,36 @@ function BrowseVehicle()
                 console.log("Refreshed");
     }
 
+
+    function adaptiveCruiseControlFilter(items){
+        if(filterAdaptiveCruiseControl==""){
+            return items;
+        }
+        return items.filter((item) => {
+            if(item.adaptiveCruiseControl==filterAdaptiveCruiseControl){
+                return item;
+            }
+        });
+    }
+    function backupCamFilter(items){
+        if(filterBackupCam==""){
+            return adaptiveCruiseControlFilter(items);
+        }
+        return adaptiveCruiseControlFilter(items.filter((item) => {
+            if(item.backupCam==filterBackupCam){
+                return item;
+                {/*
+                return searchParam.some((newItem) => {
+                    return (
+                        item[newItem]
+                            .toString()
+                            .toLowerCase()
+                            .indexOf(q.toLowerCase()) > -1
+                    );
+                });*/}
+            }
+        }));
+    }
     function search(items) {
         return items.filter((item) => {
 
@@ -114,6 +150,34 @@ function BrowseVehicle()
                         </label>
                         <div className="select">
                             <select
+                                onChange={(e) => {
+                                    setFilterAdaptiveCruiseControl(e.target.value);
+                                }}
+                                className="custom-select"
+                                aria-label="Filter Vehicles by Manufacturer"
+                            >
+                                <option value="">Filter by Adaptive Cruise Control</option>
+                                <option value="Standard">Standard</option>
+                                <option value="Optional">Optional</option>
+                            </select>
+                            <span className="focus"></span>
+                        </div>
+                        <div className="select">
+                            <select
+                                onChange={(e) => {
+                                    setFilterBackupCam(e.target.value);
+                                }}
+                                className="custom-select"
+                                aria-label="Filter Vehicles by Manufacturer"
+                            >
+                                <option value="">Filter by Backup Cam</option>
+                                <option value="Standard">Standard</option>
+                                <option value="Optional">Optional</option>
+                            </select>
+                            <span className="focus"></span>
+                        </div>
+                        <div className="select">
+                            <select
                                 /*
     //                         here we create a basic select input
     //                     we set the value to the selected value
@@ -152,7 +216,7 @@ function BrowseVehicle()
                                     setFilterParam(e.target.value);
                                 }}
                                 className="custom-select"
-                                aria-label="Filter Vehicles by Manufacturer"
+                                aria-label="Filter Vehicles by Year"
                             >
                                 <option value="All">Filter By Year</option>
                                 <option value="2010">2010</option>
@@ -202,14 +266,18 @@ function BrowseVehicle()
                                 <MenuItem value={"/sort/enginepower-desc"}>Engine Power (kW): High to low</MenuItem>
                                 <MenuItem value={"/sort/horsepower-asc"}>Horsepower: Low to High</MenuItem>
                                 <MenuItem value={"/sort/horsepower-desc"}>Horsepower: High to low</MenuItem>
-
+                                <MenuItem value={"/sort/hasBackupCam"}>Has Backup Cam</MenuItem>
+                                <MenuItem value={"/sort/hasAdaptiveCruiseControl"}>Has Adaptive Cruise Control</MenuItem>
+                                <MenuItem value={"/sort/hasAdaptDrivingBeam"}>Has Adaptive Driving Beam</MenuItem>
+                                <MenuItem value={"/sort/hasRearAutoEmergBraking"}>Has Rear Auto Emergency Braking</MenuItem>
                             </Select>
                         </FormControl>
+
 
                     </div>
                     <ul className="card-grid">
 
-                        {search(items).map((item) => {
+                        {search(backupCamFilter(items)).map((item) => {
                             var myLink = item.vin
                             return (
                                 <li>
