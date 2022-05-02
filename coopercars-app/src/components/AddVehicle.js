@@ -202,6 +202,7 @@ function AddVehicle()
     return (
         <div className="App">
             <header className="App-header">
+                <br></br>
                 <div>
                     <h1>Upload Spreadsheet (VIN, Dealer Price, Sale Price, Mileage, Status)</h1>
                     <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
@@ -209,7 +210,7 @@ function AddVehicle()
                 </div>
                 <br></br>
                 <p>
-                    Or manually enter VIN, dealer price, sale price of vehicle to add to inventory:
+                    Or, manually enter details of the vehicle to add to inventory:
                 </p>
                 <TextField
                     id="filled-basic"

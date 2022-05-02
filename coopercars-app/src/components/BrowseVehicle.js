@@ -27,11 +27,6 @@ function BrowseVehicle()
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
     const [q, setQ] = useState("");
-    //     set search parameters
-    //     we only what to search countries by capital and name
-    //     this list can be longer if you want
-    //     you can search countries even by their population
-    // just add it to this array
     const [searchParam] = useState(["make", "model"]);
     const [filterParam, setFilterParam] = useState(["All"]);
     const [sortParam, setSortParam] = useState("");
@@ -208,8 +203,6 @@ function BrowseVehicle()
 
                             </Select>
                         </FormControl>
-                        {/*<Button variant="contained" className="button" onClick={BrowseVehicle.handleSort}>Sort</Button>*/}
-
 
                     </div>
                     <ul className="card-grid">
@@ -227,29 +220,25 @@ function BrowseVehicle()
                                         </Link>
                                         <ol className="card-list">
                                             <li>
-                                                Make:{" "}
-                                                <span>{item.make}</span>
+                                                <h6><span>{item.year + " " + item.make +  " " +item.model}</span></h6>
                                             </li>
                                             <li>
-                                                Model: <span>{item.model}</span>
+                                                <b>Dealer Price:</b> $<span>{item.dealerPrice}</span>
                                             </li>
                                             <li>
-                                                Year: <span>{item.year}</span>
+                                                <b>Sale Price:</b> $<span>{item.salePrice}</span>
                                             </li>
                                             <li>
-                                                Dealer Price: $<span>{item.dealerPrice}</span>
+                                                <b>Profit:</b> $<span>{item.profit}</span>
                                             </li>
                                             <li>
-                                                Sale Price: $<span>{item.salePrice}</span>
+                                                <b>Mileage:</b> <span>{item.mileage}</span>
                                             </li>
                                             <li>
-                                                Profit: $<span>{item.profit}</span>
+                                                <b>Date Entered:</b> <span>{item.enteredDate}</span>
                                             </li>
                                             <li>
-                                                Date Entered: <span>{item.enteredDate}</span>
-                                            </li>
-                                            <li>
-                                                Status: <span>{item.status}</span>
+                                                <b>Status:</b> <span>{item.status}</span>
                                             </li>
                                         </ol>
                                     </div>
