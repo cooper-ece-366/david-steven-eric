@@ -1,6 +1,7 @@
 package edu.cooper.ece366.project.coopercars.server.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -8,6 +9,8 @@ import java.util.Date;
 public class Vehicle
 {
     @Id
+    @Column(length=17)
+    @Size(max=17)
     private String VIN;
     private double dealerPrice;
     private double salePrice;

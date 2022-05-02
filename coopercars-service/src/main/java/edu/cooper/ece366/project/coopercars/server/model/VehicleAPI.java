@@ -25,7 +25,7 @@ public class VehicleAPI
     }
 
     public VehicleAPI(String myVIN, String myStatus, String dealerPrice, String salePrice, String mileage) throws IOException {
-        String theVIN = myVIN;
+        String theVIN = myVIN.trim();
         String theStatus = myStatus;
         String VIN;
         String imgURL;
