@@ -11,6 +11,7 @@ import {
   Link,
   Navigate,
   Routes,
+  Redirect,
 } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import BrowseVehicle from "./components/BrowseVehicle";
@@ -44,6 +45,7 @@ function App() {
         localStorage.removeItem(ACCESS_TOKEN);
         setAuthenticated(false);
         Alert.success("You're safely logged out!");
+        <Navigate to ="/asdf"/>
       }
 
   return (

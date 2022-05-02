@@ -40,9 +40,10 @@ const NavBar = (props) => {
                     <Button to="/" component={Link} color="inherit">
                         <img src={logo} className="App-logo" alt="logo" sx={{ p: 0 }} width = "100" height = "100"/>
                     </Button>
-                    <Button to="/browse" component={Link} color="inherit">Browse Vehicles</Button>
-                    <Button to="/addVehicle" component={Link} color="inherit">Add Vehicle</Button>
-                    <Button to="/removeVehicle" component={Link} color="inherit">Remove Vehicle</Button>
+                    {authenticated == true ? <Button to="/browse" component={Link} color="inherit">Browse Vehicles</Button> : <p></p>}
+                    {authenticated == true ?                     <Button to="/addVehicle" component={Link} color="inherit">Add Vehicle</Button>
+ : <p></p>}
+                    {authenticated == true ? <Button to="/removeVehicle" component={Link} color="inherit">Remove Vehicle</Button> : <p></p>}
                     {authenticated == false ?
                                                          <Tooltip>
                                                              <Button to="/login" component={Link} color="inherit" align = "right" sx={{ p: 0 }}>Login</Button>
