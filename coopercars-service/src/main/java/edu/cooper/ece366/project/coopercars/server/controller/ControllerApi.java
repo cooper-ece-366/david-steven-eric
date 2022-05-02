@@ -182,4 +182,25 @@ public class ControllerApi
         return vehicleRepository.findAll(Sort.by(Sort.Direction.DESC, "model"));
     }
 
+    @GetMapping(path = "/vehicles/sort/hasBackupCam", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> hasBackupCam() {
+        return vehicleRepository.findByBackupCam("Standard");
+    }
+
+    @GetMapping(path = "/vehicles/sort/hasParkingAssist", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> hasParkingAssist() {
+        return vehicleRepository.findByParkingAssist("Standard");
+    }
+    @GetMapping(path = "/vehicles/sort/hasAdaptiveCruiseControl", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> hasAdaptiveCruiseControl() {
+        return vehicleRepository.findByAdaptiveCruiseControl("Standard");
+    }
+    @GetMapping(path = "/vehicles/sort/hasAdaptDrivingBeam", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> hasAdaptDrivingBeam() {
+        return vehicleRepository.findByAdaptDrivingBeam("Standard");
+    }
+    @GetMapping(path = "/vehicles/sort/hasRearAutoEmergBraking", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> hasRearAutoEmergBraking() {
+        return vehicleRepository.findByRearAutoEmergBraking("Standard");
+    }
 }

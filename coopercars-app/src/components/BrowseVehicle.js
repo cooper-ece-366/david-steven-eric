@@ -35,6 +35,7 @@ function BrowseVehicle()
     const [searchParam] = useState(["make", "model"]);
     const [filterParam, setFilterParam] = useState(["All"]);
     const [sortParam, setSortParam] = useState("");
+    const [filtParam, setFiltParam] = useState("");
     const fetchURLSort = "http://localhost:8080/api/vehicles"
 
     useEffect(() => {
@@ -65,6 +66,7 @@ function BrowseVehicle()
             });
                 console.log("Refreshed");
     }
+
 
     function search(items) {
         return items.filter((item) => {
@@ -157,7 +159,7 @@ function BrowseVehicle()
                                     setFilterParam(e.target.value);
                                 }}
                                 className="custom-select"
-                                aria-label="Filter Vehicles by Manufacturer"
+                                aria-label="Filter Vehicles by Year"
                             >
                                 <option value="All">Filter By Year</option>
                                 <option value="2010">2010</option>
@@ -205,11 +207,47 @@ function BrowseVehicle()
                                 <MenuItem value={"/sort/enginepower-desc"}>Engine Power (kW): High to low</MenuItem>
                                 <MenuItem value={"/sort/horsepower-asc"}>Horsepower: Low to High</MenuItem>
                                 <MenuItem value={"/sort/horsepower-desc"}>Horsepower: High to low</MenuItem>
-
+                                <MenuItem value={"/sort/hasBackupCam"}>Has Backup Cam</MenuItem>
+                                <MenuItem value={"/sort/hasAdaptiveCruiseControl"}>Has Adaptive Cruise Control</MenuItem>
+                                <MenuItem value={"/sort/hasAdaptDrivingBeam"}>Has Adaptive Driving Beam</MenuItem>
+                                <MenuItem value={"/sort/hasRearAutoEmergBraking"}>Has Rear Auto Emergency Braking</MenuItem>
                             </Select>
                         </FormControl>
                         {/*<Button variant="contained" className="button" onClick={BrowseVehicle.handleSort}>Sort</Button>*/}
-
+                        {/*
+                        <FormControl variant="filled" sx={{ m: 1, minWidth: 500 }}>
+                            <InputLabel id="demo-simple-select-filled-label">Filter by:</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-filled-label"
+                                id="demo-simple-select-filled"
+                                value={filtParam}
+                                label="Filt by:"
+                                onChange={(e) => {setFiltParam()(e.target.value); BrowseVehicle.handleSort(e.target.value)}}
+                            >
+                                <MenuItem value={""}>None</MenuItem>
+                                <MenuItem value={"/sort/dealer-asc"}>Dealer Price: Low to High</MenuItem>
+                                <MenuItem value={"/sort/dealer-desc"}>Dealer Price: High to low</MenuItem>
+                                <MenuItem value={"/sort/sale-asc"}>Sale Price: Low to High</MenuItem>
+                                <MenuItem value={"/sort/sale-desc"}>Sale Price: High to low</MenuItem>
+                                <MenuItem value={"/sort/profit-asc"}>Profit: Low to High</MenuItem>
+                                <MenuItem value={"/sort/profit-desc"}>Profit: High to low</MenuItem>
+                                <MenuItem value={"/sort/date-asc"}>Date Entered: Low to High</MenuItem>
+                                <MenuItem value={"/sort/date-desc"}>Date Entered: High to low</MenuItem>
+                                <MenuItem value={"/sort/mileage-asc"}>Mileage: Low to High</MenuItem>
+                                <MenuItem value={"/sort/mileage-desc"}>Mileage: High to low</MenuItem>
+                                <MenuItem value={"/sort/year-asc"}>Model Year: Low to High</MenuItem>
+                                <MenuItem value={"/sort/year-desc"}>Model Year: High to low</MenuItem>
+                                <MenuItem value={"/sort/make-asc"}>Make: A to Z</MenuItem>
+                                <MenuItem value={"/sort/make-desc"}>Make: Z to A</MenuItem>
+                                <MenuItem value={"/sort/model-asc"}>Model: A to Z</MenuItem>
+                                <MenuItem value={"/sort/model-desc"}>Model: Z to A</MenuItem>
+                                <MenuItem value={"/sort/enginepower-asc"}>Engine Power (kW): Low to High</MenuItem>
+                                <MenuItem value={"/sort/enginepower-desc"}>Engine Power (kW): High to low</MenuItem>
+                                <MenuItem value={"/sort/horsepower-asc"}>Horsepower: Low to High</MenuItem>
+                                <MenuItem value={"/sort/horsepower-desc"}>Horsepower: High to low</MenuItem>
+                                <MenuItem value={"/sort/hasBackupCam"}>Has Backup Cam</MenuItem>
+                            </Select>
+                        </FormControl>*/}
 
                     </div>
                     <ul className="card-grid">
