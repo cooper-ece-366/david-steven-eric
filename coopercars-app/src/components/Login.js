@@ -50,14 +50,6 @@ export default function Login(){
 
     return(
         <div>
-        <div className="social-login">
-                        <a className="btn btn-block social-btn google" href={GOOGLE_AUTH_URL}>
-                            <img width="100" height="100" src={googleLogo} alt="Google" /> Log in with Google</a>
-                        <a className="btn btn-block social-btn facebook" href={FACEBOOK_AUTH_URL}>
-                            <img width="100" height="100" src={fbLogo} alt="Facebook" /> Log in with Facebook</a>
-                        <a className="btn btn-block social-btn github" href={GITHUB_AUTH_URL}>
-                            <img width="50" height="50" src={githubLogo} alt="Github" /> Log in with Github</a>
-                    </div>
             <h3>Sign In</h3>
             <div className="form-group">
                 <label>Email address</label>
@@ -125,7 +117,6 @@ export function Register () {
 
     return(
         <div>
-        <NavBar/>
             <h3>Sign Up</h3>
             <div className="form-group">
                 <label>First Name</label>
