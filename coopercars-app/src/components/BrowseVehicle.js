@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import React, {Component} from "react";
 import ReactDOM from 'react-dom';
-
+//import { components } from "react-select";
 //import useInterval from './useInterval';
 import coopercars1_logo from '../CooperCars-logos.jpeg';
 import coopercars2_logo from '../CooperCars-logos_black.png';
@@ -32,10 +32,18 @@ function BrowseVehicle()
     const [filterParam, setFilterParam] = useState(["All"]);
     const [sortParam, setSortParam] = useState("");
     const [filtParam, setFiltParam] = useState("");
+    const [isChecked1, setIsChecked1] = useState(false);
+    const [isChecked2, setIsChecked2] = useState(false);
+    const [isChecked3, setIsChecked3] = useState(false);
+    const [isChecked4, setIsChecked4] = useState(false);
+    const [isChecked5, setIsChecked5] = useState(false);
 
     const[search_query, setSearchQuery] = useState("");
     const[filterBackupCam, setFilterBackupCam] = useState("");
     const[filterAdaptiveCruiseControl, setFilterAdaptiveCruiseControl] = useState("");
+    const[filterLKA, setFilterLKA] = useState("");
+    const[filterCrashBrake, setFilterCrashBrake] = useState("");
+    const[filterParkAssist, setFilterParkAssist] = useState("");
     const fetchURLSort = "http://localhost:8080/api/vehicles"
 
     useEffect(() => {
@@ -67,16 +75,45 @@ function BrowseVehicle()
                 console.log("Refreshed");
     }
 
-
-    function adaptiveCruiseControlFilter(items){
-        if(filterAdaptiveCruiseControl==""){
+    function parkAssistFilter(items){
+        if(filterParkAssist==""){
             return items;
         }
         return items.filter((item) => {
-            if(item.adaptiveCruiseControl==filterAdaptiveCruiseControl){
+            if(item.parkingAssist==filterParkAssist){
                 return item;
             }
         });
+    }
+    function crashBrakeFilter(items){
+        if(filterCrashBrake==""){
+            return parkAssistFilter(items);
+        }
+        return parkAssistFilter(items.filter((item) => {
+            if(item.crashImmBraking==filterCrashBrake){
+                return item;
+            }
+        }));
+    }
+    function laneKeepAssistFilter(items){
+        if(filterLKA==""){
+            return crashBrakeFilter(items);
+        }
+        return crashBrakeFilter(items.filter((item) => {
+            if(item.laneKeepAssist==filterLKA){
+                return item;
+            }
+        }));
+    }
+    function adaptiveCruiseControlFilter(items){
+        if(filterAdaptiveCruiseControl==""){
+            return laneKeepAssistFilter(items);
+        }
+        return laneKeepAssistFilter(items.filter((item) => {
+            if(item.adaptiveCruiseControl==filterAdaptiveCruiseControl){
+                return item;
+            }
+        }));
     }
     function backupCamFilter(items){
         if(filterBackupCam==""){
@@ -148,6 +185,123 @@ function BrowseVehicle()
                             />
                             <span className="sr-only">Search for vehicle here</span>
                         </label>
+
+                        <div className="topping">
+                            <input
+                                type="checkbox"
+                                id="topping"
+                                name="topping"
+                                value="Paneer"
+                                checked={isChecked2}
+                                onChange={(e) => {
+                                    setIsChecked2(!isChecked2);
+                                    if(!isChecked2){
+                                        console.log("2 Checked");
+                                        setFilterAdaptiveCruiseControl("Standard");
+                                    }
+                                    else{
+                                        console.log("2 Unchecked");
+                                        setFilterAdaptiveCruiseControl("");
+                                    }
+                                }}
+                            />
+                            <label>
+                                Adaptive Cruise Control Standard
+                            </label>
+                        </div>
+                        <div className="topping">
+                            <input
+                                type="checkbox"
+                                id="topping"
+                                name="topping"
+                                value="Paneer"
+                                checked={isChecked1}
+                                onChange={(e) => {
+                                    setIsChecked1(!isChecked1);
+                                    if(!isChecked1){
+                                        console.log("1 Checked");
+                                        setFilterBackupCam("Standard");
+                                    }
+                                    else{
+                                        console.log("1 Unchecked");
+                                        setFilterBackupCam("");
+                                    }
+                                }}
+                            />
+                            <label>
+                                Backup Cam Standard
+                            </label>
+                        </div>
+                        <div className="topping">
+                            <input
+                                type="checkbox"
+                                id="topping"
+                                name="topping"
+                                value="Paneer"
+                                checked={isChecked3}
+                                onChange={(e) => {
+                                    setIsChecked3(!isChecked3);
+                                    if(!isChecked3){
+                                        console.log("3 Checked");
+                                        setFilterLKA("Standard");
+                                    }
+                                    else{
+                                        console.log("3 Unchecked");
+                                        setFilterLKA("");
+                                    }
+                                }}
+                            />
+                            <label>
+                                Lane Keep Assist Standard
+                            </label>
+                        </div>
+                        <div className="topping">
+                            <input
+                                type="checkbox"
+                                id="topping"
+                                name="topping"
+                                value="Paneer"
+                                checked={isChecked4}
+                                onChange={(e) => {
+                                    setIsChecked4(!isChecked4);
+                                    if(!isChecked4){
+                                        console.log("4 Checked");
+                                        setFilterCrashBrake("Standard");
+                                    }
+                                    else{
+                                        console.log("4 Unchecked");
+                                        setFilterCrashBrake("");
+                                    }
+                                }}
+                            />
+                            <label>
+                                Crash Imminent Braking Standard
+                            </label>
+                        </div>
+                        <div className="topping">
+                            <input
+                                type="checkbox"
+                                id="topping"
+                                name="topping"
+                                value="Paneer"
+                                checked={isChecked5}
+                                onChange={(e) => {
+                                    setIsChecked5(!isChecked5);
+                                    if(!isChecked5){
+                                        console.log("5 Checked");
+                                        setFilterParkAssist("Standard");
+                                    }
+                                    else{
+                                        console.log("5 Unchecked");
+                                        setFilterParkAssist("");
+                                    }
+                                }}
+                            />
+                            <label>
+                                Parking Assist Standard
+                            </label>
+                        </div>
+                        {/*
                         <div className="select">
                             <select
                                 onChange={(e) => {
@@ -159,23 +313,11 @@ function BrowseVehicle()
                                 <option value="">Filter by Adaptive Cruise Control</option>
                                 <option value="Standard">Standard</option>
                                 <option value="Optional">Optional</option>
+
                             </select>
                             <span className="focus"></span>
-                        </div>
-                        <div className="select">
-                            <select
-                                onChange={(e) => {
-                                    setFilterBackupCam(e.target.value);
-                                }}
-                                className="custom-select"
-                                aria-label="Filter Vehicles by Manufacturer"
-                            >
-                                <option value="">Filter by Backup Cam</option>
-                                <option value="Standard">Standard</option>
-                                <option value="Optional">Optional</option>
-                            </select>
-                            <span className="focus"></span>
-                        </div>
+                        </div>*/}
+
                         <div className="select">
                             <select
                                 /*
