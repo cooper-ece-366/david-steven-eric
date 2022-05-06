@@ -41,7 +41,7 @@ export default function Login(){
             localStorage.setItem(ACCESS_TOKEN, response.accessToken);
             console.log("ACCESS_TOKEN = " + response.accessToken);
             Alert.success("You're successfully logged in!");
-
+            window.location.reload();
         }).catch(error =>{
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });
@@ -65,7 +65,7 @@ export default function Login(){
                     <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
                 </div>
             </div>
-            <button className="btn btn-primary btn-block" onClick={handleSubmit}>Submit</button>
+            <button className="btn btn-primary btn-block" to='/browse' onClick={handleSubmit}>Submit</button>
             <p className="forgot-password text-right">
                 Forgot <a href="#">password?</a>
             </p>
@@ -113,6 +113,15 @@ export function Register () {
         };
         fetch("http://localhost:8080/auth/signup", requestOptions).then((response) => console.log(response)).then((data) => console.log(data)); //response.json()
 
+        const loginRequest = Object.assign({}, {"email": email, "password": password});
+        login(loginRequest).then(response => {
+            localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+            console.log("ACCESS_TOKEN = " + response.accessToken);
+            Alert.success("You're successfully logged in!");
+            window.location.reload();
+        }).catch(error =>{
+            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+        });
   }
 
     return(
