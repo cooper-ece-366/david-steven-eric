@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import React, {Component} from "react";
 import ReactDOM from 'react-dom';
-//import { components } from "react-select";
+import { default as ReactSelect } from "react-select";
+import { components } from "react-select";
 //import useInterval from './useInterval';
 import coopercars1_logo from '../CooperCars-logos.jpeg';
 import coopercars2_logo from '../CooperCars-logos_black.png';
@@ -19,7 +20,13 @@ import {
 import AddVehicle from "./AddVehicle";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Button from "@material-ui/core/Button";
-
+export const featureOptions = [
+    { value: "backupCam", label: "Backup Cam" },
+    { value: "ACC", label: "Adaptive Cruise Control" },
+    { value: "LKA", label: "Lane Keep Assist" },
+    { value: "crashBrake", label: "Crash Imminent Braking" },
+    { value: "parkingAssist", label: "Parking Assist" },
+];
 
 function BrowseVehicle()
 {
@@ -45,7 +52,85 @@ function BrowseVehicle()
     const[filterCrashBrake, setFilterCrashBrake] = useState("");
     const[filterParkAssist, setFilterParkAssist] = useState("");
     const fetchURLSort = "http://localhost:8080/api/vehicles"
+    //Source: https://medium.com/geekculture/creating-multi-select-dropdown-with-checkbox-in-react-792ff2464ef3
 
+    const Option = (props) => {
+        return (
+            <components.Option{...props}>
+                <div className="filter-query">
+                    <input
+                        //onChange={(e) => {console.log("test");}}
+                        type="checkbox"
+                        id="query1"
+                        checked={props.isSelected}
+                        value={props.value}
+                        onChange={(e) => {
+                            console.log(e.target.value);
+                            console.log(props.isSelected);
+                            switch(e.target.value){
+                                case "backupCam":
+                                    console.log("Option 1");
+                                    if(!props.isSelected){
+                                        console.log("Filter 1 applied");
+                                        setFilterBackupCam("Standard");
+                                    }
+                                    else{
+                                        console.log("Filter 1 deapplied");
+                                        setFilterBackupCam("");
+                                    }
+                                    break;
+                                case "ACC":
+                                    console.log("Option 2");
+                                    if(!props.isSelected){
+                                        console.log("Filter 2 applied");
+                                        setFilterAdaptiveCruiseControl("Standard");
+                                    }
+                                    else{
+                                        console.log("Filter 2 deapplied");
+                                        setFilterAdaptiveCruiseControl("");
+                                    }
+                                    break;
+                                case "LKA":
+                                    console.log("Option 3");
+                                    if(!props.isSelected){
+                                        console.log("Filter 3 applied");
+                                        setFilterLKA("Standard");
+                                    }
+                                    else{
+                                        console.log("Filter 3 deapplied");
+                                        setFilterLKA("");
+                                    }
+                                    break;
+                                case "crashBrake":
+                                    console.log("Option 4");
+                                    if(!props.isSelected){
+                                        console.log("Filter 4 applied");
+                                        setFilterCrashBrake("Standard");
+                                    }
+                                    else{
+                                        console.log("Filter 4 deapplied");
+                                        setFilterCrashBrake("");
+                                    }
+                                    break;
+                                case "parkingAssist":
+                                    console.log("Option 5");
+                                    if(!props.isSelected){
+                                        console.log("Filter 5 applied");
+                                        setFilterParkAssist("Standard");
+                                    }
+                                    else{
+                                        console.log("Filter 5 deapplied");
+                                        setFilterParkAssist("");
+                                    }
+                                    break;
+                            }
+                        }}
+                    />{" "}
+                    <label>{props.label}</label>
+                </div>
+            </components.Option>
+        );
+    };
     useEffect(() => {
         BrowseVehicle.handleSort("");
     }, []);
@@ -177,21 +262,16 @@ function BrowseVehicle()
                                 className="search-input"
                                 placeholder="Search for..."
                                 value={q}
-                                /*
-                                // set the value of our useState q
-                                //  anytime the user types in the search box
-                                */
                                 onChange={(e) => setQ(e.target.value)}
                             />
                             <span className="sr-only">Search for vehicle here</span>
                         </label>
 
-                        <div className="topping">
+                        {/*
+                        <div className="filter-query">
                             <input
                                 type="checkbox"
-                                id="topping"
-                                name="topping"
-                                value="Paneer"
+                                id="query1"
                                 checked={isChecked2}
                                 onChange={(e) => {
                                     setIsChecked2(!isChecked2);
@@ -209,12 +289,10 @@ function BrowseVehicle()
                                 Adaptive Cruise Control Standard
                             </label>
                         </div>
-                        <div className="topping">
+                        <div className="filter-query">
                             <input
                                 type="checkbox"
-                                id="topping"
-                                name="topping"
-                                value="Paneer"
+                                id="query2"
                                 checked={isChecked1}
                                 onChange={(e) => {
                                     setIsChecked1(!isChecked1);
@@ -232,12 +310,10 @@ function BrowseVehicle()
                                 Backup Cam Standard
                             </label>
                         </div>
-                        <div className="topping">
+                        <div className="filter-query">
                             <input
                                 type="checkbox"
-                                id="topping"
-                                name="topping"
-                                value="Paneer"
+                                id="query3"
                                 checked={isChecked3}
                                 onChange={(e) => {
                                     setIsChecked3(!isChecked3);
@@ -255,12 +331,10 @@ function BrowseVehicle()
                                 Lane Keep Assist Standard
                             </label>
                         </div>
-                        <div className="topping">
+                        <div className="filter-query">
                             <input
                                 type="checkbox"
-                                id="topping"
-                                name="topping"
-                                value="Paneer"
+                                id="query4"
                                 checked={isChecked4}
                                 onChange={(e) => {
                                     setIsChecked4(!isChecked4);
@@ -278,12 +352,10 @@ function BrowseVehicle()
                                 Crash Imminent Braking Standard
                             </label>
                         </div>
-                        <div className="topping">
+                        <div className="filter-query">
                             <input
                                 type="checkbox"
-                                id="topping"
-                                name="topping"
-                                value="Paneer"
+                                id="query5"
                                 checked={isChecked5}
                                 onChange={(e) => {
                                     setIsChecked5(!isChecked5);
@@ -301,6 +373,7 @@ function BrowseVehicle()
                                 Parking Assist Standard
                             </label>
                         </div>
+                        */}
                         {/*
                         <div className="select">
                             <select
@@ -320,11 +393,6 @@ function BrowseVehicle()
 
                         <div className="select">
                             <select
-                                /*
-    //                         here we create a basic select input
-    //                     we set the value to the selected value
-    //                     and update the setC() state every time onChange is called
-                        */
                                 onChange={(e) => {
                                     setFilterParam(e.target.value);
                                 }}
@@ -349,11 +417,6 @@ function BrowseVehicle()
                         </div>
                         <div className="select">
                             <select
-                                /*
-    //                         here we create a basic select input
-    //                     we set the value to the selected value
-    //                     and update the setC() state every time onChange is called
-                        */
                                 onChange={(e) => {
                                     setFilterParam(e.target.value);
                                 }}
@@ -376,6 +439,19 @@ function BrowseVehicle()
                             </select>
                             <span className="focus"></span>
                         </div>
+                        <ReactSelect
+                            options={featureOptions}
+                            isMulti
+                            closeMenuOnSelect={false}
+                            hideSelectedOptions={false}
+                            components={{
+                                Option
+                            }}
+                            //onChange={this.handleChange}
+                            // allowSelectAll={true}
+                            //value={this.state.optionSelected}
+
+                        />
                         <FormControl variant="filled" sx={{ m: 1, minWidth: 500 }}>
                             <InputLabel id="demo-simple-select-filled-label">Sort by:</InputLabel>
                             <Select
@@ -418,7 +494,6 @@ function BrowseVehicle()
 
                     </div>
                     <ul className="card-grid">
-
                         {search(backupCamFilter(items)).map((item) => {
                             var myLink = item.vin
                             return (
@@ -459,7 +534,6 @@ function BrowseVehicle()
                         })}
                     </ul>
                 </div></div>
-
         );
     }
 }
