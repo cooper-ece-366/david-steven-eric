@@ -86,6 +86,7 @@ function RemoveVehicle()
                 })
     }
 
+
     RemoveVehicle.removeVehicleStatus = () =>
     {
         const requestOptions = {
@@ -153,7 +154,9 @@ function RemoveVehicle()
                         <MenuItem value={"In-transit"}>In-transit</MenuItem>
                     </Select>
                 </FormControl>
-                <Button variant="contained" className="button" onClick={RemoveVehicle.removeVehicleStatus()}>Remove Vehicle by Status</Button>
+                <div>
+                    <Button variant="contained" className="button" onClick={RemoveVehicle.removeVehicleStatus}>Remove Vehicle by Status</Button>
+                </div>
                 <br></br>
                 <br></br>
                 <br></br>
