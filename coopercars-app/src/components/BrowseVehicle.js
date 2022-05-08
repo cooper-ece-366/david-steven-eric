@@ -35,7 +35,7 @@ function BrowseVehicle()
     const [items, setItems] = useState([]);
     const [q, setQ] = useState("");
 
-    const [searchParam] = useState(["make", "model"]);
+    const [searchParam] = useState(["make", "year", "type"]);
     const [filterParam, setFilterParam] = useState(["All"]);
     const [sortParam, setSortParam] = useState("");
     const [filtParam, setFiltParam] = useState("");
@@ -46,6 +46,9 @@ function BrowseVehicle()
     const [isChecked5, setIsChecked5] = useState(false);
 
     const[search_query, setSearchQuery] = useState("");
+    const[filterType, setFilterType] = useState("All");
+    const[filterMake, setFilterMake] = useState("All");
+    const[filterYear, setFilterYear] = useState("All");
     const[filterBackupCam, setFilterBackupCam] = useState("");
     const[filterAdaptiveCruiseControl, setFilterAdaptiveCruiseControl] = useState("");
     const[filterLKA, setFilterLKA] = useState("");
@@ -57,77 +60,77 @@ function BrowseVehicle()
     const Option = (props) => {
         return (
             <components.Option{...props}>
-                <div className="filter-query">
-                    <input
-                        //onChange={(e) => {console.log("test");}}
-                        type="checkbox"
-                        id="query1"
-                        checked={props.isSelected}
-                        value={props.value}
-                        onChange={(e) => {
-                            console.log(e.target.value);
-                            console.log(props.isSelected);
-                            switch(e.target.value){
-                                case "backupCam":
-                                    console.log("Option 1");
-                                    if(!props.isSelected){
-                                        console.log("Filter 1 applied");
-                                        setFilterBackupCam("Standard");
-                                    }
-                                    else{
-                                        console.log("Filter 1 deapplied");
-                                        setFilterBackupCam("");
-                                    }
-                                    break;
-                                case "ACC":
-                                    console.log("Option 2");
-                                    if(!props.isSelected){
-                                        console.log("Filter 2 applied");
-                                        setFilterAdaptiveCruiseControl("Standard");
-                                    }
-                                    else{
-                                        console.log("Filter 2 deapplied");
-                                        setFilterAdaptiveCruiseControl("");
-                                    }
-                                    break;
-                                case "LKA":
-                                    console.log("Option 3");
-                                    if(!props.isSelected){
-                                        console.log("Filter 3 applied");
-                                        setFilterLKA("Standard");
-                                    }
-                                    else{
-                                        console.log("Filter 3 deapplied");
-                                        setFilterLKA("");
-                                    }
-                                    break;
-                                case "crashBrake":
-                                    console.log("Option 4");
-                                    if(!props.isSelected){
-                                        console.log("Filter 4 applied");
-                                        setFilterCrashBrake("Standard");
-                                    }
-                                    else{
-                                        console.log("Filter 4 deapplied");
-                                        setFilterCrashBrake("");
-                                    }
-                                    break;
-                                case "parkingAssist":
-                                    console.log("Option 5");
-                                    if(!props.isSelected){
-                                        console.log("Filter 5 applied");
-                                        setFilterParkAssist("Standard");
-                                    }
-                                    else{
-                                        console.log("Filter 5 deapplied");
-                                        setFilterParkAssist("");
-                                    }
-                                    break;
-                            }
-                        }}
-                    />{" "}
-                    <label>{props.label}</label>
-                </div>
+                <input
+                    //onChange={(e) => {console.log("test");}}
+                    type="checkbox"
+                    id="query1"
+                    checked={props.isSelected}
+                    value={props.value}
+
+
+                    onChange={(e) => {
+                        console.log(e.target.value);
+                        console.log(props.isSelected);
+                        switch(props.value){
+                            case "backupCam":
+                                console.log("Option 1");
+                                if(!props.isSelected){
+                                    console.log("Filter 1 applied");
+                                    setFilterBackupCam("Standard");
+                                }
+                                else{
+                                    console.log("Filter 1 deapplied");
+                                    setFilterBackupCam("");
+                                }
+                                break;
+                            case "ACC":
+                                console.log("Option 2");
+                                if(!props.isSelected){
+                                    console.log("Filter 2 applied");
+                                    setFilterAdaptiveCruiseControl("Standard");
+                                }
+                                else{
+                                    console.log("Filter 2 deapplied");
+                                    setFilterAdaptiveCruiseControl("");
+                                }
+                                break;
+                            case "LKA":
+                                console.log("Option 3");
+                                if(!props.isSelected){
+                                    console.log("Filter 3 applied");
+                                    setFilterLKA("Standard");
+                                }
+                                else{
+                                    console.log("Filter 3 deapplied");
+                                    setFilterLKA("");
+                                }
+                                break;
+                            case "crashBrake":
+                                console.log("Option 4");
+                                if(!props.isSelected){
+                                    console.log("Filter 4 applied");
+                                    setFilterCrashBrake("Standard");
+                                }
+                                else{
+                                    console.log("Filter 4 deapplied");
+                                    setFilterCrashBrake("");
+                                }
+                                break;
+                            case "parkingAssist":
+                                console.log("Option 5");
+                                if(!props.isSelected){
+                                    console.log("Filter 5 applied");
+                                    setFilterParkAssist("Standard");
+                                }
+                                else{
+                                    console.log("Filter 5 deapplied");
+                                    setFilterParkAssist("");
+                                }
+                                break;
+                        }
+                    }}
+                />{" "}
+                <label>{props.label}</label>
             </components.Option>
         );
     };
@@ -220,9 +223,9 @@ function BrowseVehicle()
         }));
     }
     function search(items) {
-        return items.filter((item) => {
+        return searchStage2(items.filter((item) => {
 
-            if (item.year==filterParam || item.make == filterParam) {
+            if (item.year==filterYear) {
                 return searchParam.some((newItem) => {
                     return (
                         item[newItem]
@@ -231,7 +234,55 @@ function BrowseVehicle()
                             .indexOf(q.toLowerCase()) > -1
                     );
                 });
-            } else if (filterParam == "All") {
+            } else if (filterYear == "All") {
+                return searchParam.some((newItem) => {
+                    return (
+                        item[newItem]
+                            .toString()
+                            .toLowerCase()
+                            .indexOf(q.toLowerCase()) > -1
+                    );
+                });
+            }
+        }));
+    }
+    function searchStage2(items){
+        return searchStage3(items.filter((item) => {
+
+            if (item.make==filterMake) {
+                return searchParam.some((newItem) => {
+                    return (
+                        item[newItem]
+                            .toString()
+                            .toLowerCase()
+                            .indexOf(q.toLowerCase()) > -1
+                    );
+                });
+            } else if (filterMake == "All") {
+                return searchParam.some((newItem) => {
+                    return (
+                        item[newItem]
+                            .toString()
+                            .toLowerCase()
+                            .indexOf(q.toLowerCase()) > -1
+                    );
+                });
+            }
+        }));
+    }
+    function searchStage3(items){
+        return items.filter((item) => {
+
+            if (item.vehicleType==filterType) {
+                return searchParam.some((newItem) => {
+                    return (
+                        item[newItem]
+                            .toString()
+                            .toLowerCase()
+                            .indexOf(q.toLowerCase()) > -1
+                    );
+                });
+            } else if (filterType == "All") {
                 return searchParam.some((newItem) => {
                     return (
                         item[newItem]
@@ -243,7 +294,6 @@ function BrowseVehicle()
             }
         });
     }
-
     if (error) {
         return <>{error.message}</>;
     } else if (!isLoaded) {
@@ -390,11 +440,25 @@ function BrowseVehicle()
                             </select>
                             <span className="focus"></span>
                         </div>*/}
-
                         <div className="select">
                             <select
                                 onChange={(e) => {
-                                    setFilterParam(e.target.value);
+                                    setFilterType(e.target.value);
+                                }}
+                                className="custom-select"
+                                aria-label="Filter Vehicles by Type"
+                            >
+                                <option value="All">Filter By Type</option>
+                                <option value="PASSENGER CAR">Passenger Car</option>
+                                <option value="MULTIPURPOSE PASSENGER VEHICLE (MPV)">Multipurpose Passenger Vehicle</option>
+                                <option value="TRUCK ">Truck</option>
+                            </select>
+                            <span className="focus"></span>
+                        </div>
+                        <div className="select">
+                            <select
+                                onChange={(e) => {
+                                    setFilterMake(e.target.value);
                                 }}
                                 className="custom-select"
                                 aria-label="Filter Vehicles by Manufacturer"
@@ -418,7 +482,7 @@ function BrowseVehicle()
                         <div className="select">
                             <select
                                 onChange={(e) => {
-                                    setFilterParam(e.target.value);
+                                    setFilterYear(e.target.value);
                                 }}
                                 className="custom-select"
                                 aria-label="Filter Vehicles by Year"
