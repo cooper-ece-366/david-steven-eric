@@ -49,7 +49,7 @@ function BrowseVehicle()
     const [items, setItems] = useState([]);
     const [q, setQ] = useState("");
 
-    const [searchParam] = useState(["make", "year", "model", "vehicleType"]);
+    const [searchParam] = useState(["make", "year", "model", "vehicleType", "bodyClass", "driveType"]);
     const [filterParam, setFilterParam] = useState(["All"]);
     const [sortParam, setSortParam] = useState("");
     const [filtParam, setFiltParam] = useState("");
@@ -59,10 +59,15 @@ function BrowseVehicle()
     const [isChecked4, setIsChecked4] = useState(false);
     const [isChecked5, setIsChecked5] = useState(false);
 
-    const[search_query, setSearchQuery] = useState("");
     const[filterType, setFilterType] = useState("All");
+    const[filterBody, setFilterBody] = useState("All");
     const[filterMake, setFilterMake] = useState("All");
     const[filterYear, setFilterYear] = useState("All");
+    const[filterCountry, setFilterCountry] = useState("All");
+    const[filterDriveType, setFilterDriveType] = useState("All");
+    const[filterFuel, setFilterFuel] = useState("All");
+    const[filterElecLvl, setFilterElecLvl] = useState("All");
+
     const[filterAdaptiveCruiseControl, setFilterAdaptiveCruiseControl] = useState("");
     const[filterBackupCam, setFilterBackupCam] = useState("");
     const[filterLKA, setFilterLKA] = useState("");
@@ -347,77 +352,45 @@ function BrowseVehicle()
             return item;
         });
     }
-    function search(items) {
-        console.log(items);
-        return searchStage2(items.filter((item) => {
-
-            if (item.year==filterYear) {
-                return searchParam.some((newItem) => {
-                    return (
-                        item[newItem]
-                            .toString()
-                            .toLowerCase()
-                            .indexOf(q.toLowerCase()) > -1
-                    );
-                });
-            } else if (filterYear == "All") {
-                return searchParam.some((newItem) => {
-                    return (
-                        item[newItem]
-                            .toString()
-                            .toLowerCase()
-                            .indexOf(q.toLowerCase()) > -1
-                    );
-                });
-            }
-        }));
-    }
-    function searchStage2(items){
-        return searchStage3(items.filter((item) => {
-
-            if (item.make==filterMake) {
-                return searchParam.some((newItem) => {
-                    return (
-                        item[newItem]
-                            .toString()
-                            .toLowerCase()
-                            .indexOf(q.toLowerCase()) > -1
-                    );
-                });
-            } else if (filterMake == "All") {
-                return searchParam.some((newItem) => {
-                    return (
-                        item[newItem]
-                            .toString()
-                            .toLowerCase()
-                            .indexOf(q.toLowerCase()) > -1
-                    );
-                });
-            }
-        }));
-    }
-    function searchStage3(items){
+    function search(items){
         return items.filter((item) => {
-
-            if (item.vehicleType==filterType) {
-                return searchParam.some((newItem) => {
-                    return (
-                        item[newItem]
-                            .toString()
-                            .toLowerCase()
-                            .indexOf(q.toLowerCase()) > -1
-                    );
-                });
-            } else if (filterType == "All") {
-                return searchParam.some((newItem) => {
-                    return (
-                        item[newItem]
-                            .toString()
-                            .toLowerCase()
-                            .indexOf(q.toLowerCase()) > -1
-                    );
-                });
+            return searchParam.some((newItem) => {
+                return (
+                    item[newItem]
+                        .toString()
+                        .toLowerCase()
+                        .indexOf(q.toLowerCase()) > -1
+                );
+            });
+        });
+    }
+    function filterVehicle(items){
+        return items.filter((item) => {
+            if(!((filterMake=="All") ||(filterMake==item.make))){
+                return;
             }
+            if(!((filterYear=="All") ||(filterYear==item.year))){
+                return;
+            }
+            if(!((filterType=="All") ||(filterType==item.vehicleType))){
+                return;
+            }
+            if(!((filterCountry=="All") ||(filterCountry==item.plantCountry))){
+                return;
+            }
+            if(!((filterBody=="All") ||(filterBody==item.bodyClass))){
+                return;
+            }
+            if(!((filterDriveType=="All") ||(filterDriveType==item.driveType))){
+                return;
+            }
+            if(!((filterFuel=="All") ||(filterFuel==item.fuelTypePrim))){
+                return;
+            }
+            if(!((filterElecLvl=="All") ||(filterElecLvl==item.electricificationLevel))){
+                return;
+            }
+            return item;
         });
     }
     if (error) {
@@ -487,6 +460,23 @@ function BrowseVehicle()
                             </select>
                             <span className="focus"></span>
                         </div>
+                        <div className="select" >
+                            <select
+                                onChange={(e) => {
+                                    setFilterBody(e.target.value);
+                                }}
+                                className="custom-select"
+                                aria-label="Filter Vehicles by Body"
+                            >
+                                <option value="All">Filter By Body</option>
+                                <option value="Sedan/Saloon">Sedan/Saloon</option>
+                                <option value="Sport Utility Vehicle (SUV)/Multi-Purpose Vehicle (MPV)">Sport Utility Vehicle (SUV)/Multi-Purpose Vehicle (MPV)</option>
+                                <option value="Hatchback/Liftback/Notchback">Hatchback/Liftback/Notchback</option>
+                                <option value="Pickup">Pickup</option>
+                                <option value="Minivan">Minivan</option>
+                            </select>
+                            <span className="focus"></span>
+                        </div>
                         <div className="select">
                             <select
                                 onChange={(e) => {
@@ -508,6 +498,64 @@ function BrowseVehicle()
                                 <option value="NISSAN">Nissan</option>
                                 <option value="TESLA">Tesla</option>
                                 <option value="TOYOTA">Toyota</option>
+                            </select>
+                            <span className="focus"></span>
+                        </div>
+                        <div className="select">
+                            <select
+                                onChange={(e) => {
+                                    setFilterFuel(e.target.value);
+                                }}
+                                className="custom-select"
+                                aria-label="Filter Vehicles by Fuel Type"
+                            >
+                                <option value="All">Filter By Primary Fuel Type</option>
+                                <option value="Gasoline">Gasoline</option>
+                                <option value="Electric">Electric</option>
+                                <option value="Flexible Fuel Vehicle (FFV)">Flexible Fuel Vehicle (FFV)</option>
+                                Flexible Fuel Vehicle (FFV)
+                            </select>
+                            <span className="focus"></span>
+                        </div>
+                        <div className="select">
+                            <select
+                                onChange={(e) => {
+                                    setFilterElecLvl(e.target.value);
+                                }}
+                                className="custom-select"
+                                aria-label="Filter Vehicles by Electricification Level"
+                            >
+                                <option value="All">Filter By Electricification Level</option>
+                                <option value="BEV (Battery Electric Vehicle)">BEV (Battery Electric Vehicle)</option>
+                                <option value="Strong HEV (Hybrid Electric Vehicle)">Strong HEV (Hybrid Electric Vehicle)</option>
+                                <option value="PHEV (Plug-in Hybrid Electric Vehicle)">PHEV (Plug-in Hybrid Electric Vehicle)</option>
+                            </select>
+                            <span className="focus"></span>
+                        </div>
+                        <div className="select">
+                            <select
+                                onChange={(e) => {
+                                    setFilterDriveType(e.target.value);
+                                }}
+                                className="custom-select"
+                                aria-label="Filter Vehicles by Drive Type"
+                            >
+                                <option value="All">Filter By Drive Type</option>
+                                <option value="4x2">4x2</option>
+                                <option value="4WD/4-Wheel Drive/4x4">4x4</option>
+                            </select>
+                            <span className="focus"></span>
+                        </div>
+                        <div className="select">
+                            <select
+                                onChange={(e) => {
+                                    setFilterCountry(e.target.value);
+                                }}
+                                className="custom-select"
+                                aria-label="Filter Vehicles by Country"
+                            >
+                                <option value="All">Filter By Country Manufactured In</option>
+                                <option value="UNITED STATES (USA)">USA</option>
                             </select>
                             <span className="focus"></span>
                         </div>
@@ -546,12 +594,11 @@ function BrowseVehicle()
                             //onChange={this.handleChange}
                             // allowSelectAll={true}
                             //value={this.state.optionSelected}
-
                         />
 
                     </div>
                     <ul className="card-grid">
-                        {search(filterSafetyFeatures(items)).map((item) => {
+                        {search(filterVehicle(filterSafetyFeatures(items))).map((item) => {
                             var myLink = item.vin
                             return (
                                 <li>
