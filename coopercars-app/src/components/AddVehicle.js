@@ -20,7 +20,7 @@ function AddVehicle()
     const [file, setFile] = useState(null);
     const [currentVIN, setCurrentVIN] = useState("");
     const [currentVehicleInfo, setCurrentVehicleInfo] = useState("");
-    const [currentVehicleImg, setCurrentVehicleImg] = useState("");
+    const [currentVehicleImg, setCurrentVehicleImg] = useState(null);
     const [currentVehicleFeatures1, setCurrentVehicleFeatures1] = useState("");
     const [currentVehicleFeatures2, setCurrentVehicleFeatures2] = useState("");
     const [currentVehicleFeatures3, setCurrentVehicleFeatures3] = useState("");
@@ -42,7 +42,7 @@ function AddVehicle()
     AddVehicle.onFileChange = () => {
         console.log('File loaded');
     }
-    AddVehicle.handleSubmit = () =>{
+    AddVehicle.handleSubmit = () => {
         console.log('Button was clicked!');
         console.log('File name: '+ file.name);
         const reader = new FileReader();
@@ -108,6 +108,7 @@ function AddVehicle()
             }
         }
         reader.readAsBinaryString(file);
+        setTimeout(alert("Vehicle added successfully!"), 5000)
     }
 
 
@@ -128,7 +129,7 @@ function AddVehicle()
             .then((response) => console.log(response))
             .then((data) => console.log(data))
             .then(()=>AddVehicle.refreshInfo());
-        alert("Vehicle added successfully!");
+
 
 
     }
@@ -270,7 +271,6 @@ function AddVehicle()
 
                 <br></br>
 
-                <p>The vehicle for VIN {vin} is </p>
                 {currentVehicleInfo}<br></br>
                 <div className="car-image">
                     <img src={currentVehicleImg} height="100"/>
