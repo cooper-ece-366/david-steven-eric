@@ -585,6 +585,7 @@ function BrowseVehicle()
             <div className="browse">
                 <div className="wrapper">
                     <div>
+                        <br></br>
                         <label htmlFor="search-form">
                             <input
                                 type="search"
@@ -721,7 +722,36 @@ function BrowseVehicle()
                             </select>
                             <span className="focus"></span>
                         </div>*/}
-                        <div className="select">
+                        <br></br>
+                        <FormControl variant="filled" sx={{ m: 1, minWidth: 800 }}>
+                            <InputLabel id="demo-simple-select-filled-label">Sort by:</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-filled-label"
+                                id="demo-simple-select-filled"
+                                value={sortParam}
+                                label="Sort by:"
+                                onChange={(e) => {setSortParam(e.target.value); BrowseVehicle.handleSort(e.target.value)}}
+                            >
+                                <MenuItem value={""}>None</MenuItem>
+                                <MenuItem value={"/sort/dealer-asc"}>Dealer Price: Low to High</MenuItem>
+                                <MenuItem value={"/sort/dealer-desc"}>Dealer Price: High to low</MenuItem>
+                                <MenuItem value={"/sort/sale-asc"}>Sale Price: Low to High</MenuItem>
+                                <MenuItem value={"/sort/sale-desc"}>Sale Price: High to low</MenuItem>
+                                <MenuItem value={"/sort/profit-asc"}>Profit: Low to High</MenuItem>
+                                <MenuItem value={"/sort/profit-desc"}>Profit: High to low</MenuItem>
+                                <MenuItem value={"/sort/date-asc"}>Date Entered: Low to High</MenuItem>
+                                <MenuItem value={"/sort/date-desc"}>Date Entered: High to low</MenuItem>
+                                <MenuItem value={"/sort/mileage-asc"}>Mileage: Low to High</MenuItem>
+                                <MenuItem value={"/sort/mileage-desc"}>Mileage: High to low</MenuItem>
+                                <MenuItem value={"/sort/year-asc"}>Model Year: Low to High</MenuItem>
+                                <MenuItem value={"/sort/year-desc"}>Model Year: High to low</MenuItem>
+                                <MenuItem value={"/sort/make-asc"}>Make: A to Z</MenuItem>
+                                <MenuItem value={"/sort/make-desc"}>Make: Z to A</MenuItem>
+                                <MenuItem value={"/sort/model-asc"}>Model: A to Z</MenuItem>
+                                <MenuItem value={"/sort/model-desc"}>Model: Z to A</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <div className="select" >
                             <select
                                 onChange={(e) => {
                                     setFilterType(e.target.value);
@@ -797,40 +827,6 @@ function BrowseVehicle()
                             //value={this.state.optionSelected}
 
                         />
-                        <FormControl variant="filled" sx={{ m: 1, minWidth: 500 }}>
-                            <InputLabel id="demo-simple-select-filled-label">Sort by:</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-filled-label"
-                                id="demo-simple-select-filled"
-                                value={sortParam}
-                                label="Sort by:"
-                                onChange={(e) => {setSortParam(e.target.value); BrowseVehicle.handleSort(e.target.value)}}
-                            >
-                                <MenuItem value={""}>None</MenuItem>
-                                <MenuItem value={"/sort/dealer-asc"}>Dealer Price: Low to High</MenuItem>
-                                <MenuItem value={"/sort/dealer-desc"}>Dealer Price: High to low</MenuItem>
-                                <MenuItem value={"/sort/sale-asc"}>Sale Price: Low to High</MenuItem>
-                                <MenuItem value={"/sort/sale-desc"}>Sale Price: High to low</MenuItem>
-                                <MenuItem value={"/sort/profit-asc"}>Profit: Low to High</MenuItem>
-                                <MenuItem value={"/sort/profit-desc"}>Profit: High to low</MenuItem>
-                                <MenuItem value={"/sort/date-asc"}>Date Entered: Low to High</MenuItem>
-                                <MenuItem value={"/sort/date-desc"}>Date Entered: High to low</MenuItem>
-                                <MenuItem value={"/sort/mileage-asc"}>Mileage: Low to High</MenuItem>
-                                <MenuItem value={"/sort/mileage-desc"}>Mileage: High to low</MenuItem>
-                                <MenuItem value={"/sort/year-asc"}>Model Year: Low to High</MenuItem>
-                                <MenuItem value={"/sort/year-desc"}>Model Year: High to low</MenuItem>
-                                <MenuItem value={"/sort/make-asc"}>Make: A to Z</MenuItem>
-                                <MenuItem value={"/sort/make-desc"}>Make: Z to A</MenuItem>
-                                <MenuItem value={"/sort/model-asc"}>Model: A to Z</MenuItem>
-                                <MenuItem value={"/sort/model-desc"}>Model: Z to A</MenuItem>
-                                <MenuItem value={"/sort/displacementcc-asc"}>Displacement CC: Low to High</MenuItem>
-                                <MenuItem value={"/sort/displacementcc-desc"}>Displacement CC: High to low</MenuItem>
-                                <MenuItem value={"/sort/enginepower-asc"}>Engine Power (kW): Low to High</MenuItem>
-                                <MenuItem value={"/sort/enginepower-desc"}>Engine Power (kW): High to low</MenuItem>
-                                <MenuItem value={"/sort/horsepower-asc"}>Horsepower: Low to High</MenuItem>
-                                <MenuItem value={"/sort/horsepower-desc"}>Horsepower: High to low</MenuItem>
-                            </Select>
-                        </FormControl>
 
 
                     </div>
