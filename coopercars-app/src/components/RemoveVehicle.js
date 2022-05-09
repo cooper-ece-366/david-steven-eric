@@ -14,7 +14,7 @@ function RemoveVehicle()
 
     const [file, setFile] = useState(null);
     const [vin, setVin] = useState("");
-    const [status,setStatus] = useState("Sold");
+    const [status,setStatus] = useState("");
     const [info, setInfo] = useState("");
 
     useEffect(() => {
@@ -86,6 +86,7 @@ function RemoveVehicle()
                 })
     }
 
+
     RemoveVehicle.removeVehicleStatus = () =>
     {
         const requestOptions = {
@@ -95,7 +96,7 @@ function RemoveVehicle()
         fetch(vehicleApiUrl,requestOptions)
             .then((response) =>
             {
-                console.log("Succesfully deleted sold");
+                console.log("Successfully deleted sold");
                 setInfo("Vehicles marked as sold removed.")
             })
         // .catch(err => {
@@ -153,7 +154,9 @@ function RemoveVehicle()
                         <MenuItem value={"In-transit"}>In-transit</MenuItem>
                     </Select>
                 </FormControl>
-                <Button variant="contained" className="button" onClick={RemoveVehicle.removeVehicleStatus()}>Remove Vehicle by Status</Button>
+                <div>
+                    <Button variant="contained" className="button" onClick={RemoveVehicle.removeVehicleStatus}>Remove Vehicle by Status</Button>
+                </div>
                 <br></br>
                 <br></br>
                 <br></br>

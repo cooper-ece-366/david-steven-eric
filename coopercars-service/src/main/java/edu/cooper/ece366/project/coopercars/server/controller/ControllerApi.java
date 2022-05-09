@@ -182,4 +182,14 @@ public class ControllerApi
         return vehicleRepository.findAll(Sort.by(Sort.Direction.DESC, "model"));
     }
 
+    @GetMapping(path = "/vehicles/sort/displacementcc-asc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortDisplacementCCAsc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.ASC, "displacementCC"));
+    }
+
+    @GetMapping(path = "/vehicles/sort/displacementcc-desc", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Vehicle> sortModelDisplacementCCDesc() {
+        return vehicleRepository.findAll(Sort.by(Sort.Direction.DESC, "displacementCC"));
+    }
+
 }
