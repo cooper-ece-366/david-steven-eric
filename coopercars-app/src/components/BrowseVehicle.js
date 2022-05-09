@@ -612,14 +612,14 @@ function BrowseVehicle()
                                 <li>
                                     <div className="card-content">
                                         <Link to={myLink}>
-                                            <h4 className="card-name">{item.vin}</h4>
+                                            <h4 className="card-name">{item.year + " " + item.make +  " " +item.model}</h4>
                                             <div className="car-image">
                                                 <img src={item.imgURL} alt={item.vin}/>
                                             </div>
                                         </Link>
                                         <ol className="card-list">
                                             <li>
-                                                <h6><span>{item.year + " " + item.make +  " " +item.model}</span></h6>
+                                                <h6>VIN: <span>{item.vin}</span></h6>
                                             </li>
                                             <li>
                                                 <b>Dealer Price:</b> $<span>{item.dealerPrice}</span>
