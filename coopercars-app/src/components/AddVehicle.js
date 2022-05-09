@@ -35,6 +35,7 @@ function AddVehicle()
     {
         console.log('Button was clicked!');
         AddVehicle.addVehicle();
+
     }
 
     AddVehicle.onFileChange = () => {
@@ -105,6 +106,7 @@ function AddVehicle()
 
             }
         }
+        alert("Uploaded successfully!");
         reader.readAsBinaryString(file);
     }
 
@@ -126,6 +128,8 @@ function AddVehicle()
             .then((response) => console.log(response))
             .then((data) => console.log(data))
             .then(()=>AddVehicle.refreshInfo());
+        alert("Vehicle added successfully!");
+
 
     }
 

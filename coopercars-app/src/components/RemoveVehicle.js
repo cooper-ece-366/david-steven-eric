@@ -81,7 +81,7 @@ function RemoveVehicle()
         fetch(vehicleApiUrl,requestOptions)
                 .then((response) =>
                 {
-                    console.log("Succesfully deleted %s VIN.", vin);
+                    alert("Succesfully deleted VIN: " + (vin));
                     setInfo("Vehicle "+vin+" removed.")
                 })
     }
@@ -96,7 +96,7 @@ function RemoveVehicle()
         fetch(vehicleApiUrl,requestOptions)
             .then((response) =>
             {
-                console.log("Successfully deleted sold");
+                alert("Succesfully deleted " + (status));
                 setInfo("Vehicles marked as sold removed.")
             })
         // .catch(err => {
