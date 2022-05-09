@@ -556,6 +556,14 @@ function BrowseVehicle()
                             >
                                 <option value="All">Filter By Country Manufactured In</option>
                                 <option value="UNITED STATES (USA)">USA</option>
+                                <option value="MEXICO">Mexico</option>
+                                <option value="JAPAN">Japan</option>
+                                <option value="GERMANY">Germany</option>
+                                <option value="SPAIN">Spain</option>
+                                <option value="SOUTH KOREA">South Korea</option>
+                                <option value="ENGLAND">England</option>
+                                <option value="INDIA">India</option>
+                                <option value="SOUTH AFRICA">South Africa</option>
                             </select>
                             <span className="focus"></span>
                         </div>
