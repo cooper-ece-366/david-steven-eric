@@ -35,7 +35,7 @@ export const featureOptions = [
     { value: "forwardCollisionWarning", label: "Forward Collision Warning" },
     { value: "dynamicBrakeSupport", label: "Dynamic Brake Support" },
     { value: "pedestrian", label: "Pedestrian Auto Emergency Braking" },
-    { value: "blindSpotWarning", label: "Dynamic Brake Support" },
+    { value: "blindSpotWarning", label: "Blind Spot Warning" },
     { value: "laneDepart", label: "Lane Departure Warning" },
     { value: "blindSpotInter", label: "Blind Spot Intervene" },
     { value: "LCA", label: "Lane Center Assist" },
