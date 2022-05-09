@@ -404,10 +404,100 @@ function BrowseVehicle()
     }
     function rearCrossFilter(items){
         if(filterRearCross==""){
+            return rearAutoFilter(items);
+        }
+        return rearAutoFilter(items.filter((item) => {
+            if(item.rearCrossTrafficAlert==filterRearCross){
+                return item;
+            }
+        }));
+    }
+    function rearAutoFilter(items){
+        if(filterRearAutoBrake==""){
+            return forwardCollisionFilter(items);
+        }
+        return forwardCollisionFilter(items.filter((item) => {
+            if(item.rearAutoEmergBraking==filterRearAutoBrake){
+                return item;
+            }
+        }));
+    }
+    function forwardCollisionFilter(items){
+        if(filterForwardCollisionWarning==""){
+            return dynamicBrakeFilter(items);
+        }
+        return dynamicBrakeFilter(items.filter((item) => {
+            if(item.forwColliWarn==filterForwardCollisionWarning){
+                return item;
+            }
+        }));
+    }
+    function dynamicBrakeFilter(items){
+        if(filterDynamicBrake==""){
+            return pedestrianFilter(items);
+        }
+        return pedestrianFilter(items.filter((item) => {
+            if(item.dynamicBrakeSupp==filterDynamicBrake){
+                return item;
+            }
+        }));
+    }
+    function pedestrianFilter(items){
+        if(filterPedestrian==""){
+            return blindSpotWarningFilter(items);
+        }
+        return blindSpotWarningFilter(items.filter((item) => {
+            if(item.pedestrianAutoEmergBrak==filterPedestrian){
+                return item;
+            }
+        }));
+    }
+    function blindSpotWarningFilter(items){
+        if(filterBlindSpotWarning==""){
+            return laneDepartFilter(items);
+        }
+        return laneDepartFilter(items.filter((item) => {
+            if(item.blindSpotWarn==filterBlindSpotWarning){
+                return item;
+            }
+        }));
+    }
+    function laneDepartFilter(items){
+        if(filterLaneDepart==""){
+            return blindSpotInterFilter(items);
+        }
+        return blindSpotInterFilter(items.filter((item) => {
+            if(item.laneDepartWarn==filterLaneDepart){
+                return item;
+            }
+        }));
+    }
+    function blindSpotInterFilter(items){
+        if(filterBlindSpotInter==""){
+            return lcaFilter(items);
+        }
+        return lcaFilter(items.filter((item) => {
+            if(item.blindSpotIntervention==filterBlindSpotInter){
+                return item;
+            }
+        }));
+    }
+    function lcaFilter(items){
+        if(filterLCA==""){
+            return adaptiveDriveBeamFilter(items);
+        }
+        return adaptiveDriveBeamFilter(items.filter((item) => {
+            if(item.laneCenterAssist==filterLCA){
+                return item;
+            }
+        }));
+    }
+    function adaptiveDriveBeamFilter(items){
+        if(filterAdaptiveDriveBeam==""){
             return items;
         }
         return items.filter((item) => {
-            if(item.rearCrossTrafficAlert==filterRearCross){
+            if(item.adaptDrivingBeam==filterAdaptiveDriveBeam){
                 return item;
             }
         });
