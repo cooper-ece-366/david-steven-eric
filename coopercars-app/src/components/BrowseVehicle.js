@@ -49,7 +49,7 @@ function BrowseVehicle()
     const [items, setItems] = useState([]);
     const [q, setQ] = useState("");
 
-    const [searchParam] = useState(["make", "year", "type"]);
+    const [searchParam] = useState(["make", "year", "model", "vehicleType"]);
     const [filterParam, setFilterParam] = useState(["All"]);
     const [sortParam, setSortParam] = useState("");
     const [filtParam, setFiltParam] = useState("");
@@ -83,7 +83,6 @@ function BrowseVehicle()
     const[filterLCA, setFilterLCA] = useState("");
     const[filterAdaptiveDriveBeam, setFilterAdaptiveDriveBeam] = useState("");
     const fetchURLSort = "http://localhost:8080/api/vehicles"
-    //Source: https://medium.com/geekculture/creating-multi-select-dropdown-with-checkbox-in-react-792ff2464ef3
 
     const Option = (props) => {
         return (
@@ -94,64 +93,47 @@ function BrowseVehicle()
                     id="query1"
                     checked={props.isSelected}
                     value={props.value}
-
-
                     onChange={(e) => {
                         console.log(e.target.value);
                         console.log(props.isSelected);
                         switch(props.value){
                             case "ACC":
-                                console.log("Option 1");
                                 if(!props.isSelected){
-                                    console.log("Filter 1 applied");
                                     setFilterAdaptiveCruiseControl("Standard");
                                 }
                                 else{
-                                    console.log("Filter 1 deapplied");
                                     setFilterAdaptiveCruiseControl("");
                                 }
                                 break;
                             case "backupCam":
-                                console.log("Option 2");
                                 if(!props.isSelected){
-                                    console.log("Filter 2 applied");
                                     setFilterBackupCam("Standard");
                                 }
                                 else{
-                                    console.log("Filter 2 deapplied");
                                     setFilterBackupCam("");
                                 }
                                 break;
                             case "LKA":
-                                console.log("Option 3");
                                 if(!props.isSelected){
-                                    console.log("Filter 3 applied");
                                     setFilterLKA("Standard");
                                 }
                                 else{
-                                    console.log("Filter 3 deapplied");
                                     setFilterLKA("");
                                 }
                                 break;
                             case "crashBrake":
-                                console.log("Option 4");
                                 if(!props.isSelected){
-                                    console.log("Filter 4 applied");
                                     setFilterCrashBrake("Standard");
                                 }
                                 else{
-                                    console.log("Filter 4 deapplied");
                                     setFilterCrashBrake("");
                                 }
                                 break;
                             case "parkingAssist":
-                                console.log("Option 5");
                                 if(!props.isSelected){
-                                    console.log("Filter 5 applied");
                                     setFilterParkAssist("Standard");
                                 }
                                 else{
-                                    console.log("Filter 5 deapplied");
                                     setFilterParkAssist("");
                                 }
                                 break;
@@ -303,203 +285,66 @@ function BrowseVehicle()
                 console.log("Refreshed");
     }
 
-    function parkAssistFilter(items){
-        if(filterParkAssist==""){
-            return antiLockFilter(items);
-        }
-        return antiLockFilter(items.filter((item) => {
-            if(item.parkingAssist==filterParkAssist){
-                return item;
-            }
-        }));
-    }
-    function crashBrakeFilter(items){
-        if(filterCrashBrake==""){
-            return parkAssistFilter(items);
-        }
-        return parkAssistFilter(items.filter((item) => {
-            if(item.crashImmBraking==filterCrashBrake){
-                return item;
-            }
-        }));
-    }
-    function laneKeepAssistFilter(items){
-        if(filterLKA==""){
-            return crashBrakeFilter(items);
-        }
-        return crashBrakeFilter(items.filter((item) => {
-            if(item.laneKeepAssist==filterLKA){
-                return item;
-            }
-        }));
-    }
-    function adaptiveCruiseControlFilter(items){
-        if(filterAdaptiveCruiseControl==""){
-            return laneKeepAssistFilter(items);
-        }
-        return laneKeepAssistFilter(items.filter((item) => {
-            if(item.adaptiveCruiseControl==filterAdaptiveCruiseControl){
-                return item;
-            }
-        }));
-    }
-    function backupCamFilter(items){
-        if(filterBackupCam==""){
-            return adaptiveCruiseControlFilter(items);
-        }
-        return adaptiveCruiseControlFilter(items.filter((item) => {
-            if(item.backupCam==filterBackupCam){
-                return item;
-                {/*
-                return searchParam.some((newItem) => {
-                    return (
-                        item[newItem]
-                            .toString()
-                            .toLowerCase()
-                            .indexOf(q.toLowerCase()) > -1
-                    );
-                });*/}
-            }
-        }));
-    }
-    function antiLockFilter(items){
-        if(filterAntiLock==""){
-            return elecStabFilter(items);
-        }
-        return elecStabFilter(items.filter((item) => {
-            if(item.antiLockBraking==filterAntiLock){
-                return item;
-            }
-        }));
-    }
-    function elecStabFilter(items){
-        if(filterElecStability==""){
-            return tracControlFilter(items);
-        }
-        return tracControlFilter(items.filter((item) => {
-            if(item.electronicStabilityt==filterElecStability){
-                return item;
-            }
-        }));
-    }
-    function tracControlFilter(items){
-        if(filterTracControl==""){
-            return autoCrashNotFilter(items);
-        }
-        return autoCrashNotFilter(items.filter((item) => {
-            if(item.tractionControl==filterTracControl){
-                return item;
-            }
-        }));
-    }
-    function autoCrashNotFilter(items){
-        if(filterAutoCrashNotif==""){
-            return rearCrossFilter(items);
-        }
-        return rearCrossFilter(items.filter((item) => {
-            if(item.autoCrashNotif==filterAutoCrashNotif){
-                return item;
-            }
-        }));
-    }
-    function rearCrossFilter(items){
-        if(filterRearCross==""){
-            return rearAutoFilter(items);
-        }
-        return rearAutoFilter(items.filter((item) => {
-            if(item.rearCrossTrafficAlert==filterRearCross){
-                return item;
-            }
-        }));
-    }
-    function rearAutoFilter(items){
-        if(filterRearAutoBrake==""){
-            return forwardCollisionFilter(items);
-        }
-        return forwardCollisionFilter(items.filter((item) => {
-            if(item.rearAutoEmergBraking==filterRearAutoBrake){
-                return item;
-            }
-        }));
-    }
-    function forwardCollisionFilter(items){
-        if(filterForwardCollisionWarning==""){
-            return dynamicBrakeFilter(items);
-        }
-        return dynamicBrakeFilter(items.filter((item) => {
-            if(item.forwColliWarn==filterForwardCollisionWarning){
-                return item;
-            }
-        }));
-    }
-    function dynamicBrakeFilter(items){
-        if(filterDynamicBrake==""){
-            return pedestrianFilter(items);
-        }
-        return pedestrianFilter(items.filter((item) => {
-            if(item.dynamicBrakeSupp==filterDynamicBrake){
-                return item;
-            }
-        }));
-    }
-    function pedestrianFilter(items){
-        if(filterPedestrian==""){
-            return blindSpotWarningFilter(items);
-        }
-        return blindSpotWarningFilter(items.filter((item) => {
-            if(item.pedestrianAutoEmergBrak==filterPedestrian){
-                return item;
-            }
-        }));
-    }
-    function blindSpotWarningFilter(items){
-        if(filterBlindSpotWarning==""){
-            return laneDepartFilter(items);
-        }
-        return laneDepartFilter(items.filter((item) => {
-            if(item.blindSpotWarn==filterBlindSpotWarning){
-                return item;
-            }
-        }));
-    }
-    function laneDepartFilter(items){
-        if(filterLaneDepart==""){
-            return blindSpotInterFilter(items);
-        }
-        return blindSpotInterFilter(items.filter((item) => {
-            if(item.laneDepartWarn==filterLaneDepart){
-                return item;
-            }
-        }));
-    }
-    function blindSpotInterFilter(items){
-        if(filterBlindSpotInter==""){
-            return lcaFilter(items);
-        }
-        return lcaFilter(items.filter((item) => {
-            if(item.blindSpotIntervention==filterBlindSpotInter){
-                return item;
-            }
-        }));
-    }
-    function lcaFilter(items){
-        if(filterLCA==""){
-            return adaptiveDriveBeamFilter(items);
-        }
-        return adaptiveDriveBeamFilter(items.filter((item) => {
-            if(item.laneCenterAssist==filterLCA){
-                return item;
-            }
-        }));
-    }
-    function adaptiveDriveBeamFilter(items){
-        if(filterAdaptiveDriveBeam==""){
-            return items;
-        }
+    function filterSafetyFeatures(items){
         return items.filter((item) => {
-            if(item.adaptDrivingBeam==filterAdaptiveDriveBeam){
-                return item;
+            if(!((filterAdaptiveCruiseControl=="") ||(filterAdaptiveCruiseControl==item.adaptiveCruiseControl))){
+                return;
             }
+            if(!((filterBackupCam=="") ||(filterBackupCam==item.backupCam))){
+                return;
+            }
+            if(!((filterLKA=="") ||(filterLKA==item.laneKeepAssist))){
+                return;
+            }
+            if(!((filterCrashBrake=="") ||(filterCrashBrake==item.crashImmBraking))){
+                return;
+            }
+            if(!((filterParkAssist=="") ||(filterParkAssist==item.parkingAssist))){
+                return;
+            }
+            if(!((filterAntiLock=="") ||(filterAntiLock==item.antiLockBraking))){
+                return;
+            }
+            if(!((filterElecStability=="") ||(filterElecStability==item.electronicStability))){
+                return;
+            }
+            if(!((filterTracControl=="") ||(filterTracControl==item.tractionControl))){
+                return;
+            }
+            if(!((filterAutoCrashNotif=="") ||(filterAutoCrashNotif==item.autoCrashNotif))){
+                return;
+            }
+            if(!((filterRearCross=="") ||(filterRearCross==item.rearCrossTrafficAlert))){
+                return;
+            }
+            if(!((filterRearAutoBrake=="") ||(filterRearAutoBrake==item.rearAutoEmergBraking))){
+                return;
+            }
+            if(!((filterForwardCollisionWarning=="") ||(filterForwardCollisionWarning==item.forwColliWarn))){
+                return;
+            }
+            if(!((filterDynamicBrake=="") ||(filterDynamicBrake==item.dynamicBrakeSupp))){
+                return;
+            }
+            if(!((filterPedestrian=="") ||(filterPedestrian==item.pedestrianAutoEmergBrak))){
+                return;
+            }
+            if(!((filterBlindSpotWarning=="") ||(filterBlindSpotWarning==item.blindSpotWarn))){
+                return;
+            }
+            if(!((filterLaneDepart=="") ||(filterLaneDepart==item.laneDepartWarn))){
+                return;
+            }
+            if(!((filterBlindSpotInter=="") ||(filterBlindSpotInter==item.blindSpotIntervention))){
+                return;
+            }
+            if(!((filterLCA=="") ||(filterLCA==item.laneCenterAssist))){
+                return;
+            }
+            if(!((filterAdaptiveDriveBeam=="") ||(filterAdaptiveDriveBeam==item.adaptDrivingBeam))){
+                return;
+            }
+            return item;
         });
     }
     function search(items) {
@@ -598,130 +443,6 @@ function BrowseVehicle()
                             />
                             <span className="sr-only">Search for vehicle here</span>
                         </label>
-
-                        {/*
-                        <div className="filter-query">
-                            <input
-                                type="checkbox"
-                                id="query1"
-                                checked={isChecked2}
-                                onChange={(e) => {
-                                    setIsChecked2(!isChecked2);
-                                    if(!isChecked2){
-                                        console.log("2 Checked");
-                                        setFilterAdaptiveCruiseControl("Standard");
-                                    }
-                                    else{
-                                        console.log("2 Unchecked");
-                                        setFilterAdaptiveCruiseControl("");
-                                    }
-                                }}
-                            />
-                            <label>
-                                Adaptive Cruise Control Standard
-                            </label>
-                        </div>
-                        <div className="filter-query">
-                            <input
-                                type="checkbox"
-                                id="query2"
-                                checked={isChecked1}
-                                onChange={(e) => {
-                                    setIsChecked1(!isChecked1);
-                                    if(!isChecked1){
-                                        console.log("1 Checked");
-                                        setFilterBackupCam("Standard");
-                                    }
-                                    else{
-                                        console.log("1 Unchecked");
-                                        setFilterBackupCam("");
-                                    }
-                                }}
-                            />
-                            <label>
-                                Backup Cam Standard
-                            </label>
-                        </div>
-                        <div className="filter-query">
-                            <input
-                                type="checkbox"
-                                id="query3"
-                                checked={isChecked3}
-                                onChange={(e) => {
-                                    setIsChecked3(!isChecked3);
-                                    if(!isChecked3){
-                                        console.log("3 Checked");
-                                        setFilterLKA("Standard");
-                                    }
-                                    else{
-                                        console.log("3 Unchecked");
-                                        setFilterLKA("");
-                                    }
-                                }}
-                            />
-                            <label>
-                                Lane Keep Assist Standard
-                            </label>
-                        </div>
-                        <div className="filter-query">
-                            <input
-                                type="checkbox"
-                                id="query4"
-                                checked={isChecked4}
-                                onChange={(e) => {
-                                    setIsChecked4(!isChecked4);
-                                    if(!isChecked4){
-                                        console.log("4 Checked");
-                                        setFilterCrashBrake("Standard");
-                                    }
-                                    else{
-                                        console.log("4 Unchecked");
-                                        setFilterCrashBrake("");
-                                    }
-                                }}
-                            />
-                            <label>
-                                Crash Imminent Braking Standard
-                            </label>
-                        </div>
-                        <div className="filter-query">
-                            <input
-                                type="checkbox"
-                                id="query5"
-                                checked={isChecked5}
-                                onChange={(e) => {
-                                    setIsChecked5(!isChecked5);
-                                    if(!isChecked5){
-                                        console.log("5 Checked");
-                                        setFilterParkAssist("Standard");
-                                    }
-                                    else{
-                                        console.log("5 Unchecked");
-                                        setFilterParkAssist("");
-                                    }
-                                }}
-                            />
-                            <label>
-                                Parking Assist Standard
-                            </label>
-                        </div>
-                        */}
-                        {/*
-                        <div className="select">
-                            <select
-                                onChange={(e) => {
-                                    setFilterAdaptiveCruiseControl(e.target.value);
-                                }}
-                                className="custom-select"
-                                aria-label="Filter Vehicles by Manufacturer"
-                            >
-                                <option value="">Filter by Adaptive Cruise Control</option>
-                                <option value="Standard">Standard</option>
-                                <option value="Optional">Optional</option>
-
-                            </select>
-                            <span className="focus"></span>
-                        </div>*/}
                         <br></br>
                         <FormControl variant="filled" sx={{ m: 1, minWidth: 800 }}>
                             <InputLabel id="demo-simple-select-filled-label">Sort by:</InputLabel>
@@ -828,10 +549,9 @@ function BrowseVehicle()
 
                         />
 
-
                     </div>
                     <ul className="card-grid">
-                        {search(backupCamFilter(items)).map((item) => {
+                        {search(filterSafetyFeatures(items)).map((item) => {
                             var myLink = item.vin
                             return (
                                 <li>
