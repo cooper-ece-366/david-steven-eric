@@ -107,6 +107,7 @@ function AddVehicle()
             }
         }
         reader.readAsBinaryString(file);
+        alert("Vehicles added!");
     }
 
 
