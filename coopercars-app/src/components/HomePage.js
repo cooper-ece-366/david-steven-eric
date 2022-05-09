@@ -131,9 +131,8 @@ function HomePage() {
         <img src={logo} className="App-logo" alt="cooper-logo" height = "800" width = "400"/>
       </h1>
         <p className="animate__animated animate__fadeInLeft animate__delay-2s">
-          Welcome to CooperCars
+          A solution for car dealers to manage their inventory. Sign in to access the application.
         </p>
-
 
       </header>
     </div>
