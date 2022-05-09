@@ -6,6 +6,7 @@ import '../App.css';
 import NavBar from './NavBar'
 import logo from "../CooperCars-logos_white.png";
 import TextField from "@material-ui/core/TextField";
+import Popup from 'react-animated-popup';
 import {
   BrowserRouter as Router,
   Route,
@@ -22,6 +23,8 @@ function getRandomColor() {
 function HomePage() {
   const apiUrlPrefix = "http://localhost:8080";
   //const vins = ['1FMCU9GD1HUA30879', '3FA6P0LU1KR242602', '3HGGK5H88KM742051', '5YJ3E1EA5JF098290', '1FTEX1E51KKC66386', '1C4RJFLG1HC603078', '3FA6P0LU1KR101755', 'JTMRWRFV7LJ048851', '1G1RE6E42EU111830', 'SADCJ2BN5HA086947', 'KNMAT2MV3JP608780', '5NPD84LF6KH490922', '5npe34af3jh646547', '2hgfc2f78jh564740', '5YFEPRAE7LP054292', '55SWF4KB5GU142000'];
+
+  const [visible, setVisible] = useState(false);
 
   const [currentVIN, setCurrentVIN] = useState('-');
   const [currentVehicleInfo, setCurrentVehicleInfo] = useState('-');
@@ -116,15 +119,31 @@ function HomePage() {
   //     setData(val.target.value)
   //     console.warn(val.target.value)
   // }
+const containerStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  minHeight: '100vh'
+}
+
+const buttonStyle = {
+  backgroundColor: 'cadetblue',
+  color: '#fff',
+  padding: 10,
+  cursor: 'pointer'
+}
+
+const pStyle = {
+  textAlign: 'center'
+}
+
 
   return (
     <div className="App">
       <header className="App-header">
-      <img src={logo} className="App-logo" alt="cooper-logo" height = "400" width = "200"/>
+      <div onMouseEnter={() => setVisible(true)} onMouseLeave={() => setVisible(false)}><img src={logo}   className="App-logo" alt="cooper-logo" height = "400" width = "200"/></div>
 
-        <p>
-          Welcome to CooperCars
-        </p>
+          {visible ? <p>Welcome to CooperCars! A website for car dealerships to manage their inventory. Sign in to add/remove vehicles to inventory or browse through the inventory.</p> : <p></p>}
 
 
 
