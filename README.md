@@ -21,8 +21,7 @@
 - Our inventory management solution targets car dealers that only uses an **Excel spreadsheet or basic database software** (Microsoft Access) to manage inventory
 - Solution streamlines a car dealer’s workflow, allowing them to focus on things other than mundane inventory management
 - [**From Consumer Reports:**](https://www.consumerreports.org/car-safety/car-safety-survey-new-car-buyers-want-advanced-safety-not-automation/) “In a national survey of U.S. drivers planning on buying a new or used vehicle in the next two years, 51 percent said it was important that their next car have a rearview camera or backup warning, and 45 percent said they wanted a blind-spot warning system.”
-- Our solution allows
-- dealer to quickly understand which vehicles in their inventory have these safety features and meet this crucial **consumer need**.
+- Our solution allows the dealer to quickly understand which vehicles in their inventory have these safety features and meet this crucial **consumer need**.
 
 ## Images of Application
 ![image1](addVehicle.png)
@@ -31,9 +30,6 @@
 ![image4](vehicleDetails1.png)
 ![image5](vehicleDetails2.png)
 
-<script>
-    md_gallery();
-</script>
 
 
 
