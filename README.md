@@ -88,7 +88,7 @@
 **Purpose:** Test adding vehicles with a test set of 20 vehicles (used for debugging).<br>
 
 **Name:** `sampleSpreadsheet1000.xlsx`<br>
-**Purpose:** A stress test for adding vehicles with a 1000 vehicles. VINs were randomly generated using a [Python script](https://replit.com/@exu4630/RandomVINGenerator) (since these VINs were randomly generated, many vehicles are not consumer vehicles and therefore this file is more for stress-testing the backend because the filtering/sorting with these random vehicles isn't too representative of what a dealer would typically have).<br>
+**Purpose:** A stress test for adding vehicles with 1000 vehicles. VINs were randomly generated using a [Python script](https://replit.com/@exu4630/RandomVINGenerator) (since these VINs were randomly generated, many vehicles are not consumer vehicles and therefore this file is more for stress-testing the backend because the filtering/sorting with these random vehicles isn't too representative of what a dealer would typically have).<br>
 
 **Name:** `sampleRemoveSpreadsheet.xlsx`<br> 
 **Purpose:** Test remove vehicles with a set of 44 VINs that were in `sampleSpreadsheet.xlsx`, `sampleSpreadsheetMaster.xlsx`, and `sampleSpreadsheet1000.xlsx`.<br>
