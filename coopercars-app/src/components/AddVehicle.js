@@ -11,6 +11,7 @@ import { InputLabel } from '@mui/material';
 import { Select } from '@mui/material';
 import { MenuItem } from '@mui/material';
 import Alert from 'react-s-alert';
+import { ACCESS_TOKEN } from '../constants';
 
 
 
@@ -115,9 +116,10 @@ function AddVehicle()
 
     AddVehicle.addVehicle = () =>
     {
+        const authorization = "Bearer " + localStorage.getItem(ACCESS_TOKEN)
         const requestOptions = {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", "Authorization" : authorization },
             body: JSON.stringify({
                 vin,
                 dealerPrice,
@@ -137,9 +139,11 @@ function AddVehicle()
 
     function addVehicleXlsx(myVin,myDealerPrice,mySalePrice)
     {
+        const authorization = "Bearer " + localStorage.getItem(ACCESS_TOKEN)
+
         const requestOptions = {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", "Authorization" : authorization },
             body: JSON.stringify({
                 myVin,
                 myDealerPrice,
@@ -156,7 +160,13 @@ function AddVehicle()
     {
         console.log("Refreshing ... %s vehicle ...", currentVIN);
         var vehicleApiUrl = apiUrlPrefix.concat("/api/vehicle/getinfo/",vin);
-        fetch(vehicleApiUrl)
+        const token = localStorage.getItem(ACCESS_TOKEN)
+        const authorization = "Bearer " + token
+        const requestOptions = {
+          method: "GET",
+          headers: { "Authorization": authorization},
+        };
+        fetch(vehicleApiUrl, requestOptions)
             .then(response => response.json())
             .then(data => {
                 setCurrentVehicleImg(data.imgURL);

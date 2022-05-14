@@ -7,6 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import * as XLSX from "xlsx";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import { ACCESS_TOKEN } from '../constants';
 
 function RemoveVehicle()
 {
@@ -74,8 +75,11 @@ function RemoveVehicle()
     }
     RemoveVehicle.removeVehicle = () =>
     {
+        const authorization = "Bearer " + localStorage.getItem(ACCESS_TOKEN)
+
         const requestOptions = {
-            method: "DELETE"
+            method: "DELETE",
+            headers: { "Authorization": authorization}
         };
         var vehicleApiUrl = apiUrlPrefix.concat("/api/vehicle/remove/",vin);
         fetch(vehicleApiUrl,requestOptions)
@@ -89,8 +93,11 @@ function RemoveVehicle()
 
     RemoveVehicle.removeVehicleStatus = () =>
     {
+        const authorization = "Bearer " + localStorage.getItem(ACCESS_TOKEN)
+
         const requestOptions = {
-            method: "DELETE"
+            method: "DELETE",
+            headers: { "Authorization": authorization}
         };
         var vehicleApiUrl = apiUrlPrefix.concat("/api/vehicle/remove/status/", status);
         fetch(vehicleApiUrl,requestOptions)

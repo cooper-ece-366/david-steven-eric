@@ -14,9 +14,12 @@ import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL, ACCESS_TOKEN } fro
 import Alert from 'react-s-alert';
 import { getCurrentUser } from '../util/APIUtils';
 import default_profile_pic from "../img/default_profile_pic.jpg";
+import Popup from 'react-animated-popup';
 
 
 export default function Profile(props){
+
+
 
 
     return(
@@ -26,7 +29,10 @@ export default function Profile(props){
             <Button variant="contained">Edit Picture</Button>
             <p>{props.currentUser.name}</p>
             <p>{props.currentUser.email}</p>
+
         </div>
+
+
     );
 }
 

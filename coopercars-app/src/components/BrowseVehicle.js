@@ -20,6 +20,9 @@ import {
 import AddVehicle from "./AddVehicle";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Button from "@material-ui/core/Button";
+import { ACCESS_TOKEN } from '../constants';
+
+
 export const featureOptions = [
     { value: "ACC", label: "Adaptive Cruise Control" },
     { value: "backupCam", label: "Backup Cam" },
@@ -41,6 +44,7 @@ export const featureOptions = [
     { value: "LCA", label: "Lane Center Assist" },
     { value: "adaptiveDriveBeam", label: "Adaptive Drive Beam" }
 ];
+
 
 function BrowseVehicle()
 {
@@ -259,10 +263,16 @@ function BrowseVehicle()
     }, []);
 
     BrowseVehicle.handleSort = (val) =>{
+        const token = localStorage.getItem(ACCESS_TOKEN)
+        const authorization = "Bearer " + token
+        const requestOptions = {
+          method: "GET",
+          headers: { "Authorization": authorization},
+        };
         var sortURL = fetchURLSort.concat(val);
         console.log(val);
         console.log(sortURL);
-        fetch(sortURL)
+        fetch(sortURL, requestOptions)
             .then((res) => res.json())
             .then(
                 (result) => {

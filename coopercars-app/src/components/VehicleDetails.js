@@ -14,6 +14,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { ACCESS_TOKEN } from '../constants';
 
 
 function VehicleDetails()
@@ -97,7 +98,13 @@ function VehicleDetails()
         window.scrollTo(0, 0);
         console.log("Refreshing ... %s vehicle ...", VIN);
         var vehicleApiUrl = apiUrlPrefix.concat("/api/vehicle/getinfo/",VIN);
-        fetch(vehicleApiUrl)
+        const token = localStorage.getItem(ACCESS_TOKEN)
+        const authorization = "Bearer " + token
+        const requestOptions = {
+          method: "GET",
+          headers: { "Authorization": authorization},
+        };
+        fetch(vehicleApiUrl, requestOptions)
             .then(response => response.json())
             .then(data => {
                 setCurrentVehicleImg(data.imgURL);

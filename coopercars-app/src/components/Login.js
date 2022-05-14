@@ -3,7 +3,7 @@ import "./boostrap.min.css";
 import "./Login.css";
 import NavBar from './NavBar'
 import {Link, useNavigate} from "react-router-dom";
-import { login } from '../util/APIUtils';
+import { login, signup } from '../util/APIUtils';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -21,7 +21,10 @@ import githubLogo from "../img/github-logo.png";
 import googleLogo from "../img/google-logo.png";
 
 
+
 export default function Login(){
+
+
   const navigate = useNavigate();
   const [email, changeEmail] = useState("");
   const [password, changePassword] = useState("");
@@ -49,6 +52,7 @@ export default function Login(){
         });
 
   }
+
 
     return(
         <div>
@@ -82,8 +86,7 @@ export default function Login(){
 
 
 export function Register () {
-  const [firstName, changeFirstName] = useState("");
-  const [lastName, changeLastName] = useState("");
+  const [name, changeName] = useState("");
   const [email, changeEmail] = useState("");
   const [password, changePassword] = useState("");
     const handlePassword = (event) => {
@@ -96,42 +99,43 @@ export function Register () {
         changeEmail(event.target.value);
         console.log(event.target.value);
     }
-    const handleFirstName = (event) =>{
+    const handleName = (event) =>{
         event.preventDefault();
-        changeFirstName(event.target.value);
+        changeName(event.target.value);
         console.log(event.target.value);
     }
 
 
     const handleSubmit = () => {
+        const signUpRequest = Object.assign({}, {"firstName" : name, "email": email, "password": password});
         const requestOptions = {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
-                firstName,
+                name,
                 email,
                 password,
               }),
         };
-        fetch("http://localhost:8080/auth/signup", requestOptions).then((response) => console.log(response)).then((data) => console.log(data)); //response.json()
 
-        const loginRequest = Object.assign({}, {"email": email, "password": password});
-        login(loginRequest).then(response => {
-            localStorage.setItem(ACCESS_TOKEN, response.accessToken);
-            console.log("ACCESS_TOKEN = " + response.accessToken);
-            Alert.success("You're successfully logged in!");
-            window.location.reload();
-        }).catch(error =>{
-            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
-        });
-  }
+        signup(signUpRequest)
+                .then(response => {
+                    Alert.success("You're successfully registered. Please login to continue!");
+                    this.props.history.push("/login");
+                }).catch(error => {
+                    Alert.error('Oops! Something went wrong. Please try again!');
+                });
+            }
+        // fetch("http://localhost:8080/auth/signup", requestOptions).then((response) => console.log(response)).then((data) => console.log(data)); //response.json()
+
+
 
     return(
         <div>
             <h3>Sign Up</h3>
             <div className="form-group">
                 <label>First Name</label>
-                <input type="first-name" className="form-control" placeholder="Steven" onChange={handleFirstName} />
+                <input type="first-name" className="form-control" placeholder="Steven" onChange={handleName} />
             </div>
             <div className="form-group">
                 <label>Email address</label>
