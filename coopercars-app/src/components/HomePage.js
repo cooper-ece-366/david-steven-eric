@@ -134,9 +134,9 @@ function HomePage() {
           Welcome to CooperCars!
         </p>
         <p className="animate__animated animate__fadeInLeft animate__delay-2s">
-          A vehicle inventory management solution for your small car dealership!
-        </p>
+          A vehicle inventory management solution for your small car dealership! Sign in to get started.
 
+        </p>
 
       </header>
     </div>

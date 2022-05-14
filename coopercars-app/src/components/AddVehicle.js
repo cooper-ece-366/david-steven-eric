@@ -109,6 +109,7 @@ function AddVehicle()
         }
         reader.readAsBinaryString(file);
         setTimeout(alert("Vehicle added successfully!"), 5000)
+
     }
 
 
