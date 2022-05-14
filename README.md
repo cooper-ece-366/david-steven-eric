@@ -55,7 +55,7 @@
     2) Sort by a certain parameter such as Dealer Price, Sale Price, Profit, Mileage, Year, etc.
        ![home](imgs/sortby.png)
     3) Filter by specifications such as Type, Body, Make, Fuel Type, etc. Click on the dropdown to select a specific option.
-       ![home](filterby.png)
+       ![home](imgs/filterby.png)
     4) Filter by multiple safety features such as backup camera, blind spot monitor, etc by clicking on the checkbox within the dropdown menu.
        ![home](imgs/filterbysafety.png)
 - Each vehicle card in the `Browse Vehicles` tab is linked to its own landing page. Click on it to view more details about that specific vehicle.
