@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "./boostrap.min.css";
 import "./Login.css";
 import NavBar from './NavBar'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { login } from '../util/APIUtils';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -22,6 +22,7 @@ import googleLogo from "../img/google-logo.png";
 
 
 export default function Login(){
+  const navigate = useNavigate();
   const [email, changeEmail] = useState("");
   const [password, changePassword] = useState("");
     const handlePassword = (event) => {
@@ -40,8 +41,9 @@ export default function Login(){
         login(loginRequest).then(response => {
             localStorage.setItem(ACCESS_TOKEN, response.accessToken);
             console.log("ACCESS_TOKEN = " + response.accessToken);
-            Alert.success("You're successfully logged in!");
+            navigate("/");
             window.location.reload();
+
         }).catch(error =>{
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });

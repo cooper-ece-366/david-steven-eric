@@ -44,8 +44,6 @@ function App() {
     function handleLogout() {
         localStorage.removeItem(ACCESS_TOKEN);
         setAuthenticated(false);
-        Alert.success("You're safely logged out!");
-        <Navigate to ="/asdf"/>
       }
 
   return (
