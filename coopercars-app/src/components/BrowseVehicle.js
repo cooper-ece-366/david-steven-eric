@@ -38,7 +38,7 @@ export const featureOptions = [
     { value: "forwardCollisionWarning", label: "Forward Collision Warning" },
     { value: "dynamicBrakeSupport", label: "Dynamic Brake Support" },
     { value: "pedestrian", label: "Pedestrian Auto Emergency Braking" },
-    { value: "blindSpotWarning", label: "Dynamic Brake Support" },
+    { value: "blindSpotWarning", label: "Blind Spot Warning" },
     { value: "laneDepart", label: "Lane Departure Warning" },
     { value: "blindSpotInter", label: "Blind Spot Intervene" },
     { value: "LCA", label: "Lane Center Assist" },
@@ -54,14 +54,7 @@ function BrowseVehicle()
     const [q, setQ] = useState("");
 
     const [searchParam] = useState(["make", "year", "model", "vehicleType", "bodyClass", "driveType"]);
-    const [filterParam, setFilterParam] = useState(["All"]);
     const [sortParam, setSortParam] = useState("");
-    const [filtParam, setFiltParam] = useState("");
-    const [isChecked1, setIsChecked1] = useState(false);
-    const [isChecked2, setIsChecked2] = useState(false);
-    const [isChecked3, setIsChecked3] = useState(false);
-    const [isChecked4, setIsChecked4] = useState(false);
-    const [isChecked5, setIsChecked5] = useState(false);
 
     const[filterType, setFilterType] = useState("All");
     const[filterBody, setFilterBody] = useState("All");
