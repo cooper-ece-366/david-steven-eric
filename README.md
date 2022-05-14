@@ -30,7 +30,7 @@
 2) Go to `./coopercars-service/src/main/java/RestApiServer`.
 3) Ensure JDK 17.0 is installed, then build RestApiServer.
 4) Check configuration settings to run RestAPIServer:
-   ![image1](restapi_config.png)
+   ![image1](imgs/restapi_config.png)
    NOTE: This application uses port 3000 and 8080. Ensure these ports are not already in use.
 5) Ensure [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) is installed on your machine.
 6) Go to terminal in IntelliJ, change directory into `./coopercars-app`, and run the following: `npm i react-select`, `npm i xlsx`, `npm install @mui/system @emotion/react @emotion/styled`.<br>
@@ -43,14 +43,38 @@
    ADDITIONAL NOTE: The backend database is running on an already configured Amazon RDS server, no additional action is needed to set this up.<br>
    In the case you would like the database to be local, head to `./coopercars-service/src/main/resources/application.yml` and change the datasource to your mySQL server credentials. 
 
+## How-To Guide
+- Upon visiting http://localhost:3000/, the only visible tab is the Login tab.
+- You must login to access the application. This is to ensure that a car dealer's critical inventory information will not get into the hands of bad actors.
+  ![image1](imgs/login.png)
+- Once you login, you will have full access to the application.
+  ![home](imgs/home.png)
+- Starting with the `Browse Vehicles` tab, there are three different ways to sort/filter the cars that are presented.
+    1) Filter results by typing in the Make or Model of the car (for example: `Corolla` or `Toyota`)
+       ![home](imgs/toyota.png)
+    2) Sort by a certain parameter such as Dealer Price, Sale Price, Profit, Mileage, Year, etc.
+       ![home](imgs/sortby.png)
+    3) Filter by specifications such as Type, Body, Make, Fuel Type, etc. Click on the dropdown to select a specific option.
+       ![home](imgs/filterby.png)
+    4) Filter by multiple safety features such as backup camera, blind spot monitor, etc by clicking on the checkbox within the dropdown menu.
+       ![home](imgs/filterbysafety.png)
+- Each vehicle card in the `Browse Vehicles` tab is linked to its own landing page. Click on it to view more details about that specific vehicle.
+  ![home](imgs/vehicleDetails1.png)
+- The `Add/Update Vehicles` tab is quite self-explanatory: you can choose to upload a spreadsheet (column parameters are defined in the next section), or manually enter details of the vehicle to add to inventory.
+  ![home](imgs/addVehicle.png)
+- The `Remove Vehicles` tab is also quite self-explanatory: you can choose to upload a spreadsheet with VINs, enter a VIN to directly remove from inventory, or select a Status (ie: Sold, For Sale, In-transit) to batch remove from inventory.
+  ![home](imgs/removeVehicle.png)  
+
 ## Format for spreadsheets used to batch add/remove vehicles
 **Add:** Columns are VIN, Dealer Price, Sale Price, Mileage, Status (Sold, For sale, In-transit).
-![image1](add_xlsx_example.png)<br>
+![image1](imgs/add_xlsx_example.png)<br>
 **Remove:** Only a list of VINs. <br>
-![image1](remove_xlsx_example.png)<br>
+![image2](imgs/remove_xlsx_example.png)<br>
 
 
 ## Spreadsheets to test application
+**_There are spreadsheets attached to this repo (under the `spreadsheets` directory) to test the application._<br>**
+
 **Name:** `sampleSpreadsheet.xlsx`<br>
 **Purpose:** Test adding vehicles with a variety of 70 different vehicles. These VINs came from actual cars for sale by dealers across the U.S.!<br>
 
@@ -58,29 +82,29 @@
 **Purpose:** Test adding vehicles with another set of 70 different vehicles. These VINs came from actual cars for sale by dealers across the U.S.!<br>
 
 **Name:** `sampleSpreadsheetMaster.xlsx`<br>
-**Purpose:** Test adding vehicles with another a master set of 140 vehicles. These VINs came from actual cars for sale by dealers across the U.S.!<br>
+**Purpose:** Test adding vehicles with a master set of 140 vehicles (two 70s merged together). These VINs came from actual cars for sale by dealers across the U.S.!<br>
 
 **Name:** `sampleSpreadsheetTest.xlsx`<br>
 **Purpose:** Test adding vehicles with a test set of 20 vehicles (used for debugging).<br>
 
 **Name:** `sampleSpreadsheet1000.xlsx`<br>
-**Purpose:** A stress test for adding vehicles with a 1000 vehicles. VINs were randomly generated using a [Python script](https://replit.com/@exu4630/RandomVINGenerator) (since these VINs were randomly generated, many vehicles are not consumer vehicles and therefore this file is more for stress-testing the backend because the filtering/sorting with these random vehicles isn't too representative of what a dealer would typically have).<br>
+**Purpose:** A stress test for adding vehicles with 1000 vehicles. VINs were randomly generated using a [Python script](https://replit.com/@exu4630/RandomVINGenerator) (since these VINs were randomly generated, many vehicles are not consumer vehicles and therefore this file is more for stress-testing the backend because the filtering/sorting with these random vehicles isn't too representative of what a dealer would typically have).<br>
 
-**Name:** `sampleRemoveSpreadsheet.xlsx`<br>
+**Name:** `sampleRemoveSpreadsheet.xlsx`<br> 
 **Purpose:** Test remove vehicles with a set of 44 VINs that were in `sampleSpreadsheet.xlsx`, `sampleSpreadsheetMaster.xlsx`, and `sampleSpreadsheet1000.xlsx`.<br>
 
 ## Overall Architecture
-![image1](overall_arch.png)
+![image1](imgs/overall_arch.png)
 
 ## UML of Vehicle Backend
-![image1](backend_vehicles_scope.png)
+![image1](imgs/backend_vehicles_scope.png)
 
 ## Images of Application
-![image1](addVehicle.png)
-![image2](removeVehicle.png)
-![image3](browseVehicle.png)
-![image4](vehicleDetails1.png)
-![image5](vehicleDetails2.png)
+![image1](imgs/addVehicle.png)
+![image2](imgs/removeVehicle.png)
+![image3](imgs/browseVehicle.png)
+![image4](imgs/vehicleDetails1.png)
+![image5](imgs/vehicleDetails2.png)
 
 
 
