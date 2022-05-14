@@ -131,7 +131,11 @@ function HomePage() {
         <img src={logo} className="App-logo" alt="cooper-logo" height = "800" width = "400"/>
       </h1>
         <p className="animate__animated animate__fadeInLeft animate__delay-2s">
-          A solution for car dealers to manage their inventory. Sign in to access the application.
+          Welcome to CooperCars!
+        </p>
+        <p className="animate__animated animate__fadeInLeft animate__delay-2s">
+          A vehicle inventory management solution for your small car dealership! Sign in to get started.
+
         </p>
 
       </header>
