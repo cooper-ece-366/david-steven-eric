@@ -25,17 +25,6 @@ const NavBar = (props) => {
                     >
                     </Typography>
 
-                    {/*<div>*/}
-                    {/*    <Link>*/}
-                    {/*        Home*/}
-                    {/*    </Link>*/}
-                    {/*    <Link>*/}
-                    {/*        Search*/}
-                    {/*    </Link>*/}
-                    {/*</div>*/}
-                    {/*<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>*/}
-                    {/*    Vehicles*/}
-                    {/*</Typography>*/}
                     <Button to="/" component={Link} color="inherit">
                         <img src={logo} className="App-logo" alt="logo" sx={{ p: 0 }} width = "100" height = "100"/>
                     </Button>
