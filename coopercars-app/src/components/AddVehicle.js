@@ -56,24 +56,20 @@ function AddVehicle()
     }
 
     //Excel parsing by David
+    //Use XLSX to parse spreadsheet row by row and get parameters from each column for constructing a vehicle object
     AddVehicle.handleSubmit = () => {
         console.log('Button was clicked!');
         console.log('File name: '+ file.name);
         const reader = new FileReader();
-        reader.onload = (evt) => { // evt = on_file_select event
-            /* Parse data */
+        reader.onload = (evt) => {
             const bstr = evt.target.result;
             const wb = XLSX.read(bstr, {type: 'binary'});
-            /* Get first worksheet */
             const wsname = wb.SheetNames[0];
             const ws = wb.Sheets[wsname];
-            /* Convert array of arrays */
             const data = XLSX.utils.sheet_to_csv(ws, {header: 1});
-            /* Update state */
             console.log("Data>>> \n" + data);
             var sheet = wb.Sheets[wb.SheetNames[0]];
-            /* loop through every cell manually */
-            var range = XLSX.utils.decode_range(sheet['!ref']); // get the range
+            var range = XLSX.utils.decode_range(sheet['!ref']);
             for(var R = range.s.r; R <= range.e.r; ++R) {
                 var vi = null;
                 var dealer = null;
@@ -81,13 +77,12 @@ function AddVehicle()
                 var mile = null;
                 var stat = null;
                 for (var C = range.s.c; C <= range.e.c; ++C) {
-                    /* find the cell object */
                     console.log('Row : ' + R);
                     console.log('Column : ' + C);
-                    var cellref = XLSX.utils.encode_cell({c: C, r: R}); // construct A1 reference for cell
+                    var cellref = XLSX.utils.encode_cell({c: C, r: R});
                     if (!sheet[cellref]) continue; // if cell doesn't exist, move on
                     var cell = sheet[cellref];
-
+                    //Determine parameter type based on current column
                     if(C==0){
                         vi = cell.v;
                         console.log("VIN: " + vi);
