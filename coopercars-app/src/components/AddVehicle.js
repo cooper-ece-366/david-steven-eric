@@ -114,7 +114,8 @@ function AddVehicle()
             }
         }
         reader.readAsBinaryString(file);
-        wait(8000);
+        alert("Vehicles are being added to inventory... this will take a moment");
+        wait(18000);
         alert("Vehicles added successfully!");
 
     }
