@@ -20,6 +20,9 @@ public class VehicleRepositoryTest {
         vehicle.setStatus("someStatus");
         vehicle.setVIN("123456");
         vehicle.setBackupCam("Test BackupCam");
+        vehicle.setDealerPrice(30000.0);
+        vehicle.setSalePrice(30000.0);
+        vehicle.setMileage(8000.0);
         try {
             VehicleAPI myVehicleAPI = new VehicleAPI(vehicle.getVIN(), vehicle.getStatus(), Double.toString(vehicle.getDealerPrice()), Double.toString(vehicle.getSalePrice()), Double.toString(vehicle.getMileage()));
             Vehicle theVehicle = vehicleRepository.save(myVehicleAPI.getTheVehicle());
