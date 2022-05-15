@@ -17,6 +17,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17.0.2
+      - name: Maven Test
+      run: mvn -q -B clean test
       - name: Maven Package
         run: mvn -B clean package -DskipTests
       - name: Maven Verify
