@@ -1,14 +1,19 @@
+
 package edu.cooper.ece366.project.coopercars.server.model;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import java.io.IOException;
 
-//Steven, David
-public class VehicleTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+//David
+class VehicleAPITest {
+
+    VehicleAPI vehicleAPI;
+
     Vehicle vehicle;
     private String VIN;
     private double dealerPrice;
@@ -21,7 +26,15 @@ public class VehicleTest {
 
     @BeforeEach
     void createVehicle(){
+        try {
+            vehicleAPI = new VehicleAPI("3HGGK5H88KM742051", "TestStatus", "1000.0", "1000.0", "1000.0");
+        }
+        catch (IOException ex) {
+            System.out.println("Unable to communicate to Vehicle API.");
+        }
         vehicle = new Vehicle();
+        vehicleAPI.setTheVehicle(vehicle);
+        vehicle = vehicleAPI.getTheVehicle();
     }
 
     @Test
@@ -472,6 +485,7 @@ public class VehicleTest {
     }
     @AfterEach
     void deleteVehicle(){
+        vehicleAPI = null;
         vehicle = null;
     }
 }
