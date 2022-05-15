@@ -23,13 +23,15 @@ public class VehicleRepositoryTest {
         vehicle.setDealerPrice(30000.0);
         vehicle.setSalePrice(30000.0);
         vehicle.setMileage(8000.0);
+        vehicleRepository.save(vehicle);
+        /*
         try {
             VehicleAPI myVehicleAPI = new VehicleAPI(vehicle.getVIN(), vehicle.getStatus(), Double.toString(vehicle.getDealerPrice()), Double.toString(vehicle.getSalePrice()), Double.toString(vehicle.getMileage()));
             Vehicle theVehicle = vehicleRepository.save(myVehicleAPI.getTheVehicle());
         }
         catch (IOException ex) {
             System.out.println("Unable to communicate to Vehicle API.");
-        }
+        }*/
     }
 
     @Test
