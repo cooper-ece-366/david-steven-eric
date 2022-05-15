@@ -103,7 +103,7 @@
 1) Head over to Remove Vehicles, and test removing by status `Sold`, `In-Transit`, `For sale`. Check after each batch remove that vehicles with that status tag no longer shows up on `Browse Vehicles`.
 2) Confirm that after removing by all three status, there are no vehicles presented under `Browse Vehicles`.
 3) Head over to Add Vehicles and upload `sampleSpreadsheetMaster.xlsx`. Check that the vehicles are presented under `Browse Vehicles`.
-4) Test filtering, sorting, and filtering in `Browse Vehicles`.
+4) Test filtering, sorting, and searching in `Browse Vehicles`.
 
 ## Overall Architecture
 ![image1](imgs/overall_arch.png)
