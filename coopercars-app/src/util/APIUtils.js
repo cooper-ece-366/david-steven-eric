@@ -1,5 +1,7 @@
 import { API_BASE_URL, ACCESS_TOKEN, BASE_URL } from '../constants';
 
+// Edited by Steven
+
 const request = (options) => {
     const headers = new Headers({
         'Content-Type': 'application/json',

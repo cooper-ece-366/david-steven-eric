@@ -9,6 +9,10 @@ import * as XLSX from "xlsx";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import { ACCESS_TOKEN } from '../constants';
 
+//File edited by: Steven, David, Eric
+// Initial API call setup by Eric
+// Securing API calls by Steven
+// Excel parsing by David
 function RemoveVehicle()
 {
     const apiUrlPrefix = "http://localhost:8080";
@@ -21,6 +25,8 @@ function RemoveVehicle()
     useEffect(() => {
     }, []);
 
+
+    // Excel parsing by David
     RemoveVehicle.handleSubmit = () =>{
         console.log('Button was clicked!');
         console.log('File name: '+ file.name);
@@ -73,6 +79,9 @@ function RemoveVehicle()
         }
         reader.readAsBinaryString(file);
     }
+
+    // API calls by Eric
+    // Securing API calls by Steven
     RemoveVehicle.removeVehicle = () =>
     {
         const authorization = "Bearer " + localStorage.getItem(ACCESS_TOKEN)
@@ -117,6 +126,7 @@ function RemoveVehicle()
         RemoveVehicle.removeVehicle(vin);
     }
 
+    // David, Eric
     return (
         <div className="App">
             <header className="App-header">

@@ -3,6 +3,8 @@ package edu.cooper.ece366.project.coopercars.server.payload;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+
+//Steven
 public class SignUpRequest {
     @NotBlank
     private String firstName;

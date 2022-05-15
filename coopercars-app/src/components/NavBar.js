@@ -7,8 +7,7 @@ import {Container, Tooltip} from "@material-ui/core";
 import logo from "../CooperCars-logos_white.png";
 import {Link} from "react-router-dom";
 
-const pages = ['Browse Vehicles', 'Add Vehicles'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+// NavBar.js edited by David
 
 const NavBar = (props) => {
 

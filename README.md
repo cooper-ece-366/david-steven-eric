@@ -98,6 +98,27 @@
 ## UML of Vehicle Backend
 ![image1](backend_vehicles_scope.png)
 
+## Description of Vehicle Backend
+- **VehicleAPI** class takes the VIN, status, dealer/sale price, and mileage from the front-end. 
+- Using the **VIN**, **VehicleAPI** calls **NHTSA's** VIN decoder tool, which returns a .csv file (below is an example for given VIN)
+  ![image1](imgs/example_nhtsa.png)
+- **VehicleAPI** parses the csv file:
+  1) Checks that there is **no error code** returned.
+  2) Creates an **array** with the **features (ie: "Element" column)** of interest.
+  3) Matches **elements of that array** with **each row of "Element"**, then **parses the value** into another array.
+  4) Creates a **Vehicle** class with those attributes from the aforementioned array.
+- **Vehicle** class created from **VehicleAPI** class contains VIN, status, dealer/sale price, and mileage, which were parameters for VehicleAPI, and also has attributes of features and specifications pulled from **NHTSA's VIN decoder tool** from the VehicleAPI class.
+
+## Design Choices and Justifications
+- This solution is intended for small, independent car dealers with an expected average of 50-100 vehicles in the inventory.
+- We conducted most of our testing with 140 vehicles in the inventory and performance was great:
+    1) Less than a second to load `Browse Vehicles`, less than a second to search, filter, sort.
+    2) Approximately less than 5 seconds to add all vehicles, less than a second to remove all vehicles.
+- We conducted a stress test of 1000 vehicles (an extreme case)
+    1) Approximately two seconds to load `Browse Vehicles`, approximately one second to seach, filter, sort.
+    2) Approximately 8 seconds to add all vehicles to inventory, approximately five seconds to remove all vehicles.
+- The decision was made to push all the vehicles in inventory on the `Browse Vehicles` because a small car dealer with 50-100 cars would be better off being able to sort and filter through all the vehicles in the inventory as opposed to going through multiple pages. 
+
 ## Images of Application
 ![image1](addVehicle.png)
 ![image2](removeVehicle.png)

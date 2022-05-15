@@ -3,6 +3,9 @@ package edu.cooper.ece366.project.coopercars.server.payload;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+
+//Eric
+//simple class that works with API when creating a new Vehicle object
 public class AddVehicleRequest {
     @NotBlank
     private String VIN;

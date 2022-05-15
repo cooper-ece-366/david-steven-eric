@@ -20,7 +20,7 @@ import fbLogo from "../img/fb-logo.png";
 import githubLogo from "../img/github-logo.png";
 import googleLogo from "../img/google-logo.png";
 
-
+// Login.js edited by Steven
 
 export default function Login(){
 

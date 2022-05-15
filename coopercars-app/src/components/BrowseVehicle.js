@@ -22,6 +22,9 @@ import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Button from "@material-ui/core/Button";
 import { ACCESS_TOKEN } from '../constants';
 
+//David: all things filtering and searching.
+//Eric: sorting.
+//Steven: securing PAI calls
 
 export const featureOptions = [
     { value: "ACC", label: "Adaptive Cruise Control" },

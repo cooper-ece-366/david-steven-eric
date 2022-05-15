@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
+// Eric
+// Simple Vehicle object class that creates a Vehicle object with given attributes. Integrated JPA - each object is stored as a database entry.
 @Entity
 @Table(name = "vehicles")
 public class Vehicle

@@ -16,6 +16,7 @@ import { getCurrentUser } from '../util/APIUtils';
 import default_profile_pic from "../img/default_profile_pic.jpg";
 import Popup from 'react-animated-popup';
 
+// Edited by Steven
 
 export default function Profile(props){
 

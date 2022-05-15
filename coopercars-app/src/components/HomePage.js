@@ -18,10 +18,8 @@ import {
   Routes,
 } from "react-router-dom";
 
-function getRandomColor() {
-  let colorValues = ["red", "blue", "green"];
-  return colorValues[Math.floor(Math.random() * colorValues.length)];
-}
+//File edited by: David, Steven
+
 
 function HomePage() {
   const apiUrlPrefix = "http://localhost:8080";

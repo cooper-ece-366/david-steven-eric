@@ -29,6 +29,9 @@ function getRandomColor() {
   return colorValues[Math.floor(Math.random() * colorValues.length)];
 }
 
+
+//Login edited by Steven
+//Dynamic routing edited by Eric
 function App() {
 
     const [currentUser, setCurrentUser] = useState([])

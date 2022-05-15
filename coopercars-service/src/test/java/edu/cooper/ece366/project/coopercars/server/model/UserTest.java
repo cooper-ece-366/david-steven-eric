@@ -2,13 +2,20 @@
 package edu.cooper.ece366.project.coopercars.server.model;
 
 import edu.cooper.ece366.project.coopercars.server.model.User;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
 
-    User user = new User();
+    User user;
+    @BeforeEach
+    void createUser(){
+        user = new User();
+    }
+
 
     @Test
     void Id() {
@@ -58,6 +65,11 @@ class UserTest {
         user.setProviderId("YO");
         System.out.println("checking email verified");
         assertEquals("YO", user.getProviderId());
+    }
+
+    @AfterEach
+    void deleteUser(){
+        user = null;
     }
 
 

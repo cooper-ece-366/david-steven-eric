@@ -13,7 +13,18 @@ import { MenuItem } from '@mui/material';
 import Alert from 'react-s-alert';
 import { ACCESS_TOKEN } from '../constants';
 
+//File edited by: Steven, David, Eric
+// Initial API call setup by Eric
+// Securing API calls by Steven
+// Excel parsing by David
 
+function wait(ms){
+    var start = new Date().getTime();
+    var end = start;
+    while(end < start + ms) {
+        end = new Date().getTime();
+    }
+}
 
 function AddVehicle()
 {
@@ -43,6 +54,8 @@ function AddVehicle()
     AddVehicle.onFileChange = () => {
         console.log('File loaded');
     }
+
+    //Excel parsing by David
     AddVehicle.handleSubmit = () => {
         console.log('Button was clicked!');
         console.log('File name: '+ file.name);
@@ -109,11 +122,13 @@ function AddVehicle()
             }
         }
         reader.readAsBinaryString(file);
-        setTimeout(alert("Vehicle added successfully!"), 5000)
+        wait(8000);
+        alert("Vehicle added successfully!");
 
     }
 
-
+    // API calls by Eric
+    // Securing API calls by Steven
     AddVehicle.addVehicle = () =>
     {
         const authorization = "Bearer " + localStorage.getItem(ACCESS_TOKEN)
@@ -132,9 +147,6 @@ function AddVehicle()
             .then((response) => console.log(response))
             .then((data) => console.log(data))
             .then(()=>AddVehicle.refreshInfo());
-
-
-
     }
 
     function addVehicleXlsx(myVin,myDealerPrice,mySalePrice)
@@ -156,6 +168,7 @@ function AddVehicle()
             .then(()=>AddVehicle.refreshInfo());
     }
 
+    // Eric
     AddVehicle.refreshInfo = () =>
     {
         console.log("Refreshing ... %s vehicle ...", currentVIN);
@@ -215,6 +228,8 @@ function AddVehicle()
         console.log("Refreshed %s VIN.", currentVIN);
     }
 
+
+    // David, Eric
     return (
         <div className="App">
             <header className="App-header">

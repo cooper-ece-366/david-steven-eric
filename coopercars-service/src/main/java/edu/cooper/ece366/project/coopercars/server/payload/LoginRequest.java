@@ -1,5 +1,7 @@
 package edu.cooper.ece366.project.coopercars.server.payload;
 
+
+//Steven
 public class LoginRequest {
     private String email;
 
