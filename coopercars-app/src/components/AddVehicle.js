@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import coopercars1_logo from '../CooperCars-logos.jpeg';
-import coopercars2_logo from '../CooperCars-logos_black.png';
 import '../App.css';
-import NavBar from './NavBar'
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import * as XLSX from 'xlsx';
@@ -118,7 +115,7 @@ function AddVehicle()
         }
         reader.readAsBinaryString(file);
         wait(8000);
-        alert("Vehicle added successfully!");
+        alert("Vehicles added successfully!");
 
     }
 
@@ -163,7 +160,7 @@ function AddVehicle()
             .then(()=>AddVehicle.refreshInfo());
     }
 
-    // Eric
+    // Eric, David
     AddVehicle.refreshInfo = () =>
     {
         console.log("Refreshing ... %s vehicle ...", currentVIN);

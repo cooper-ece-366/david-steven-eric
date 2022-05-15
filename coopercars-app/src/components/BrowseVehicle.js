@@ -93,7 +93,6 @@ function BrowseVehicle()
         return (
             <components.Option{...props}>
                 <input
-                    //onChange={(e) => {console.log("test");}}
                     type="checkbox"
                     id="query1"
                     checked={props.isSelected}
@@ -282,8 +281,7 @@ function BrowseVehicle()
                     setIsLoaded(true);
                     setItems(result);
                 },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
+                // important to handle errors here instead of a catch() block so that we don't swallow
                 // exceptions from actual bugs in components.
                 (error) => {
                     setIsLoaded(true);
@@ -296,6 +294,7 @@ function BrowseVehicle()
                 console.log("Refreshed");
     }
 
+    // Following functions filter set of items based on the current selected filter specs and return filtered array
     function filterSafetyFeatures(items){
         return items.filter((item) => {
             if(!((filterAdaptiveCruiseControl=="") ||(filterAdaptiveCruiseControl==item.adaptiveCruiseControl))){
@@ -355,9 +354,11 @@ function BrowseVehicle()
             if(!((filterAdaptiveDriveBeam=="") ||(filterAdaptiveDriveBeam==item.adaptDrivingBeam))){
                 return;
             }
+            // If item passes through all if statements, it matches the filter specifications
             return item;
         });
     }
+    // Search for an item with one of the search parameters matching the user input
     function search(items){
         return items.filter((item) => {
             return searchParam.some((newItem) => {
@@ -396,6 +397,7 @@ function BrowseVehicle()
             if(!((filterElecLvl=="All") ||(filterElecLvl==item.electricificationLevel))){
                 return;
             }
+            // If item passes through all if statements, it matches the filter specifications
             return item;
         });
     }

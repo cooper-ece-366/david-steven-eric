@@ -13,6 +13,14 @@ import { ACCESS_TOKEN } from '../constants';
 // Initial API call setup by Eric
 // Securing API calls by Steven
 // Excel parsing by David
+
+function wait(ms){
+    var start = new Date().getTime();
+    var end = start;
+    while(end < start + ms) {
+        end = new Date().getTime();
+    }
+}
 function RemoveVehicle()
 {
     const apiUrlPrefix = "http://localhost:8080";
@@ -58,13 +66,15 @@ function RemoveVehicle()
                     }
                 }
                 console.log(vi);
-                //addVehicleXlsx(vi, dealer, sale);
+
                 setVin(vi);
                 RemoveVehicle.removeVehicle();
 
             }
         }
         reader.readAsBinaryString(file);
+        wait(8000);
+        alert("Vehicles removed successfully!");
     }
 
     // API calls by Eric
@@ -81,7 +91,7 @@ function RemoveVehicle()
         fetch(vehicleApiUrl,requestOptions)
                 .then((response) =>
                 {
-                    alert("Succesfully deleted VIN: " + (vin));
+
                     setInfo("Vehicle "+vin+" removed.")
                 })
     }
