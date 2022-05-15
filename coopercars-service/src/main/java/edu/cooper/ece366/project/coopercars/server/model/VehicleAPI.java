@@ -13,6 +13,7 @@ import java.net.URL;
 
 // Eric
 // VehicleAPI takes in a VIN number, sales information and returns a Vehicle object.
+// More details on overall scope is in the "Description of Vehicle Backend" section of Readme.
 public class VehicleAPI
 {
     // Vehicle object is instance object of this class

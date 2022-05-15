@@ -99,6 +99,17 @@
 ## UML of Vehicle Backend
 ![image1](imgs/backend_vehicles_scope.png)
 
+## Description of Vehicle Backend
+- **VehicleAPI** class takes the VIN, status, dealer/sale price, and mileage from the front-end. 
+- Using the **VIN**, **VehicleAPI** calls **NHTSA's** VIN decoder tool, which returns a .csv file (below is an example for given VIN)
+  ![image1](imgs/example_nhtsa.png)
+- **VehicleAPI** parses the csv file:
+  1) Checks that there is **no error code** returned.
+  2) Creates an **array** with the **features (ie: "Element" column)** of interest.
+  3) Matches **elements of that array** with **each row of "Element"**, then **parses the value** into another array.
+  4) Creates a **Vehicle** class with those attributes from the aforementioned array.
+- **Vehicle** class created from **VehicleAPI** class contains VIN, status, dealer/sale price, and mileage, which were parameters for VehicleAPI, and also has attributes of features and specifications pulled from **NHTSA's VIN decoder tool** from the VehicleAPI class.
+
 ## Images of Application
 ![image1](imgs/addVehicle.png)
 ![image2](imgs/removeVehicle.png)
