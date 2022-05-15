@@ -73,7 +73,7 @@ function RemoveVehicle()
             }
         }
         reader.readAsBinaryString(file);
-        wait(8000);
+        wait(2000);
         alert("Vehicles removed successfully!");
     }
 
