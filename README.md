@@ -44,7 +44,7 @@
    NOTE: If you run into an issue with starting, try deleting `"proxy": "http://localhost:5000"` in `./coopercars-app/package.json`.
 9) ENJOY!<br>
    ADDITIONAL NOTE: The backend database is running on an already configured Amazon RDS server, no additional action is needed to set this up.<br>
-   In the case you would like the database to be local, head to `./coopercars-service/src/main/resources/application.yml` and change the datasource to your mySQL server credentials. 
+   In the case you would like the database to be local, head to `./coopercars-service/src/main/resources/application.yml`, change the datasource to your mySQL server credentials, and create a database named `coopercars`. 
 
 
 ## How-To Guide
@@ -126,10 +126,10 @@
 - This solution is intended for small, independent car dealers with an expected average of 50-100 vehicles in the inventory.
 - We conducted most of our testing with 140 vehicles in the inventory and performance was great:
     1) Less than a second to load `Browse Vehicles`, less than a second to search, filter, sort.
-    2) Approximately less than 5 seconds to add all vehicles, less than a second to remove all vehicles.
+    2) Approximately 15 seconds to add all vehicles, less than a second to remove all vehicles.
 - We conducted a stress test of 1000 vehicles (an extreme case)
-    1) Approximately two seconds to load `Browse Vehicles`, approximately one second to seach, filter, sort.
-    2) Approximately 8 seconds to add all vehicles to inventory, approximately five seconds to remove all vehicles.
+    1) Approximately three seconds to load `Browse Vehicles`, approximately one second to seach, filter, sort.
+    2) Approximately 80 seconds to add all vehicles to inventory, approximately five seconds to remove all vehicles.
 - The decision was made to push all the vehicles in inventory on the `Browse Vehicles` because a small car dealer with 50-100 cars would be better off being able to sort and filter through all the vehicles in the inventory as opposed to going through multiple pages. 
 
 ## Images of Application
