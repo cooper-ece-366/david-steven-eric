@@ -16,6 +16,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { ACCESS_TOKEN } from '../constants';
 
+// Page setup edited by Eric
+// Securing API calls by Steven
 
 function VehicleDetails()
 {

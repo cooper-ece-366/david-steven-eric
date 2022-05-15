@@ -10,7 +10,8 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
-
+//Eric
+//JPA implementatin of Vehicle objects
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, String> {
     Vehicle findByVIN(String VIN);

@@ -11,9 +11,11 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.net.URL;
 
-// VehicleAPI takes in a VIN number and returns a Vehicle object.
+// Eric
+// VehicleAPI takes in a VIN number, sales information and returns a Vehicle object.
 public class VehicleAPI
 {
+    // Vehicle object is instance object of this class
     private Vehicle theVehicle;
 
     public Vehicle getTheVehicle() {
@@ -24,6 +26,7 @@ public class VehicleAPI
         this.theVehicle = theVehicle;
     }
 
+    // constructor take a VIN, status, dealer/sale price, mileage
     public VehicleAPI(String myVIN, String myStatus, String dealerPrice, String salePrice, String mileage) throws IOException {
         String theVIN = myVIN.trim();
         String theStatus = myStatus;
@@ -110,6 +113,8 @@ public class VehicleAPI
         String driveType;
         int axles;
         String transmissionStyle;
+
+        // call to NHTSA's VIN Decoder Tool
         String theURL = "https://vpic.nhtsa.dot.gov/decoder/Decoder/ExportToExcel?VIN=" + theVIN;
         String[] populateInitialRow = {"VIN","Anti-lock Braking System (ABS)", "Electronic Stability Control (ESC)", "Traction Control",
                 "Keyless Ignition", "Automatic Crash Notification (ACN) / Advanced Automatic Crash Notification (AACN)",
@@ -129,6 +134,7 @@ public class VehicleAPI
         List<String[]> initialRow = new ArrayList<String[]>();
         initialRow.add(populateInitialRow);
 
+        // buffered reader to read returned CSV file from NHTSA
         BufferedReader in = null;
         try {
             URL url = new URL(theURL);
@@ -141,10 +147,11 @@ public class VehicleAPI
         String currentLine = null;
         String[] vehicleData;
 
-        List<String[]> vehicleRows = new ArrayList<String[]>();
+        // vehicle details are parse and populated in an array
         String[] populateVehicleRow = new String[69];
         populateVehicleRow[0] = theVIN;
 
+        // reads line by line; parses with comma seperated delimiter
         while ((currentLine = in.readLine()) != null) {
             vehicleData = currentLine.split(",", 3);
             if (vehicleData[1].equals("Error Code") && !(vehicleData[2].equals("0")))
@@ -163,8 +170,8 @@ public class VehicleAPI
         }
         populateVehicleRow[66] = dealerPrice;
         populateVehicleRow[67] = salePrice;
-        //populateVehicleRow[68] = "https://pictures.topspeed.com/IMG/crop/201609/smart-fortwo-nypd-ed-9_1600x0w.jpg";
 
+        // populating strings
         VIN = populateVehicleRow[0];
         antiLockBraking = populateVehicleRow[1];
         electronicStability = populateVehicleRow[2];
@@ -191,6 +198,7 @@ public class VehicleAPI
         adaptiveCruiseControl = populateVehicleRow[23];
         year = Integer.parseInt("0" + populateVehicleRow[54]);
 
+        // converting string to ints
         numOfCylinders = Integer.parseInt("0" + populateVehicleRow[24]);
         displacementCC = Double.parseDouble("0" + populateVehicleRow[25]);
         displacementCI = Double.parseDouble("0" + populateVehicleRow[26]);
@@ -212,7 +220,6 @@ public class VehicleAPI
         numOfSeats = Integer.parseInt("0" + populateVehicleRow[61]);
         numOfSeatRows = Integer.parseInt("0" + populateVehicleRow[62]);
         axles = Integer.parseInt("0" + populateVehicleRow[64]);
-
         Double theDealerPrice = Double.parseDouble("0"+populateVehicleRow[66]);
         Double theSalePrice = Double.parseDouble("0"+populateVehicleRow[67]);
         Double theProfit = theSalePrice - theDealerPrice;
@@ -239,10 +246,13 @@ public class VehicleAPI
         entertainSys = populateVehicleRow[60];
         driveType = populateVehicleRow[63];
         transmissionStyle = populateVehicleRow[65];
-        //imgURL = populateVehicleRow[68];
+
+        // storing the date/time of when this object was created
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String strDate = dateFormat.format(date);
+
+        // web scraper that returns image URL from year, make, model
         imgURL = returnLink(year + "+" + make + "+" +model);
 
         theVehicle = new Vehicle(VIN, theStatus, theDealerPrice, theSalePrice, theProfit, theMileage, imgURL, strDate, make, model, year, series, trim, vehicleType, plantCountry, basePrice, entertainSys, numOfSeats,
@@ -254,6 +264,7 @@ public class VehicleAPI
                 wheelBase, grossCombWeight, truckBedType, truckCabType, numOfWheels, wheelSizeFrontIn, wheelSizeRearIn, driveType, axles, transmissionStyle);
     }
 
+    // web scraper that returns first result from Google Images
     // reference: https://stackoverflow.com/questions/67852467/java-load-first-link-from-google-image-search-jsoup
     public String returnLink(String str) {
         String links = null;

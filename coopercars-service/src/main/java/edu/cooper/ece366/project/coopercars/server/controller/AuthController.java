@@ -24,6 +24,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 
+//AuthController edited by Steven
 
 @RestController
 @RequestMapping(value="/auth")

@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
+
 //@SpringBootApplication
 @SpringBootApplication(scanBasePackages = {
         "edu.cooper.ece366.project.coopercars.server"
