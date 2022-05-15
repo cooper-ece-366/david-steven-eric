@@ -39,6 +39,8 @@ function RemoveVehicle()
     RemoveVehicle.handleSubmit = () =>{
         console.log('Button was clicked!');
         console.log('File name: '+ file.name);
+        var size = file.size;
+        console.log('File size:' + file.size);
         const reader = new FileReader();
         reader.onload = (evt) => {
             const bstr = evt.target.result;
@@ -73,8 +75,8 @@ function RemoveVehicle()
             }
         }
         reader.readAsBinaryString(file);
-        alert("Vehicles are being removed from inventory... this will take a moment");
-        wait(3000);
+        alert("Vehicles are being removed from inventory... this will take a moment. Another popup will appear when task is completed.");
+        wait(size+1000);
         alert("Vehicles removed successfully!");
     }
 
@@ -93,6 +95,7 @@ function RemoveVehicle()
                 .then((response) =>
                 {
 
+                    alert("Successfully deleted VIN " + vin);
                     setInfo("Vehicle "+vin+" removed.")
                 })
     }

@@ -3,11 +3,13 @@
 ### Professor R. Marano
 ### David Guo, Steven Joongyeon Cho, Eric Xu
 
+
 ## Introduction
 - Our solution provides the dealer with valuable information about vehicles available in inventory and is designed as a tool for the dealer to use when consulting with a potential customer.
 - The dealer will add vehicles to inventory by **uploading a spreadsheet** with VIN and pertaining information.
 - Data and image of vehicle is pulled from **online sources** and presented in its own landing page.
 - Solution is designed for a **dealer to reference** when consulting with a client. The dealer employee can look up vehicles on his/her computer and show the client results from the application. 
+
 
 ## Features
 - Dealer **logins** to access the application. This ensures an unauthorized third party cannot access inventory information. 
@@ -17,12 +19,14 @@
 - Easily **upload a spreadsheet** to batch add to inventory (designed to work well with dealer’s **existing workflows**). 
 - Remove from inventory based on **sales status** or via **spreadsheet**.
 
+
 ## Purpose and Business Outcomes 
 - Dealers may carry **hundreds of vehicles** of different makes and models. 
 - Our inventory management solution targets small car dealers that only uses an **Excel spreadsheet or basic database software** (Microsoft Access) to manage their inventory.
 - Solution streamlines a car dealer’s workflow, allowing them to focus on things **other than mundane inventory management**.
 - [**According to Consumer Reports:**](https://www.consumerreports.org/car-safety/car-safety-survey-new-car-buyers-want-advanced-safety-not-automation/) “In a national survey of U.S. drivers planning on buying a new or used vehicle in the next two years, 51 percent said it was important that their next car have a rearview camera or backup warning, and 45 percent said they wanted a blind-spot warning system.”
 - Our solution allows the dealer to **quickly understand** which vehicles in their inventory have these safety features and meet this crucial **consumer need**.
+
 
 ## How to run from scratch (on IntelliJ)
 1) Clone our repo from Github. 
@@ -41,6 +45,7 @@
 9) ENJOY!<br>
    ADDITIONAL NOTE: The backend database is running on an already configured Amazon RDS server, no additional action is needed to set this up.<br>
    In the case you would like the database to be local, head to `./coopercars-service/src/main/resources/application.yml` and change the datasource to your mySQL server credentials. 
+
 
 ## How-To Guide
 - Upon visiting http://localhost:3000/, the only visible tab is the Login tab.
@@ -63,6 +68,7 @@
   ![home](imgs/addVehicle.png)
 - The `Remove Vehicles` tab is also quite self-explanatory: you can choose to upload a spreadsheet with VINs, enter a VIN to directly remove from inventory, or select a Status (ie: Sold, For Sale, In-transit) to batch remove from inventory.
   ![home](imgs/removeVehicle.png)  
+
 
 ## Format for spreadsheets used to batch add/remove vehicles
 **Add:** Columns are VIN, Dealer Price, Sale Price, Mileage, Status (Sold, For sale, In-transit).
@@ -91,6 +97,13 @@
 
 **Name:** `sampleRemoveSpreadsheet.xlsx`<br> 
 **Purpose:** Test remove vehicles with a set of 44 VINs that were in `sampleSpreadsheet.xlsx`, `sampleSpreadsheetMaster.xlsx`, and `sampleSpreadsheet1000.xlsx`.<br>
+
+
+## Recommended way to test application
+1) Head over to Remove Vehicles, and test removing by status `Sold`, `In-Transit`, `For sale`. Check after each batch remove that vehicles with that status tag no longer shows up on `Browse Vehicles`.
+2) Confirm that after removing by all three status, there are no vehicles presented under `Browse Vehicles`.
+3) Head over to Add Vehicles and upload `sampleSpreadsheetMaster.xlsx`. Check that the vehicles are presented under `Browse Vehicles`.
+4) Test filtering, sorting, and filtering in `Browse Vehicles`.
 
 ## Overall Architecture
 ![image1](imgs/overall_arch.png)
