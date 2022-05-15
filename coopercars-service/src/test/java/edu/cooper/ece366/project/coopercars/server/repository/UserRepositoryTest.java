@@ -2,9 +2,11 @@ package edu.cooper.ece366.project.coopercars.server.repository;
 import edu.cooper.ece366.project.coopercars.server.model.User;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@RestController
 public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
