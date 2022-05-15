@@ -57,6 +57,8 @@ function AddVehicle()
     AddVehicle.handleSubmit = () => {
         console.log('Button was clicked!');
         console.log('File name: '+ file.name);
+        var size = file.size;
+        console.log('File size:' + file.size);
         const reader = new FileReader();
         reader.onload = (evt) => {
             const bstr = evt.target.result;
@@ -114,8 +116,8 @@ function AddVehicle()
             }
         }
         reader.readAsBinaryString(file);
-        alert("Vehicles are being added to inventory... this will take a moment");
-        wait(18000);
+        alert("Vehicles are being added to inventory... this will take a moment. Another popup will appear when task is completed.");
+        wait(size+5000);
         alert("Vehicles added successfully!");
 
     }

@@ -63,7 +63,7 @@ class UserTest {
     @Test
     void ProviderId() {
         user.setProviderId("YO");
-        System.out.println("checking email verified");
+        System.out.println("checking provider ID");
         assertEquals("YO", user.getProviderId());
     }
 
