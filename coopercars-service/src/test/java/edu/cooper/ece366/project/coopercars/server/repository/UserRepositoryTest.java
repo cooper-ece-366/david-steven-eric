@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@RestController
 public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
