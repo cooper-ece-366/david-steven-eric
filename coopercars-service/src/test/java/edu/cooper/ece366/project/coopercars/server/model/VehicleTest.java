@@ -62,21 +62,21 @@ public class VehicleTest {
     @Test
     void Mileage() {
         vehicle.setMileage(1000);
-        System.out.println("checking email verified");
+        System.out.println("checking mileage");
         assertEquals(1000, vehicle.getMileage());
     }
 
     @Test
     void Status() {
         vehicle.setStatus("YO");
-        System.out.println("checking email verified");
+        System.out.println("checking status");
         assertEquals("YO", vehicle.getStatus());
     }
 
     @Test
     void EnteredDate() {
         vehicle.setEnteredDate("YO");
-        System.out.println("checking email verified");
+        System.out.println("checking entered date");
         assertEquals("YO", vehicle.getEnteredDate());
     }
     @Test

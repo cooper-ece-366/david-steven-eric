@@ -93,10 +93,10 @@
 **Purpose:** Test remove vehicles with a set of 44 VINs that were in `sampleSpreadsheet.xlsx`, `sampleSpreadsheetMaster.xlsx`, and `sampleSpreadsheet1000.xlsx`.<br>
 
 ## Overall Architecture
-![image1](overall_arch.png)
+![image1](imgs/overall_arch.png)
 
 ## UML of Vehicle Backend
-![image1](backend_vehicles_scope.png)
+![image1](imgs/backend_vehicles_scope.png)
 
 ## Description of Vehicle Backend
 - **VehicleAPI** class takes the VIN, status, dealer/sale price, and mileage from the front-end. 
@@ -120,11 +120,11 @@
 - The decision was made to push all the vehicles in inventory on the `Browse Vehicles` because a small car dealer with 50-100 cars would be better off being able to sort and filter through all the vehicles in the inventory as opposed to going through multiple pages. 
 
 ## Images of Application
-![image1](addVehicle.png)
-![image2](removeVehicle.png)
-![image3](browseVehicle.png)
-![image4](vehicleDetails1.png)
-![image5](vehicleDetails2.png)
+![image1](imgs/addVehicle.png)
+![image2](imgs/removeVehicle.png)
+![image3](imgs/browseVehicle.png)
+![image4](imgs/vehicleDetails1.png)
+![image5](imgs/vehicleDetails2.png)
 
 
 
